@@ -1,0 +1,314 @@
+{
+  "schema": "brain-project-checklist-v1",
+  "notes": "Operator-facing project status. Edit this file to update; the widget polls every 30s. Percentages are operator estimates. `next` = immediate next steps. `milestones` = shipped/decided things in reverse-chronological order. Internal file paths are intentionally absent — see handoffs for implementation detail.",
+  "updated": "2026-04-24",
+  "milestones": [
+    { "date": "2026-04-24", "project": "kenos-controller", "kind": "planned", "title": "KenOS Controller rebuild plan written", "summary": "Operator surface for bringing the BRAIN runtime up, watching it stay up, and bringing it back. 12 services rostered (pipe-r, ollama, ttyd panes, auto-mode, halo, nightly timer, model orchestrator, etc.). Open decisions surfaced." },
+    { "date": "2026-04-24", "project": "kenos-controller", "kind": "decided", "title": "KenOS naming pass", "summary": "Deck → KenOS Controller. Trio Chat → KenOS Remote (laptop mirror of main display). Trio Android app → KenOS. Filename/package renames bundled into the upcoming Controller rebuild." },
+    { "date": "2026-04-24", "project": "main-shell", "kind": "shipped", "title": "Main display ↔ KenOS Remote frame sync", "summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log). Trio order normalized to Claude / Codex / KenAI. Sync-discipline comments added to both files so future edits touch both." },
+    { "date": "2026-04-24", "project": "kenos-remote", "kind": "shipped", "title": "Project checklist widget shipped", "summary": "Frame 5 of KenOS Remote replaced with this live checklist (clickable filter pills + Projects/Timeline view toggle)." },
+    { "date": "2026-04-24", "project": "brain-orchestrator", "kind": "shipped", "title": "Recovery coverage", "summary": "Diagnose + recover routine for the orchestrator state machine. Handles partial-failure scenarios at every phase. 10/10 unit tests passing." },
+    { "date": "2026-04-24", "project": "brain-orchestrator", "kind": "shipped", "title": "Quick-switch endpoint + UI cutover", "summary": "Ad-hoc model switches now wrap atomically in a synthetic batch with a real handoff record. Settings popover wired to the new path." },
+    { "date": "2026-04-24", "project": "brain-orchestrator", "kind": "shipped", "title": "Models catalog + DeepSeek registration", "summary": "Operator-curated catalog of switchable local models. Switch route catalog-gated. DeepSeek registered as a disabled candidate pending a launcher." },
+    { "date": "2026-04-24", "project": "brain-pipe-r", "kind": "shipped", "title": "Orchestrator HTTP surface", "summary": "Pickup, ask-history, batch durability, server-events, and stop/start switching all exposed as runtime API endpoints." },
+    { "date": "2026-04-24", "project": "brain-orchestrator", "kind": "shipped", "title": "Cheap cold-start surfaces", "summary": "Local CLI surfaces for resume orientation: pickup summary, ask history, orchestrator state. Reduces token use on every session start." },
+    { "date": "2026-04-23", "project": "main-shell", "kind": "shipped", "title": "Chatlog viewer", "summary": "Date-scrolling viewer over Claude + Codex + shared transcripts with live SSE feed." },
+    { "date": "2026-04-23", "project": "debe-corp", "kind": "decided", "title": "CMC renamed to Debe Corp", "summary": "Private repo seeded; Try-CHERP links repointed to the trades page." },
+    { "date": "2026-04-22", "project": "kenai-v5", "kind": "shipped", "title": "kenai:v5 promoted to production", "summary": "Modelfile-driven KenAI v5; v5.5 active in prod. v5.6 in catalog." },
+    { "date": "2026-04-22", "project": "kenai-truthfulness", "kind": "shipped", "title": "Peerlog truthfulness gate (8/8 probes)", "summary": "Probes for hallucinated commit / deploy / file-creation / launch / save-memory claims, seeded from the highest-frequency unsupported phrases in the corpus." },
+    { "date": "2026-04-21", "project": "brain-pipe-r", "kind": "shipped", "title": "Trio terminal autostart + endpoint logging", "summary": "Trio agent terminals (Claude / KenAI / Codex) come up with the server. Every terminal action logged for audit." },
+    { "date": "2026-04-21", "project": "nest", "kind": "shipped", "title": "Nest catalog v2 + 16 modules", "summary": "Multi-tenant catalog merged. Smoke build passes 15/15 invariants." },
+    { "date": "2026-04-21", "project": "revv", "kind": "shipped", "title": "REVV files rescued from old machine", "summary": "140 files migrated to the active workspace and pushed." },
+    { "date": "2026-04-18", "project": "brain-linux-infra", "kind": "shipped", "title": "Pop!_OS cutover landed", "summary": "Migration from Windows complete. Old Windows paths retired. New canonical workspace under Linux." },
+    { "date": "2026-04-18", "project": "kenai-v5", "kind": "shipped", "title": "V4 corpus + Qwen2.5-Coder-7B fine-tune runner", "summary": "197-row fine-tune dataset committed; V4 LoRA training runner pinned. Sets the stage for the v4-baseline-plus + later v5 lineage." },
+    { "date": "2026-04-18", "project": "brain-pipe-r", "kind": "shipped", "title": "Pipe-R workspace migrated into BRAIN", "summary": "Codex workspace restructured to live under the unified BRAIN root on Linux." },
+    { "date": "2026-04-19", "project": "kenai-v5", "kind": "shipped", "title": "KenAI v4-baseline-plus promoted (87.3%)", "summary": "Modelfile-only baseline-plus tag scored 87.3% on the 30-prompt holdout — beating the prior baseline by +50%. Fine-tune path explored and parked; Modelfile-only is the production lineage." },
+    { "date": "2026-04-19", "project": "kenai-v5", "kind": "shipped", "title": "KenAI agent shell shipped", "summary": "Memory + threads + primer + tool tags + dreams + shared.log discipline. The agent loop the v5 line still uses." },
+    { "date": "2026-04-19", "project": "main-shell", "kind": "decided", "title": "DP4 main display plan", "summary": "First architectural sketch of the kiosk-style main display that became the current 6-slot deck." },
+    { "date": "2026-04-20", "project": "nest", "kind": "decided", "title": "Nest module catalog drift identified", "summary": "Audit caught Nest's module catalog out of sync with current CHERP screens. Triggered the catalog v2 rewrite." },
+    { "date": "2026-04-21", "project": "brain-pipe-r", "kind": "shipped", "title": "Operator Model doctrine + BRAIN root git", "summary": "Charter written; BRAIN root initialized as its own repo (4 commits, 176 files tracked). Codex + Claude formalized as two hands of one operator." },
+    { "date": "2026-04-22", "project": "brain-pipe-r", "kind": "shipped", "title": "Brain RAG hybrid + CHERP scope", "summary": "Brain index + CHERP workspace registered as first-class repos. Hybrid lexical + semantic search; scope presets (brain / codex / cherp); CHERP-aware reranking." },
+    { "date": "2026-04-12", "project": "cherp-maintain", "kind": "shipped", "title": "Field-test ready: CHERP live + Pipe-R loop running", "summary": "First time CHERP was production-stable while Pipe-R was running the dev loop end-to-end." },
+    { "date": "2026-04-12", "project": "nest", "kind": "shipped", "title": "Nest moved to project root + Pipe-R co-launch", "summary": "Nest workspace promoted to top-level; Pipe-R / Nest unified launchers wired up." },
+    { "date": "2026-04-12", "project": "kenai-v5", "kind": "shipped", "title": "KenAI v1 built", "summary": "First end-to-end Ken AI build alongside the CHERP bug sweep. Predates v4/v5 lineage but kicked off the in-house agent track." },
+    { "date": "2026-04-12", "project": "brain-pipe-r", "kind": "shipped", "title": "Pipe-R web-first command center", "summary": "Pipe-R cuts over from .bat-driven launchers to the pipe-r.html command center — direct ancestor of today's KenOS Controller." },
+    { "date": "2026-04-10", "project": "cherp-maintain", "kind": "shipped", "title": "Google Sheets sync for CHERP crews", "summary": "Backup + reference system: 8 tabs (Roster, Timecards, Tasks, MROs, Incidents, Certifications, JSAs, Crew Info) with formatting / validation / protection rules. First crew synced successfully." },
+    { "date": "2026-04-10", "project": "brain-pipe-r", "kind": "shipped", "title": "Agent Mode: batch runner + file-context prompts", "summary": "First training-data-capturing batch runner with file context wiring. Origin of the agent dispatch + auto-execute loops." },
+    { "date": "2026-04-08", "project": "cherp-maintain", "kind": "decided", "title": "CHERP keeps its name (REVV rename reverted)", "summary": "Briefly renamed to REVV, then reverted — CHERP stays as the construction-platform brand. REVV later picked up as a separate first-Nest-customer track." },
+    { "date": "2026-04-05", "project": "brain-pipe-r", "kind": "shipped", "title": "Sci-fi terminal-agent UI + dataset import", "summary": "Pipe-R reworked from menu-only into the sci-fi command surface that defines the look today. 4-model auto-launchers on COMPLETE TODO." },
+    { "date": "2026-04-04", "project": "brain-pipe-r", "kind": "shipped", "title": "Pipe-R first commit", "summary": "The original Node.js + button-driven TUI. Origin of the orchestration center that's now becoming KenOS Controller." },
+    { "date": "2026-04-23", "project": "kenai-truthfulness", "kind": "shipped", "title": "Peerlog parser shipped", "summary": "Structured peer-log evidence extractor produced 8,143 rows from Claude / KenAI / Codex / shared logs. Surfaced 516 unsupported claims for triage." },
+    { "date": "2026-04-23", "project": "kenai-truthfulness", "kind": "shipped", "title": "Action-class smoke probes added", "summary": "Three new truthfulness probes seeded from the highest-frequency unsupported phrases in the corpus (file-creation, launch, save-memory)." },
+    { "date": "2026-04-23", "project": "heskeny-brain", "kind": "shipped", "title": "Investor packet generator + portal payload", "summary": "Sanitized investor packet auto-generated; Heskeny-Brain public portal seeded with the first investor.html snapshot." },
+    { "date": "2026-04-23", "project": "kenai-v5", "kind": "shipped", "title": "KenAI dream refresh + seed approval flow", "summary": "Dream loop refreshed; operator seed-approval review queue introduced so curated training rows get human sign-off." },
+    { "date": "2026-04-23", "project": "main-shell", "kind": "shipped", "title": "Main display layout — KenAI to col 3", "summary": "Trio terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover." },
+    { "date": "2026-04-22", "project": "cherp-trade-variants", "kind": "decided", "title": "CHERP runtime branding upgrade scoped", "summary": "First serious sketch of the trade-variant approach (Pipe Trades / Electricians / HVAC) on a single backend with a runtime trade flag." },
+    { "date": "2026-04-21", "project": "kenos-android", "kind": "shipped", "title": "Trio Android v2.0.1 sideloaded + scroll fix", "summary": "Android WebView wrapper rebuilt; scroll buttons working after Tailscale fix on phone. Predecessor of today's KenOS app rename." },
+    { "date": "2026-04-21", "project": "brain-pipe-r", "kind": "shipped", "title": "Trio chat: real LLM responses", "summary": "Trio chat endpoint replaced placeholder responses with live model output across all three agents." },
+    { "date": "2026-04-21", "project": "main-shell", "kind": "shipped", "title": "kenos kiosk files + widgets-brainlog v3", "summary": "First kiosk-shaped main display files committed alongside the v3 BRAIN log widget makeover." },
+    { "date": "2026-04-21", "project": "brain-pipe-r", "kind": "shipped", "title": "BRAIN CLI surface — health/sync/today/commits/handoff-index/archive/check/retrain-status/slice-log/kenai-audit/trio/grep-log", "summary": "The main brain.sh subcommand fanout that defines the operator's everyday loop." },
+    { "date": "2026-04-21", "project": "brain-linux-infra", "kind": "shipped", "title": "Nightly maintenance timer", "summary": "systemd brain-nightly.timer at 03:00: push feature branches, prune worktrees, rebuild BRAIN.db if stale, write log slices + daily dossier." },
+    { "date": "2026-04-21", "project": "brain-pipe-r", "kind": "shipped", "title": "PostToolUse hook installed", "summary": "Every Bash / Edit / Write tool invocation now leaves a shared.log entry. Foundation for the peerlog parser + truthfulness gate." },
+    { "date": "2026-04-20", "project": "brain-pipe-r", "kind": "shipped", "title": "Trio terminal endpoint logging", "summary": "Every /api/trio-term/{ensure,key,stop} action logged for audit. Made the orchestrator durability gates trustworthy." },
+    { "date": "2026-04-14", "project": "kenai-v5", "kind": "shipped", "title": "Offline agent + KenAI v3 skeleton", "summary": "FastAPI-backed offline_agent: Modelfile builder, evaluator, brain auto-refresh, model designer, memory/drill tools, voice routing. The v3 lineage that became today's v5." },
+    { "date": "2026-04-14", "project": "kenai-v5", "kind": "shipped", "title": "KenAI overnight learn mode", "summary": "Native keylog + vision + driver loop running unattended. First sustained learning loop without operator presence." },
+    { "date": "2026-04-14", "project": "kenai-v5", "kind": "shipped", "title": "KenAI streaming + Halo tab + halo_tools", "summary": "Streaming responses landed; live stats + death-watch + learning-stats dashboard. Validation surface for the unattended loop." },
+    { "date": "2026-04-13", "project": "kenai-v5", "kind": "shipped", "title": "Halo MCC: KenAI takes the sticks", "summary": "First end-to-end agent driving a real game (Halo MCC). Vision loop, motion detection, blob clustering, engagement loop, anti-noop bias. Predecessor lineage of the current KenAI tool-use behavior." },
+    { "date": "2026-04-13", "project": "cherp-maintain", "kind": "shipped", "title": "CHERP offline-first shipped (Phase 9)", "summary": "Offline-first PWA mode. Field-test plan documented. Major maturity step toward the current maintain-mode posture." },
+    { "date": "2026-04-13", "project": "cherp-maintain", "kind": "decided", "title": "Friend-code → employee-id rename", "summary": "Crew membership identifier rationalized. Hierarchy + theorycraft plans drafted alongside." },
+    { "date": "2026-04-12", "project": "brain-pipe-r", "kind": "shipped", "title": "Auto Mode: closed-loop autonomous squad operator", "summary": "First sustained autonomous squad runner — auto-review + macro-AFK + Live Test results log. Direct ancestor of today's auto-mode tick + halo loops." },
+    { "date": "2026-04-12", "project": "brain-pipe-r", "kind": "shipped", "title": "Mesh networking + HP Remote v3", "summary": "Workstation + laptop joined a private mesh; deck tabs embedded in the laptop client. Foundation for today's KenOS Remote on a second PC." },
+
+    { "date": "2026-04-24", "project": "kenos-controller", "kind": "decided", "title": "Ken: rebuild the Deck as KenOS Controller", "summary": "Ken's call to reframe the HDMI-A-1 surface from generic ops deck → server-lifecycle controller. 'all the brain systems and launches are going to be through the KenOS Suite, that is to be my operating end for everything.'" },
+    { "date": "2026-04-24", "project": "kenos-remote", "kind": "decided", "title": "Ken: phone client is the gold standard", "summary": "After reviewing the trio-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference. Triggered the main-display ↔ phone frame sync work the same day." },
+    { "date": "2026-04-24", "project": "kenos-remote", "kind": "decided", "title": "Ken: project checklist as 'the human-rag'", "summary": "Ken's framing — the operator-curated checklist (with milestones + per-project timelines) becomes the human-readable retrieval surface for context. Drove the click-into-detail + clickable-milestones work." },
+    { "date": "2026-04-24", "project": "heskeny-brain", "kind": "shipped", "title": "Checklist published to public portal", "summary": "Operator-facing checklist mirrored to the Heskeny-Brain GitHub Pages portal as a shareable live URL. One-command publish script handles future refreshes." },
+    { "date": "2026-04-23", "project": "kenai-v5", "kind": "decided", "title": "Ken: arm gate for KenAI tool execution", "summary": "After watching KenAI attempt live writes from inside trio chat, Ken introduced the safe-by-default --dry-run arm gate. Tags get parsed + displayed as [dry-run] notices unless KENAI_ARMED=1 is set." },
+    { "date": "2026-04-22", "project": "cherp-maintain", "kind": "decided", "title": "Ken: CHERP maintain mode", "summary": "Stability-first stance on cherp.live — small fixes only, no refactors / no new features. The hold posture the project still operates under." },
+    { "date": "2026-04-22", "project": "kenos-suite", "kind": "decided", "title": "Ken: BRAIN holds everything", "summary": "Operator rule — every repo / log / reference must live inside The Brain so session primers see the complete context. Drove the CHERP / Nest / REVV / Heskeny-Brain consolidation under one root." },
+    { "date": "2026-04-19", "project": "kenai-v5", "kind": "decided", "title": "Ken: V4 production = baseline-plus", "summary": "After reviewing the rubric-fixed eval (87.3% vs 40.4%), Ken approved Modelfile-only baseline-plus as the production lineage and parked the fine-tune track until the corpus crosses 500 rows." },
+    { "date": "2026-04-19", "project": "main-shell", "kind": "decided", "title": "Ken: kenos kiosk plan", "summary": "Ken sketched the multi-display kiosk concept (deck + main display + widget band on the same PC) that became today's three-program setup." },
+    { "date": "2026-04-18", "project": "brain-linux-infra", "kind": "decided", "title": "Ken: cut over to Pop!_OS", "summary": "Operator decision to migrate the entire workspace off Windows and standardize on Linux. Triggered the BRAIN root reshuffle, paths.py, and the canonical-paths discipline that everything else now depends on." },
+    { "date": "2026-04-18", "project": "kenos-suite", "kind": "decided", "title": "Ken: CHERP → Nest → REVV strategy", "summary": "Sequencing call: restore cherp.live first → level Nest up to emit current-CHERP → ship REVV via Nest as the first real customer instance. Still the active ecosystem ordering." },
+    { "date": "2026-04-12", "project": "brain-pipe-r", "kind": "decided", "title": "Ken: button-driven UX only", "summary": "Operator rule — Ken is a non-coder; the TUI uses numbered buttons and letter keys, no free-text commands. Every feature needs a button. Still binding on Pipe-R / KenOS Controller work." },
+    { "date": "2026-04-08", "project": "cherp-maintain", "kind": "decided", "title": "Ken: keep the CHERP name", "summary": "Briefly experimented with renaming CHERP → REVV; reverted within hours. Ken kept CHERP as the construction-platform brand and held REVV in reserve as a future Nest customer instance." },
+    { "date": "2026-04-04", "project": "brain-pipe-r", "kind": "decided", "title": "Ken: start Pipe-R", "summary": "Operator origin point — Ken set up the first Pipe-R workspace as a button-driven orchestration TUI. Everything in this checklist descends from this commit." }
+  ],
+  "groups": [
+    {
+      "id": "cherp",
+      "title": "CHERP",
+      "color": "#6cc24a",
+      "projects": [
+        {
+          "id": "cherp-maintain",
+          "name": "CHERP maintain mode",
+          "status": "active",
+          "percent": 100,
+          "summary": "cherp.live stability-first hold; small fixes only",
+          "current": "5/5 maintain · 13/13 simulator · 8/8 KenAI truth gate · 8,143 peerlog rows",
+          "next": [
+            "Keep live-site hold until cross-family deploy checks land",
+            "Triage 516 unsupported-claim flags weekly"
+          ],
+          "owner": "ken"
+        },
+        {
+          "id": "cherp-trade-variants",
+          "name": "Trade-variant apps",
+          "status": "planned",
+          "percent": 5,
+          "summary": "Pipe Trades / Electricians / HVAC variants on Play + cherp.live picker, single backend, runtime trade flag",
+          "current": "Plan written 2026-04-24; queued behind ecosystem hold",
+          "next": [
+            "Decide which trade ships first (Pipe Trades is default)",
+            "Stand up trade-flag wiring in CHERP source"
+          ],
+          "owner": "ken"
+        }
+      ]
+    },
+    {
+      "id": "kenos-suite",
+      "title": "KenOS Suite",
+      "color": "#7ec8e8",
+      "projects": [
+        {
+          "id": "kenos-controller",
+          "name": "KenOS Controller",
+          "status": "planning",
+          "percent": 20,
+          "summary": "Operator surface for server lifecycle: launchers, enders, health, infrastructure on/off",
+          "current": "Plan written; current pipe-r command center will be folded in. Naming pass complete.",
+          "next": [
+            "Land /api/controller/* lifecycle endpoints",
+            "Build the new Controller view alongside the existing one",
+            "Cut over the HDMI-A-1 surface in a single reversible commit"
+          ],
+          "owner": "claude",
+          "related": ["brain-pipe-r", "main-shell", "brain-orchestrator"]
+        },
+        {
+          "id": "main-shell",
+          "name": "KenOS Main Display",
+          "status": "active",
+          "percent": 92,
+          "summary": "6-slot kiosk: Claude / Codex / KenAI trio + chatlog + projects + brain log",
+          "current": "Stable; settings popover catalog-aware; quick-switch wired; symlink to canonical fixed today",
+          "next": [
+            "Verify cross-model switch end-to-end on a quiet KenAI window"
+          ],
+          "owner": "claude",
+          "related": ["kenos-remote", "kenos-controller", "brain-orchestrator"]
+        },
+        {
+          "id": "kenos-remote",
+          "name": "KenOS Remote",
+          "status": "active",
+          "percent": 85,
+          "summary": "Laptop mirror of the main display (same content, different physical PC). Trio + Chatlog + Projects + BRAIN Log.",
+          "current": "Frames 4/5/6 synced with main display; trio order normalized to Claude / Codex / KenAI",
+          "next": [
+            "Decide whether to add a 4th ops frame or keep the current 3"
+          ],
+          "owner": "claude",
+          "related": ["main-shell", "kenos-android"]
+        },
+        {
+          "id": "kenos-android",
+          "name": "KenOS (Android)",
+          "status": "active",
+          "percent": 70,
+          "summary": "WebView wrapper for KenOS Remote, Tailscale-reachable. Sideloaded; not on the Play Store.",
+          "current": "Functional; visible labels renamed Trio → KenOS today",
+          "next": [
+            "Rebuild + re-sideload to pick up the new labels",
+            "Bundle the package-id rename into the next Controller rebuild commit"
+          ],
+          "owner": "ken"
+        }
+      ]
+    },
+    {
+      "id": "brain",
+      "title": "BRAIN runtime",
+      "color": "#ff9347",
+      "projects": [
+        {
+          "id": "brain-orchestrator",
+          "name": "Model orchestrator",
+          "status": "active",
+          "percent": 92,
+          "summary": "Single-resident-model orchestrator with batch durability, audit trail, and recovery",
+          "current": "All 8 build-list items shipped except the DeepSeek launcher; 10/10 recovery tests pass",
+          "next": [
+            "Pull the DeepSeek tag and write its launcher",
+            "Real cross-family switch verification (KenAI ↔ DeepSeek)"
+          ],
+          "owner": "claude",
+          "related": ["brain-pipe-r", "kenai-v5", "kenos-controller"]
+        },
+        {
+          "id": "brain-pipe-r",
+          "name": "Pipe-R command center",
+          "status": "active",
+          "percent": 95,
+          "summary": "Backend orchestration on :7777 — trio terminals, auto-mode, brain logger, model API. Becoming part of KenOS Controller.",
+          "current": "Stable; recent additions: chatlog viewer, orchestrator API surface, models catalog, project-checklist endpoint",
+          "next": [
+            "Carve out the controller-specific endpoints under /api/controller/*",
+            "Verify quick-switch on a cross-model live test"
+          ],
+          "owner": "codex",
+          "related": ["kenos-controller", "brain-orchestrator", "main-shell"]
+        },
+        {
+          "id": "brain-linux-infra",
+          "name": "BRAIN Linux infra",
+          "status": "active",
+          "percent": 85,
+          "summary": "Pop!_OS cutover from Windows; nightly maintenance timer; tailnet-reachable services",
+          "current": "Live; nightly timer enabled; sudoers cleanup pending; reboot verification done",
+          "next": [
+            "Sudoers cleanup (deferred from cutover)"
+          ],
+          "owner": "ken"
+        }
+      ]
+    },
+    {
+      "id": "kenai",
+      "title": "KenAI",
+      "color": "#ff5a2b",
+      "projects": [
+        {
+          "id": "kenai-v5",
+          "name": "KenAI v5.x in production",
+          "status": "active",
+          "percent": 90,
+          "summary": "Modelfile-driven KenAI; v5.5 active, v5.6 built, baseline-plus archived",
+          "current": "v5.5 active in prod; v5.6 in catalog; v6 corpus growth deferred until 500+ rows",
+          "next": [
+            "Cut v6 once the corpus crosses 500 rows",
+            "Re-run v4.1 fine-tune merge when training-stack compatibility is unblocked"
+          ],
+          "owner": "ken",
+          "related": ["brain-orchestrator", "kenai-truthfulness"]
+        },
+        {
+          "id": "kenai-truthfulness",
+          "name": "Peerlog truthfulness gate",
+          "status": "active",
+          "percent": 80,
+          "summary": "Probes that catch hallucinated commit / deploy / file-creation / launch / save-memory claims before they ship",
+          "current": "8/8 probes pass on v5.5; 3 new action-class probes added 2026-04-23",
+          "next": [
+            "Add commit-claim-without-evidence probe",
+            "Add deploy-claim-without-infra-tag probe"
+          ],
+          "owner": "claude"
+        }
+      ]
+    },
+    {
+      "id": "ecosystem",
+      "title": "Ecosystem",
+      "color": "#c084fc",
+      "projects": [
+        {
+          "id": "nest",
+          "name": "Bird's Nest multi-tenant",
+          "status": "active",
+          "percent": 60,
+          "summary": "Multi-tenant catalog with 16 modules; the engine that emits per-customer CHERP builds",
+          "current": "Smoke build passes 15/15 invariants; not yet emitting current-generation CHERP",
+          "next": [
+            "Level Nest up to emit current-CHERP",
+            "Wire REVV as the first real customer instance through Nest"
+          ],
+          "owner": "codex",
+          "related": ["revv", "cherp-maintain", "cherp-trade-variants"]
+        },
+        {
+          "id": "revv",
+          "name": "REVV (first Nest customer)",
+          "status": "planning",
+          "percent": 15,
+          "summary": "First real customer instance to ship via Nest",
+          "current": "Source files rescued from the old machine and staged in the active workspace",
+          "next": [
+            "Wait for Nest to emit current-CHERP",
+            "Plumb REVV branding through the Nest catalog"
+          ],
+          "owner": "ken"
+        },
+        {
+          "id": "debe-corp",
+          "name": "Debe Corp site",
+          "status": "planning",
+          "percent": 30,
+          "summary": "2026-04-23 rename of Clean Money Corporation; new private repo seeded",
+          "current": "Try-CHERP links repointed to the trades page; site shell not yet built",
+          "next": [
+            "Build site scaffold from the CMC snapshot",
+            "Cut over debecorp.com DNS once the site is live"
+          ],
+          "owner": "ken"
+        },
+        {
+          "id": "heskeny-brain",
+          "name": "Heskeny-Brain investor portal",
+          "status": "active",
+          "percent": 75,
+          "summary": "Public sanitized progress portal; investor-facing snapshot of Brain + CHERP",
+          "current": "Live on GitHub Pages; investor page + this checklist now hosted there",
+          "next": [
+            "Automate payload generation from current evidence",
+            "Add a demo dashboard with green checks + evidence links"
+          ],
+          "owner": "claude"
+        }
+      ]
+    }
+  ]
+}

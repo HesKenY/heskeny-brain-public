@@ -1,0 +1,23 @@
+{
+  "name": "Heskeny-Brain",
+  "generated_at": "2026-04-23T03:06:44Z",
+  "description": "Sanitized static Brain resource for handoffs, operating memory, and agent evidence.",
+  "privacy": {
+    "raw_logs_exported": false,
+    "brain_db_exported": false,
+    "absolute_home_paths_sanitized": true,
+    "emails_sanitized": true
+  },
+  "counts": {
+    "core_docs": 3,
+    "handoffs": 36,
+    "diaries": 12
+  },
+  "sources": [
+    "README.md",
+    "BRAIN_CHARTER.md",
+    "ROADMAP.md",
+    "handoffs/*.md",
+    "diaries/*.md"
+  ]
+}

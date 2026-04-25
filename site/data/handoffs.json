@@ -1,0 +1,254 @@
+[
+  {
+    "title": "Handoff — KenAI truthfulness guard + peer-log training opportunity",
+    "path": "handoffs/HANDOFF_2026-04-23_kenai_truthfulness_and_peerlog_training.md",
+    "updated": "2026-04-23T02:56:29Z",
+    "summary": "created: 2026-04-23T01:55:00Z owner: codex for: next-agent status: ready Ken pasted a Claude work-log fragment into KenAI: `● Bash(cd \"[BRAIN_ROOT]\" && git show --stat 75b12f8 | head -10)`",
+    "content": "created: 2026-04-23T01:55:00Z owner: codex for: next-agent status: ready Ken pasted a Claude work-log fragment into KenAI: `● Bash(cd \"[BRAIN_ROOT]\" && git show --stat 75b12f8 | head -10)`\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoff — session close (v5.5 prod, 14B SYSTEM-prompt ceiling found)",
+    "path": "handoffs/HANDOFF_2026-04-22_session_close_v5.5_prod.md",
+    "updated": "2026-04-23T01:36:28Z",
+    "summary": "created: 2026-04-22T21:40:00Z owner: claude for: claude-next status: session-closed **Prod KenAI tag:** `kenai:v5.5` (14B + identity anchor + uncommitted pin) **Trio pane:** live on v5.5 via `config/trio-kenai-model.txt`, thread `2026-04-21T233838Z` resumed",
+    "content": "created: 2026-04-22T21:40:00Z owner: claude for: claude-next status: session-closed **Prod KenAI tag:** `kenai:v5.5` (14B + identity anchor + uncommitted pin) **Trio pane:** live on v5.5 via `config/trio-kenai-model.txt`, thread `2026-04-21T233838Z` resumed\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Brain RAG Hybrid + CHERP Scope",
+    "path": "handoffs/HANDOFF_2026-04-22_brain_rag_hybrid_cherp_scope.md",
+    "updated": "2026-04-22T21:34:59Z",
+    "summary": "Date: 2026-04-22 Added `brain_root` and `cherp_workspace` as first-class repositories in [repositories.json]([HOME]/Documents/The%20Brain/repositories.json). Extended [build_brain.py]([HOME]/Documents/The%20Brain/build_brain.py) with:",
+    "content": "Date: 2026-04-22 Added `brain_root` and `cherp_workspace` as first-class repositories in [repositories.json]([HOME]/Documents/The%20Brain/repositories.json). Extended [build_brain.py]([HOME]/Documents/The%20Brain/build_brain.py) with:\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoff — KenAI v5.5 promoted, three v5 blockers closed",
+    "path": "handoffs/HANDOFF_2026-04-22_kenai_v5.5_promoted.md",
+    "updated": "2026-04-22T21:13:55Z",
+    "summary": "created: 2026-04-22T17:55:00Z owner: claude for: claude-next status: shipped RAG in kenai-chat + stopword filter in brain-fts-lookup Interactive smoke battery (voice/cherp/typo/coherence/identity)",
+    "content": "created: 2026-04-22T17:55:00Z owner: claude for: claude-next status: shipped RAG in kenai-chat + stopword filter in brain-fts-lookup Interactive smoke battery (voice/cherp/typo/coherence/identity)\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Roadmap — what needs to be true for v5 to ship as prod",
+    "path": "handoffs/ROADMAP_v5_promotion.md",
+    "updated": "2026-04-22T21:12:59Z",
+    "summary": "created: 2026-04-22T16:40:00Z closed: 2026-04-22T17:53:00Z owner: claude for: history status: SHIPPED — kenai:v5.5 promoted 2026-04-22T17:53Z with all 3 blockers addressed All three blockers shipped in the same session this doc was written: **Blocker 1 — RAG in kenai-chat**: done. Commits `4f91fa0`, `434aac0`, `b786705`. `fetch_rag_context()` calls `scripts/brain-fts-lookup.py`; `sanitize_query()` drops ~70 stopwords so conversational prompts hit. Live-measured at ~30-40 ms per lookup.",
+    "content": "created: 2026-04-22T16:40:00Z closed: 2026-04-22T17:53:00Z owner: claude for: history status: SHIPPED — kenai:v5.5 promoted 2026-04-22T17:53Z with all 3 blockers addressed All three blockers shipped in the same session this doc was written: **Blocker 1 — RAG in kenai-chat**: done. Commits `4f91fa0`, `434aac0`, `b786705`. `fetch_rag_context()` calls `scripts/brain-fts-lookup.py`; `sanitize_query()` drops ~70 stopwords so conversational prompts hit. Live-measured at ~30-40 ms per lookup.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoff — KenAI v5.2 (14B) promoted to prod + trio slotted",
+    "path": "handoffs/HANDOFF_2026-04-22_kenai_v5_prod_promoted.md",
+    "updated": "2026-04-22T16:15:11Z",
+    "summary": "created: 2026-04-22T16:15:00Z owner: claude for: claude-next status: shipped 1. **\"continue from handoff\"** — resumed from stale 12:15Z handoff; 5 commits had landed since (v6 promote, RAG ship, Codex preflight commit, holdout expansion, v5.0 preview build). Uncommitted harness fixes in `kenai-chat.py` responded to the 85bc685 finding that \"project-builder bottleneck is harness, not base model size\". 2. **\"a\"** — shipped harness fixes. 3. **\"a b and c\"** — (a) self-correction-gap scold, (b) test-discipline Modelfile bullets, (c) fresh smoke tests on v4.7 / v4.8 / v5.0 / v5.1. 4. **\"push towards v5\"** — diagnosed the rules-system regression blocking v5 promotion, targeted\n\n[truncated for portal]",
+    "content": "created: 2026-04-22T16:15:00Z owner: claude for: claude-next status: shipped 1. **\"continue from handoff\"** — resumed from stale 12:15Z handoff; 5 commits had landed since (v6 promote, RAG ship, Codex preflight commit, holdout expansion, v5.0 preview build). Uncommitted harness fixes in `kenai-chat.py` responded to the 85bc685 finding that \"project-builder bottleneck is harness, not base model size\". 2. **\"a\"** — shipped harness fixes. 3. **\"a b and c\"** — (a) self-correction-gap scold, (b) test-discipline Modelfile bullets, (c) fresh smoke tests on v4.7 / v4.8 / v5.0 / v5.1. 4. **\"push towards v5\"** — diagnosed the rules-system regression blocking v5 promotion, targeted\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "CHERP runtime branding upgrade",
+    "path": "handoffs/HANDOFF_2026-04-22_cherp_runtime_branding_upgrade.md",
+    "updated": "2026-04-22T14:58:07Z",
+    "summary": "created: 2026-04-22T15:34:30-05:00 owner: codex for: ken-or-next-agent status: pushed repo: [BRAIN_ROOT]/Codex/workspace/CHERP base_commit: 1468f93 commit: 5f5a0ae Continue the deployment-mode upgrade work after the `1468f93` push without inventing a new feature branch. Chosen slice:",
+    "content": "created: 2026-04-22T15:34:30-05:00 owner: codex for: ken-or-next-agent status: pushed repo: [BRAIN_ROOT]/Codex/workspace/CHERP base_commit: 1468f93 commit: 5f5a0ae Continue the deployment-mode upgrade work after the `1468f93` push without inventing a new feature branch. Chosen slice:\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "CHERP runtime push",
+    "path": "handoffs/HANDOFF_2026-04-22_cherp_runtime_push.md",
+    "updated": "2026-04-22T14:50:09Z",
+    "summary": "created: 2026-04-22T15:12:00-05:00 owner: codex for: ken-or-next-agent status: pushed repo: [BRAIN_ROOT]/Codex/workspace/CHERP branch: main commit: 1468f93 Resume intent was clarified as \"cherp work\", then \"push cherp git\". The active CHERP checkout in this workspace was: `[BRAIN_ROOT]/Codex/workspace/CHERP`",
+    "content": "created: 2026-04-22T15:12:00-05:00 owner: codex for: ken-or-next-agent status: pushed repo: [BRAIN_ROOT]/Codex/workspace/CHERP branch: main commit: 1468f93 Resume intent was clarified as \"cherp work\", then \"push cherp git\". The active CHERP checkout in this workspace was: `[BRAIN_ROOT]/Codex/workspace/CHERP`\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoff — KenAI Modelfile v5 promoted + iterate tooling landed",
+    "path": "handoffs/HANDOFF_2026-04-22_kenai_modelfile_v5_promoted.md",
+    "updated": "2026-04-22T12:16:33Z",
+    "summary": "created: 2026-04-22T12:15:47Z owner: claude for: claude-next status: shipped 1. (resume + \"next step?\") — walked through open threads from prior handoff. 2. \"proceed\" — cleared the two cheap open threads: verified MCP logging live, gitignored `agents/kenai/threads/` + `focus_sessions/`. 3. \"resume work towards Kenai\" — ran apples-to-apples eval on holdout_v2. baseline-plus 73.9% vs v4p1-finetune 51.5% vs v4-finetune-clean 33.2%. Confirmed baseline-plus stays prod; neither fine-tune should ship. 4. \"continue\" → \"optimize, enhance, upgrade and iterate\" → \"carry on\" — iterated the baseline-plus Modelfile through v2/v3/v4/v5 against holdout_v2 until v5 hit 81.3% (+7.5 over pr\n\n[truncated for portal]",
+    "content": "created: 2026-04-22T12:15:47Z owner: claude for: claude-next status: shipped 1. (resume + \"next step?\") — walked through open threads from prior handoff. 2. \"proceed\" — cleared the two cheap open threads: verified MCP logging live, gitignored `agents/kenai/threads/` + `focus_sessions/`. 3. \"resume work towards Kenai\" — ran apples-to-apples eval on holdout_v2. baseline-plus 73.9% vs v4p1-finetune 51.5% vs v4-finetune-clean 33.2%. Confirmed baseline-plus stays prod; neither fine-tune should ship. 4. \"continue\" → \"optimize, enhance, upgrade and iterate\" → \"carry on\" — iterated the baseline-plus Modelfile through v2/v3/v4/v5 against holdout_v2 until v5 hit 81.3% (+7.5 over pr\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoff — KenAI MCP deploy + discipline rules + per-call logging",
+    "path": "handoffs/HANDOFF_2026-04-22_kenai_mcp_rules.md",
+    "updated": "2026-04-22T11:26:26Z",
+    "summary": "created: 2026-04-22T03:35:15Z updated: 2026-04-22T11:25:50Z owner: claude for: claude-next status: shipped 1. \"mcp kenai?\" — check status of the KenAI MCP server. 2. \"token system working? test\" — smoke-test `kenai_ask`. 3. \"is the system deployed by default?\" — check scope. 4. \"yes\" — promote kenai MCP to user scope so it's available outside The Brain. 5. \"is it reliable? token savings?\" — honest assessment. 6. \"make it a rule\" — codify the trust-but-verify usage pattern. 7. \"same for improving KenAI\" — codify discipline when modifying the KenAI stack. 8. \"handover at 98% / to codex\" — first handoff written (for codex-next). 9. (resume) \"usage?\" / \"all. continue worklist\n\n[truncated for portal]",
+    "content": "created: 2026-04-22T03:35:15Z updated: 2026-04-22T11:25:50Z owner: claude for: claude-next status: shipped 1. \"mcp kenai?\" — check status of the KenAI MCP server. 2. \"token system working? test\" — smoke-test `kenai_ask`. 3. \"is the system deployed by default?\" — check scope. 4. \"yes\" — promote kenai MCP to user scope so it's available outside The Brain. 5. \"is it reliable? token savings?\" — honest assessment. 6. \"make it a rule\" — codify the trust-but-verify usage pattern. 7. \"same for improving KenAI\" — codify discipline when modifying the KenAI stack. 8. \"handover at 98% / to codex\" — first handoff written (for codex-next). 9. (resume) \"usage?\" / \"all. continue worklist\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Claude current status",
+    "path": "handoffs/HANDOFF_2026-04-21_claude_current_status.md",
+    "updated": "2026-04-22T03:28:48Z",
+    "summary": "created: 2026-04-21T22:35:00-05:00 owner: codex for: ken-or-next-agent status: snapshot source_window: shared.log through 2026-04-22T03:27:34Z Claude spent this session tightening the Brain operator layer, reducing resume/startup token cost, improving the kiosk/logging surfaces, and wiring KenAI into the normal workflow so exploratory questions can go through the local model first instead of burning agent context. The work broke down into five main tracks:",
+    "content": "created: 2026-04-21T22:35:00-05:00 owner: codex for: ken-or-next-agent status: snapshot source_window: shared.log through 2026-04-22T03:27:34Z Claude spent this session tightening the Brain operator layer, reducing resume/startup token cost, improving the kiosk/logging surfaces, and wiring KenAI into the normal workflow so exploratory questions can go through the local model first instead of burning agent context. The work broke down into five main tracks:\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Handoffs",
+    "path": "handoffs/README.md",
+    "updated": "2026-04-22T03:17:24Z",
+    "summary": "Dated agent-to-agent notes. Filename shape: `HANDOFF_YYYY-MM-DD_topic.md`. Each file is a short scope: Why / Current state / Proposed design / Open questions / Critical files / Status. Read the newest first. Read the one most relevant to your current task. Update the Status line when you land the work. Generated index below regenerates via `./brain.sh handoff-index`.",
+    "content": "Dated agent-to-agent notes. Filename shape: `HANDOFF_YYYY-MM-DD_topic.md`. Each file is a short scope: Why / Current state / Proposed design / Open questions / Critical files / Status. Read the newest first. Read the one most relevant to your current task. Update the Status line when you land the work. Generated index below regenerates via `./brain.sh handoff-index`.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Session end — 2026-04-21 (auto)",
+    "path": "handoffs/HANDOFF_2026-04-21_session_auto_2.md",
+    "updated": "2026-04-22T03:15:57Z",
+    "summary": "created: 2026-04-22T03:15:57Z kind: auto-session-end date: 2026-04-21 generator: scripts/brain-session-end.sh Generated end-of-session snapshot. Supplements hand-written handoffs; does not replace them. Next session reads this to get a fast picture of what just landed. **BRAIN (root) (12)**",
+    "content": "created: 2026-04-22T03:15:57Z kind: auto-session-end date: 2026-04-21 generator: scripts/brain-session-end.sh Generated end-of-session snapshot. Supplements hand-written handoffs; does not replace them. Next session reads this to get a fast picture of what just landed. **BRAIN (root) (12)**\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Token minimization + kenos frame 5 viewer",
+    "path": "handoffs/HANDOFF_2026-04-22_token_min_and_kenos_frame5.md",
+    "updated": "2026-04-22T01:40:54Z",
+    "summary": "created: 2026-04-22T01:35:00Z updated: 2026-04-22T01:41:00Z owner: claude for: claude-next status: in-progress 1. Continue KenAI 4.2 seed work after Claude restarted → done first (10 focus_project seeds). 2. **Plan** this session's next moves across brain logging + trio server + kenai. Plan approved. 3. Trio scroll bug (kenos main display: trio terminals don't scroll). 4. **Token minimization** — wire systems so Claude burns fewer tokens. Utilize kenai + brain. *(active track)* 5. Accurate logs maintained (every action leaves a trace). 6. Frame 5 of kenos main display → brain log + chat viewer. 7. Maintain this handoff for refresh resilience. **`scripts/brain-log-reader.p\n\n[truncated for portal]",
+    "content": "created: 2026-04-22T01:35:00Z updated: 2026-04-22T01:41:00Z owner: claude for: claude-next status: in-progress 1. Continue KenAI 4.2 seed work after Claude restarted → done first (10 focus_project seeds). 2. **Plan** this session's next moves across brain logging + trio server + kenai. Plan approved. 3. Trio scroll bug (kenos main display: trio terminals don't scroll). 4. **Token minimization** — wire systems so Claude burns fewer tokens. Utilize kenai + brain. *(active track)* 5. Accurate logs maintained (every action leaves a trace). 6. Frame 5 of kenos main display → brain log + chat viewer. 7. Maintain this handoff for refresh resilience. **`scripts/brain-log-reader.p\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Brain viewer + KenAI focus fix",
+    "path": "handoffs/HANDOFF_2026-04-21_brain_viewer_and_kenai_focus_fix.md",
+    "updated": "2026-04-21T23:37:35Z",
+    "summary": "created: 2026-04-21T23:27:00Z owner: codex for: codex-or-claude `scripts/brain-log-reader.py` supports `--source shared|chat|all`",
+    "content": "created: 2026-04-21T23:27:00Z owner: codex for: codex-or-claude `scripts/brain-log-reader.py` supports `--source shared|chat|all`\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Session end — 2026-04-21 (auto)",
+    "path": "handoffs/HANDOFF_2026-04-21_session_auto.md",
+    "updated": "2026-04-21T12:25:04Z",
+    "summary": "created: 2026-04-21T12:25:04Z kind: auto-session-end date: 2026-04-21 generator: scripts/brain-session-end.sh Generated end-of-session snapshot. Supplements hand-written handoffs; does not replace them. Next session reads this to get a fast picture of what just landed. **BRAIN (root) (4)**",
+    "content": "created: 2026-04-21T12:25:04Z kind: auto-session-end date: 2026-04-21 generator: scripts/brain-session-end.sh Generated end-of-session snapshot. Supplements hand-written handoffs; does not replace them. Next session reads this to get a fast picture of what just landed. **BRAIN (root) (4)**\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "SharePoint integration — CHERP / Nest / REVV plan",
+    "path": "handoffs/HANDOFF_2026-04-21_sharepoint_integration_plan.md",
+    "updated": "2026-04-21T11:49:49Z",
+    "summary": "created: 2026-04-21T11:45:00Z status: draft — scope only, no code owner: next hand (Codex likely, Claude can review) Construction office staff already live in Microsoft 365. Today CHERP/REVV data (daily logs, JSAs, timecards, site photos, document library) is trapped in Supabase, readable only through the PWA. Office wants: A shared, auditable paper trail for daily logs + JSAs (office never",
+    "content": "created: 2026-04-21T11:45:00Z status: draft — scope only, no code owner: next hand (Codex likely, Claude can review) Construction office staff already live in Microsoft 365. Today CHERP/REVV data (daily logs, JSAs, timecards, site photos, document library) is trapped in Supabase, readable only through the PWA. Office wants: A shared, auditable paper trail for daily logs + JSAs (office never\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Nest module catalog — proposed answers + draft files",
+    "path": "handoffs/HANDOFF_2026-04-21_nest_module_catalog_proposal.md",
+    "updated": "2026-04-21T11:23:17Z",
+    "summary": "created: 2026-04-21T11:23:00Z follows: handoffs/HANDOFF_2026-04-20_nest_module_catalog_rewrite.md Autopilot-drafted proposal for the 5 open questions in the 2026-04-20 handoff. Nothing committed, nothing copied into Nest yet — **read, adjust, then promote into `Codex/nest/data/modules.json` + `Codex/nest/templates/instance-config.json` when ready.** `scripts/nest-drafts/modules.json` — proposed catalog (16 entries matching the CHERP screen registry)",
+    "content": "created: 2026-04-21T11:23:00Z follows: handoffs/HANDOFF_2026-04-20_nest_module_catalog_rewrite.md Autopilot-drafted proposal for the 5 open questions in the 2026-04-20 handoff. Nothing committed, nothing copied into Nest yet — **read, adjust, then promote into `Codex/nest/data/modules.json` + `Codex/nest/templates/instance-config.json` when ready.** `scripts/nest-drafts/modules.json` — proposed catalog (16 entries matching the CHERP screen registry)\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Session worklist — 2026-04-21",
+    "path": "handoffs/HANDOFF_2026-04-21_session_worklist.md",
+    "updated": "2026-04-21T03:33:22Z",
+    "summary": "created: 2026-04-21T03:35:00Z session: 2026-04-21 01:36Z → 03:35Z+ `BRAIN_CHARTER.md` — new **Operator Model** section: Codex + Claude as two hands of one operator; canonical helpers; who writes where. `rules/operator-model.md` + indexed in `rules/INDEX.md`.",
+    "content": "created: 2026-04-21T03:35:00Z session: 2026-04-21 01:36Z → 03:35Z+ `BRAIN_CHARTER.md` — new **Operator Model** section: Codex + Claude as two hands of one operator; canonical helpers; who writes where. `rules/operator-model.md` + indexed in `rules/INDEX.md`.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Nest module catalog — drift + rewrite plan",
+    "path": "handoffs/HANDOFF_2026-04-20_nest_module_catalog_rewrite.md",
+    "updated": "2026-04-21T02:09:49Z",
+    "summary": "created: 2026-04-20T23:59:00Z follow_up_to: handoffs/HANDOFF_2026-04-20_nest_update_scope.md Nest's module catalog (`Codex/nest/data/modules.json` + `templates/instance-config.json` modules + `src/modules/module-manager.js` defaults) is built against an older CHERP screen registry. Current cherp.live has different screens, and several modules Nest still offers as knobs don't correspond to any screen in the current code. Until this is fixed, toggling a module in Nest's wizard doesn't map cleanly onto the actual app a customer receives. This handoff is scope only — no code edits. It needs Ken's input on mapping, always-on vs toggleable, and whether deprecated module IDs sho\n\n[truncated for portal]",
+    "content": "created: 2026-04-20T23:59:00Z follow_up_to: handoffs/HANDOFF_2026-04-20_nest_update_scope.md Nest's module catalog (`Codex/nest/data/modules.json` + `templates/instance-config.json` modules + `src/modules/module-manager.js` defaults) is built against an older CHERP screen registry. Current cherp.live has different screens, and several modules Nest still offers as knobs don't correspond to any screen in the current code. Until this is fixed, toggling a module in Nest's wizard doesn't map cleanly onto the actual app a customer receives. This handoff is scope only — no code edits. It needs Ken's input on mapping, always-on vs toggleable, and whether deprecated module IDs sho\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Config snapshot log — CLAUDE.md + MEMORY.md + dreams",
+    "path": "handoffs/HANDOFF_2026-04-20_config_snapshot_log.md",
+    "updated": "2026-04-21T02:01:13Z",
+    "summary": "created: 2026-04-20T23:50:00Z CLAUDE.md files, `~/.claude/projects/-home-ken-Documents-The-Brain/memory/*`, and agent dream artifacts (`agents/kenai/dreams/`, `Codex/agent_mode/memories/ken-ai-latest/dreams.jsonl`, `v4_corpus/dreams/codex/ken-ai-latest/dreams.jsonl`) are three stores that encode \"who Claude thinks it is + what it remembers\" across sessions. They evolve, sometimes silently. Two problems: 1. Context condensation can wipe transcript evidence of when / why a rule or memory changed. 2. There's no cross-session diffable history — hard to tell \"when did we add X feedback\", \"what did MEMORY.md look like pre-cutover\".",
+    "content": "created: 2026-04-20T23:50:00Z CLAUDE.md files, `~/.claude/projects/-home-ken-Documents-The-Brain/memory/*`, and agent dream artifacts (`agents/kenai/dreams/`, `Codex/agent_mode/memories/ken-ai-latest/dreams.jsonl`, `v4_corpus/dreams/codex/ken-ai-latest/dreams.jsonl`) are three stores that encode \"who Claude thinks it is + what it remembers\" across sessions. They evolve, sometimes silently. Two problems: 1. Context condensation can wipe transcript evidence of when / why a rule or memory changed. 2. There's no cross-session diffable history — hard to tell \"when did we add X feedback\", \"what did MEMORY.md look like pre-cutover\".\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Nest update — emit current cherp.live copies",
+    "path": "handoffs/HANDOFF_2026-04-20_nest_update_scope.md",
+    "updated": "2026-04-21T02:00:19Z",
+    "summary": "created: 2026-04-20T23:45:00Z Nest (`Codex/nest/`, local clone of `HesKenY/CHERP-Nest`) already fetches `HesKenY/CHERP.git` main on every build and pins the commit SHA to the instance manifest. That solves \"source freshness\" but several inputs haven't kept up with CHERP's evolution. Each customer instance is a copy of current cherp.live, but the knobs Nest exposes and the Supabase bring-up it performs are pre-phase-2. This handoff scopes what to update. **Do not modify Nest code yet without Ken's go.**",
+    "content": "created: 2026-04-20T23:45:00Z Nest (`Codex/nest/`, local clone of `HesKenY/CHERP-Nest`) already fetches `HesKenY/CHERP.git` main on every build and pins the commit SHA to the instance manifest. That solves \"source freshness\" but several inputs haven't kept up with CHERP's evolution. Each customer instance is a copy of current cherp.live, but the knobs Nest exposes and the Supabase bring-up it performs are pre-phase-2. This handoff scopes what to update. **Do not modify Nest code yet without Ken's go.**\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "V4 corpus growth — CHERP full-stack + Nest instance manager",
+    "path": "handoffs/HANDOFF_2026-04-20_v4_cherp_nest_corpus_plan.md",
+    "updated": "2026-04-21T01:59:46Z",
+    "summary": "created: 2026-04-20T23:45:00Z supersedes: handoffs/HANDOFF_2026-04-19_v4_corpus_growth_plan.md KenAI v4 fine-tune is parked on `kenai:v4-baseline-plus` (Modelfile-only, 87.3% holdout). Retrain is gated on corpus ≥500 rows. This plan retargets the +170 growth rows from generic BRAIN/agent-mode coverage to the actual work Ken is doing: operating CHERP as full-stack developer (cherp.live maintenance, Supabase schema ops, Pipe-R, screen modules, Netlify deploy) and evolving Nest to emit current-CHERP copies (multi-tenant provisioning, module/role/branding injection, migration propagation). Target: 497 unique rows → 500+ after de-dup. Holdout grows 30 → ~100, CHERP/Nest-weighted.",
+    "content": "created: 2026-04-20T23:45:00Z supersedes: handoffs/HANDOFF_2026-04-19_v4_corpus_growth_plan.md KenAI v4 fine-tune is parked on `kenai:v4-baseline-plus` (Modelfile-only, 87.3% holdout). Retrain is gated on corpus ≥500 rows. This plan retargets the +170 growth rows from generic BRAIN/agent-mode coverage to the actual work Ken is doing: operating CHERP as full-stack developer (cherp.live maintenance, Supabase schema ops, Pipe-R, screen modules, Netlify deploy) and evolving Nest to emit current-CHERP copies (multi-tenant provisioning, module/role/branding injection, migration propagation). Target: 497 unique rows → 500+ after de-dup. Holdout grows 30 → ~100, CHERP/Nest-weighted.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "V4 corpus growth plan — background work to unblock retrain",
+    "path": "handoffs/HANDOFF_2026-04-19_v4_corpus_growth_plan.md",
+    "updated": "2026-04-19T21:42:39Z",
+    "summary": "KenAI v4 fine-tune is parked. Baseline-plus (`kenai:v4-baseline-plus`, Modelfile-only) is production at 87.3% holdout. Fine-tune retrain is gated on corpus ≥500 rows with more diversity — the 327-row QLoRA run overfit + forgot base capabilities (regurgitates corpus fragments, lost base Qwen). Corpus growth is the unlock; retrain happens after. | file | rows | purpose | | --- | --- | --- | | `Codex/agent_mode/training/kenai-v4-finetune.jsonl` | 327 | main training set (last used for v4) | | `Codex/agent_mode/training/kenai-v4-curated-corpus.jsonl` | 108 | hand-curated subset | | `agents/kenai/corpus_expansion/rules_coverage.jsonl` | 82 | rules-focused expansion | Assume ~5\n\n[truncated for portal]",
+    "content": "KenAI v4 fine-tune is parked. Baseline-plus (`kenai:v4-baseline-plus`, Modelfile-only) is production at 87.3% holdout. Fine-tune retrain is gated on corpus ≥500 rows with more diversity — the 327-row QLoRA run overfit + forgot base capabilities (regurgitates corpus fragments, lost base Qwen). Corpus growth is the unlock; retrain happens after. | file | rows | purpose | | --- | --- | --- | | `Codex/agent_mode/training/kenai-v4-finetune.jsonl` | 327 | main training set (last used for v4) | | `Codex/agent_mode/training/kenai-v4-curated-corpus.jsonl` | 108 | hand-curated subset | | `agents/kenai/corpus_expansion/rules_coverage.jsonl` | 82 | rules-focused expansion | Assume ~5\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Plan — DP-4 Main Display program (anchor-gated, symmetric to HDMI widget band)",
+    "path": "handoffs/HANDOFF_2026-04-19_dp4_main_display_plan.md",
+    "updated": "2026-04-19T20:40:29Z",
+    "summary": "We're standing up an anchor-gated boot flow for the HDMI touch panel that (1) opens a tiny positioning window, (2) lets Ken drag/fullscreen it onto the target display, (3) on a \"Set\" click plays the splash, then paints the widget band at the anchored geometry, (4) also kicks off pipe-r / BRAIN services so this becomes the start program for the whole stack. Ken now wants the same pattern for DP-4 — a sibling program that, once anchored, paints the \"main display\" experience (the full KenOS deck / dashboard) rather than the widget band. Call it **KenOS Main Display** (the DP-4 counterpart to KenOS Widget Band). | Aspect | HDMI (widget band) | DP-4 (main display) | | --- | --\n\n[truncated for portal]",
+    "content": "We're standing up an anchor-gated boot flow for the HDMI touch panel that (1) opens a tiny positioning window, (2) lets Ken drag/fullscreen it onto the target display, (3) on a \"Set\" click plays the splash, then paints the widget band at the anchored geometry, (4) also kicks off pipe-r / BRAIN services so this becomes the start program for the whole stack. Ken now wants the same pattern for DP-4 — a sibling program that, once anchored, paints the \"main display\" experience (the full KenOS deck / dashboard) rather than the widget band. Call it **KenOS Main Display** (the DP-4 counterpart to KenOS Widget Band). | Aspect | HDMI (widget band) | DP-4 (main display) | | --- | --\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "Plan — Tilix HTML shells (trio chat panes as first-class UI surfaces)",
+    "path": "handoffs/HANDOFF_2026-04-19_tilix_html_shells_plan.md",
+    "updated": "2026-04-19T20:26:25Z",
+    "summary": "Widget-band trio frame (frame 2) now has Chat buttons that POST to `/api/open-chat?agent=claude|kenai|codex`. The server launches the existing `[HOME]/bin/trio-pane-{claude,kenai,codex}.sh` helpers via `tilix --new-process`, so every click spawns a native terminal chat with the right agent. This works for now but the panes have no shared chrome, no persistent positioning, and no awareness of the trio app they belong to. \"Tilix HTML shells\" is the path to give each chat pane a proper wrapper: an HTML shim that owns the terminal window frame (titlebar, status strip, agent sidebar) and embeds the tilix session inside it. Cosmic Wayland ignores client positioning; all windowi\n\n[truncated for portal]",
+    "content": "Widget-band trio frame (frame 2) now has Chat buttons that POST to `/api/open-chat?agent=claude|kenai|codex`. The server launches the existing `[HOME]/bin/trio-pane-{claude,kenai,codex}.sh` helpers via `tilix --new-process`, so every click spawns a native terminal chat with the right agent. This works for now but the panes have no shared chrome, no persistent positioning, and no awareness of the trio app they belong to. \"Tilix HTML shells\" is the path to give each chat pane a proper wrapper: an HTML shim that owns the terminal window frame (titlebar, status strip, agent sidebar) and embeds the tilix session inside it. Cosmic Wayland ignores client positioning; all windowi\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-19 — Login verification pickup",
+    "path": "handoffs/HANDOFF_2026-04-19_login_verification_pickup.md",
+    "updated": "2026-04-19T19:31:45Z",
+    "summary": "**For the next Claude session after Ken's logout/login.** Three things to verify in order. Do not spawn agents; walk through these directly. Old bug: `claude`/`codex` CLIs rewrite Tilix window title within ~0.5s, and the pin loop was matching titles up to 15s later → pin-timeout on CLAUDE window, which also killed CODEX/KENAI pins under `set -e`. Fix committed in `[HOME]/bin/kenai-ops-center.sh`: capture wid right after spawn (2s tight poll on fresh \"Tilix: CLAUDE\" title), pin by wid, log `verify=match|drift` from post-move geometry readback.",
+    "content": "**For the next Claude session after Ken's logout/login.** Three things to verify in order. Do not spawn agents; walk through these directly. Old bug: `claude`/`codex` CLIs rewrite Tilix window title within ~0.5s, and the pin loop was matching titles up to 15s later → pin-timeout on CLAUDE window, which also killed CODEX/KENAI pins under `set -e`. Fix committed in `[HOME]/bin/kenai-ops-center.sh`: capture wid right after spawn (2s tight poll on fresh \"Tilix: CLAUDE\" title), pin by wid, log `verify=match|drift` from post-move geometry readback.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-19 — KenAI v4 agent shell + promoted baseline-plus",
+    "path": "handoffs/HANDOFF_2026-04-19_kenai_v4_agent_shell_landed.md",
+    "updated": "2026-04-19T19:25:56Z",
+    "summary": "**What shipped this session.** Full agent shell (memory, threads, primer, tool tags, dreams, shared.log discipline) on top of a richer Modelfile-only tag that beats the old baseline by +50% on a 30-prompt holdout. Fine-tune path was explored and parked; Modelfile-only is the production path. **Initial eval under-measured — rubric was looking for literal \"says no\" instead of actual refusal language in the response.** Fixed rubric → real scores below. | Tag | Score | Notes | |---|---|---| | `kenai:v4-offline-developer` (prior baseline, Modelfile-only) | **40.4%** (42/104) | Elaborate voice-focused system prompt, no rules/schema knowledge baked in | | `kenai:v4-prototype-pha\n\n[truncated for portal]",
+    "content": "**What shipped this session.** Full agent shell (memory, threads, primer, tool tags, dreams, shared.log discipline) on top of a richer Modelfile-only tag that beats the old baseline by +50% on a 30-prompt holdout. Fine-tune path was explored and parked; Modelfile-only is the production path. **Initial eval under-measured — rubric was looking for literal \"says no\" instead of actual refusal language in the response.** Fixed rubric → real scores below. | Tag | Score | Notes | |---|---|---| | `kenai:v4-offline-developer` (prior baseline, Modelfile-only) | **40.4%** (42/104) | Elaborate voice-focused system prompt, no rules/schema knowledge baked in | | `kenai:v4-prototype-pha\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-19 — Ops center / widgets / layout → Codex",
+    "path": "handoffs/HANDOFF_2026-04-19_ops_center_pin_fix_to_codex.md",
+    "updated": "2026-04-19T17:18:51Z",
+    "summary": "Claude is pivoting to KenAI v4 fulfillment. **Codex owns the trio pin race + any remaining layout drift from here.** | Stage | Result | |---|---| | Splash DP-4 | Painted, auto-closed | | Splash HDMI-A-1 | Painted, auto-closed (`0x00800004 1920x720+975+1080 pop-os boot`) | | Widgets band | `pin-ok` — single-window rewrite held (`520,60 2280×520` target; wmctrl readback `+780+189` due to Cosmic/XWayland drift — visually correct) | | HDMI deck (Pipe-R) | `pin-ok` — `975,1080 1920×720` target | | Trio CLAUDE | **`pin-timeout`** at 17:12:21 — never matched `Tilix: CLAUDE` | | Trio KENAI | Launched, never pinned (see race below) | | Trio CODEX | Launched, never pinned (see race\n\n[truncated for portal]",
+    "content": "Claude is pivoting to KenAI v4 fulfillment. **Codex owns the trio pin race + any remaining layout drift from here.** | Stage | Result | |---|---| | Splash DP-4 | Painted, auto-closed | | Splash HDMI-A-1 | Painted, auto-closed (`0x00800004 1920x720+975+1080 pop-os boot`) | | Widgets band | `pin-ok` — single-window rewrite held (`520,60 2280×520` target; wmctrl readback `+780+189` due to Cosmic/XWayland drift — visually correct) | | HDMI deck (Pipe-R) | `pin-ok` — `975,1080 1920×720` target | | Trio CLAUDE | **`pin-timeout`** at 17:12:21 — never matched `Tilix: CLAUDE` | | Trio KENAI | Launched, never pinned (see race below) | | Trio CODEX | Launched, never pinned (see race\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-19 — Login layout plan → Codex",
+    "path": "handoffs/HANDOFF_2026-04-19_login_layout_to_codex.md",
+    "updated": "2026-04-19T17:06:02Z",
+    "summary": "Post-login display layout on Pop!_OS / Cosmic Wayland. Everything wired; **needs a logout/login cycle to verify pinning holds**. **DP-4** (primary): 3840×1080 at `+0+0` **HDMI-A-1** (touchscreen): 1920×720 at `+975+1080` (below DP-4, offset right)",
+    "content": "Post-login display layout on Pop!_OS / Cosmic Wayland. Everything wired; **needs a logout/login cycle to verify pinning holds**. **DP-4** (primary): 3840×1080 at `+0+0` **HDMI-A-1** (touchscreen): 1920×720 at `+975+1080` (below DP-4, offset right)\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 — CHERP schema apply paused mid-run",
+    "path": "handoffs/HANDOFF_2026-04-18_cherp_schema_mid_apply.md",
+    "updated": "2026-04-19T04:16:13Z",
+    "summary": "Paused for token usage. 3 of ~5 schema chunks applied to new Supabase project `[redacted_project_ref]`. Site repair ~60% complete — DB schema partial, repo URL swap not done, no commit, cherp.live still serving old backend. 1. **Confirm DB state.** `mcp__supabase__list_tables` schemas=[\"public\"]. Expect ~32 tables. ALPHA-01 seeded in `team_codes`; 2 superintendent rows in `crew_members`; 1 demo superuser in `user_profiles`; 3 rows in `app_settings`. **Chunk 4** (lines 1328-1544): `pending_users` + `edit_conflicts` (phase 2 tail), phase 2b `crew_jsa`/`crew_mros` `owner_id`, phase 7a `pipe_messages` employee-id cols, hierarchy H2 (`trade`/`hired_at` + cycle trigger).",
+    "content": "Paused for token usage. 3 of ~5 schema chunks applied to new Supabase project `[redacted_project_ref]`. Site repair ~60% complete — DB schema partial, repo URL swap not done, no commit, cherp.live still serving old backend. 1. **Confirm DB state.** `mcp__supabase__list_tables` schemas=[\"public\"]. Expect ~32 tables. ALPHA-01 seeded in `team_codes`; 2 superintendent rows in `crew_members`; 1 demo superuser in `user_profiles`; 3 rows in `app_settings`. **Chunk 4** (lines 1328-1544): `pending_users` + `edit_conflicts` (phase 2 tail), phase 2b `crew_jsa`/`crew_mros` `owner_id`, phase 7a `pipe_messages` employee-id cols, hierarchy H2 (`trade`/`hired_at` + cycle trigger).\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 — Claude pickup paused pre-bootstrap (logout)",
+    "path": "handoffs/HANDOFF_2026-04-18_claude_pickup_paused.md",
+    "updated": "2026-04-19T03:50:54Z",
+    "summary": "Claude session booted, brainscanned, reviewed `HANDOFF_2026-04-18_cherp_migration_in_flight.md`, and **paused before executing anything** per Ken's \"pause and log for logout\" instruction. Read the CHERP migration handoff and the linux-wrapup / plan context. Confirmed Supabase MCP is authenticated (`/mcp` returned",
+    "content": "Claude session booted, brainscanned, reviewed `HANDOFF_2026-04-18_cherp_migration_in_flight.md`, and **paused before executing anything** per Ken's \"pause and log for logout\" instruction. Read the CHERP migration handoff and the linux-wrapup / plan context. Confirmed Supabase MCP is authenticated (`/mcp` returned\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 — CHERP Supabase migration in flight",
+    "path": "handoffs/HANDOFF_2026-04-18_cherp_migration_in_flight.md",
+    "updated": "2026-04-19T03:48:24Z",
+    "summary": "Ken started migrating CHERP from the old Supabase project (legacy JWT keys, disabled) to a brand-new project with the new `[redacted_key_prefix]` / `[redacted_key_prefix]` key format. Not finished this session. Supabase globally disabled all **legacy JWT API keys** on **2026-04-16T00:29:23Z**. Both Ken's original `[SERVICE_ROLE_ENV]` and the 4-16 \"rotation\" key were legacy JWTs ([redacted_jwt]…) — both got killed at the platform level, not just for CHERP. CHERP's 4-16 maintenance incident commits trace to this event even though the code only says \"security incident\". Rotating legacy-format keys doesn't help; the JWT format itself is disabled. Path forward = new project wi\n\n[truncated for portal]",
+    "content": "Ken started migrating CHERP from the old Supabase project (legacy JWT keys, disabled) to a brand-new project with the new `[redacted_key_prefix]` / `[redacted_key_prefix]` key format. Not finished this session. Supabase globally disabled all **legacy JWT API keys** on **2026-04-16T00:29:23Z**. Both Ken's original `[SERVICE_ROLE_ENV]` and the 4-16 \"rotation\" key were legacy JWTs ([redacted_jwt]…) — both got killed at the platform level, not just for CHERP. CHERP's 4-16 maintenance incident commits trace to this event even though the code only says \"security incident\". Rotating legacy-format keys doesn't help; the JWT format itself is disabled. Path forward = new project wi\n\n[truncated for portal]\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 — Pokemon sprite wire-up (post-login pickup)",
+    "path": "handoffs/HANDOFF_2026-04-18_pokemon_sprites_wire.md",
+    "updated": "2026-04-19T01:21:01Z",
+    "summary": "Ken asked to wire up Pokemon portrait dumps after login. **Stated path (empty right now):** `[HOME]/Pictures/Pokemon Sprites/` **Actual dump location:** `[HOME]/Downloads/pokemonGen7-20260419T011533Z-3-001/pokemonGen7/Gen7/ultra-sun-ultra-moon/`",
+    "content": "Ken asked to wire up Pokemon portrait dumps after login. **Stated path (empty right now):** `[HOME]/Pictures/Pokemon Sprites/` **Actual dump location:** `[HOME]/Downloads/pokemonGen7-20260419T011533Z-3-001/pokemonGen7/Gen7/ultra-sun-ultra-moon/`\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 — live logs, tilix polish, pre-reboot state",
+    "path": "handoffs/HANDOFF_2026-04-18_live_logs_tilix_reboot.md",
+    "updated": "2026-04-19T00:50:37Z",
+    "summary": "This session shipped (a) the Tilix trio polish + BRAIN-root cd, (b) consolidated the autostart collision, (c) a full live-log architecture for BRAIN with Claude Code hooks, and (d) a daily archive timer. Staged for reboot verification. `~/bin/trio-pane-{claude,kenai,codex}.sh` now `cd [BRAIN_ROOT]` (BRAIN root). Each sets its terminal title via `printf '\\033]0;TITLE\\007'` so CLAUDE/KENAI/CODEX stick. `~/bin/kenai-ops-center.sh` launches three separate Tilix windows with `--window-style=borderless --profile=KenOS --geometry=140x38+X+150` — X = 30 / 1290 / 2550 across DP-4 (3840×1080). `--working-directory` = BRAIN root.",
+    "content": "This session shipped (a) the Tilix trio polish + BRAIN-root cd, (b) consolidated the autostart collision, (c) a full live-log architecture for BRAIN with Claude Code hooks, and (d) a daily archive timer. Staged for reboot verification. `~/bin/trio-pane-{claude,kenai,codex}.sh` now `cd [BRAIN_ROOT]` (BRAIN root). Each sets its terminal title via `printf '\\033]0;TITLE\\007'` so CLAUDE/KENAI/CODEX stick. `~/bin/kenai-ops-center.sh` launches three separate Tilix windows with `--window-style=borderless --profile=KenOS --geometry=140x38+X+150` — X = 30 / 1290 / 2550 across DP-4 (3840×1080). `--working-directory` = BRAIN root.\n\n[Full source stays local in the private Brain.]"
+  },
+  {
+    "title": "HANDOFF 2026-04-18 - claude linux wrapup",
+    "path": "handoffs/HANDOFF_2026-04-18_claude_linux_wrapup.md",
+    "updated": "2026-04-19T00:00:22Z",
+    "summary": "BRAIN root: `[BRAIN_ROOT]` live Codex repo: `[BRAIN_ROOT]/Codex` Claude peer repo: `[BRAIN_ROOT]/Claude`",
+    "content": "BRAIN root: `[BRAIN_ROOT]` live Codex repo: `[BRAIN_ROOT]/Codex` Claude peer repo: `[BRAIN_ROOT]/Claude`\n\n[Full source stays local in the private Brain.]"
+  }
+]

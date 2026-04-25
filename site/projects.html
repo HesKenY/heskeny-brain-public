@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>BRAIN · Project Checklist</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --bg-card: #121620;
+    --bg-card-hover: #161b27;
+    --border: #1f2533;
+    --border-strong: #2a3344;
+    --text: #d6dde9;
+    --text-dim: #8993a8;
+    --text-faint: #5b657a;
+    --accent: #7ec8e8;
+    --done: #6cc24a;
+    --warn: #ffd819;
+    --err: #ff5a2b;
+    --paused: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: linear-gradient(180deg, var(--bg) 70%, rgba(11,13,18,0));
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .head-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .head h1 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .head .meta {
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .view-tabs {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0 6px;
+  }
+  .view-tab {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .view-tab.on {
+    background: var(--bg-card);
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .totals {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    font-family: inherit;
+  }
+  .pill.static { cursor: default; }
+  .pill strong { color: var(--text); font-weight: 600; }
+  .pill.on {
+    background: #1b2436;
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .pill.on.active   { border-color: var(--done);   background: #14241b; }
+  .pill.on.planning { border-color: var(--warn);   background: #2a2615; }
+  .pill.on.done     { border-color: var(--done);   background: #14241b; }
+  .pill.on.on-hold  { border-color: var(--paused); background: #221b30; }
+  .filter-clear {
+    background: transparent;
+    border: 1px dashed var(--border-strong);
+    color: var(--text-faint);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  main { padding: 8px 10px 24px; }
+  .group { margin-bottom: 14px; }
+  .group-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin: 6px 6px 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .group-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 11px;
+    margin-bottom: 6px;
+  }
+  .card-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .card-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .pct {
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .status {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .status.active { background: #1b3429; color: var(--done); }
+  .status.planning { background: #2a2e1c; color: var(--warn); }
+  .status.planned { background: #2a2e1c; color: var(--warn); }
+  .status.on-hold { background: #2c2630; color: var(--paused); }
+  .status.done { background: #1b3429; color: var(--done); }
+  .bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 6px 0 8px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .summary {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin: 0 0 4px;
+  }
+  .current {
+    color: var(--text);
+    font-size: 12px;
+    margin: 0 0 6px;
+  }
+  .current::before {
+    content: "now: ";
+    color: var(--text-faint);
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    margin-right: 4px;
+  }
+  .next-list {
+    margin: 4px 0 0;
+    padding: 0 0 0 16px;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+  .next-list li { margin: 1px 0; }
+  .next-label, .meta-line {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+  .err-state {
+    padding: 16px;
+    color: var(--err);
+    font-size: 12px;
+  }
+  .empty-state {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 12px;
+  }
+  /* Timeline view */
+  .tl-day {
+    margin: 6px 0 16px;
+  }
+  .tl-date {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    border-bottom: 1px dashed var(--border);
+    padding: 0 4px 4px;
+    margin-bottom: 6px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+  }
+  .tl-row {
+    display: flex;
+    gap: 10px;
+    padding: 6px 6px;
+    border-radius: 6px;
+  }
+  .tl-row:hover { background: var(--bg-card-hover); }
+  .tl-icon {
+    flex: 0 0 24px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .tl-icon.shipped { background: #1b3429; color: var(--done); }
+  .tl-icon.decided { background: #1b2436; color: var(--accent); }
+  .tl-icon.planned { background: #2a2e1c; color: var(--warn); }
+  .tl-icon.blocked { background: #2c2630; color: var(--paused); }
+  .tl-body { flex: 1; min-width: 0; }
+  .tl-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+  }
+  .tl-summary {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: 2px 0 0;
+  }
+  .tl-tag {
+    font-size: 10px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 6px;
+  }
+  /* Card click affordance */
+  .card { cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .card:hover, .card:focus { background: var(--bg-card-hover); border-color: var(--border-strong); outline: none; }
+
+  /* Detail overlay */
+  .detail-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 13, 18, 0.78);
+    backdrop-filter: blur(2px);
+    z-index: 50;
+    display: none;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .detail-overlay.open { display: flex; }
+  .detail-pane {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    width: min(680px, 100%);
+    max-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+    padding: 16px 16px 32px;
+    position: relative;
+  }
+  @media (min-width: 600px) {
+    .detail-pane { border-radius: 10px; margin: 24px; max-height: calc(100vh - 48px); }
+  }
+  .detail-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: var(--bg-card);
+    color: var(--text-dim);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+  }
+  .detail-close:hover { color: var(--text); }
+  .detail-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 4px;
+  }
+  .detail-meta {
+    color: var(--text-faint);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+  }
+  .detail-section {
+    margin-top: 14px;
+  }
+  .detail-section h3 {
+    margin: 0 0 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+  .detail-section p {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-size: 13px;
+  }
+  .detail-section ul {
+    margin: 4px 0;
+    padding-left: 18px;
+    color: var(--text);
+    font-size: 13px;
+  }
+  .related-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .related-chip {
+    background: #1b2436;
+    color: var(--accent);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .related-chip:hover { background: #243152; }
+
+  /* Mini timeline inside detail pane */
+  .detail-tl-row {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--border);
+  }
+  .detail-tl-row:first-child { border-top: 0; }
+  .detail-tl-date {
+    flex: 0 0 90px;
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 2px;
+  }
+  .detail-tl-body { flex: 1; min-width: 0; }
+  .detail-tl-title {
+    font-size: 13px;
+    color: var(--text);
+    margin: 0;
+    font-weight: 600;
+  }
+  .detail-tl-summary {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: 2px 0 0;
+  }
+  .detail-tl-kind {
+    display: inline-block;
+    padding: 0 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 4px;
+    vertical-align: 1px;
+    font-weight: 700;
+  }
+  .detail-tl-kind.shipped { background: #1b3429; color: var(--done); }
+  .detail-tl-kind.decided { background: #1b2436; color: var(--accent); }
+  .detail-tl-kind.planned { background: #2a2e1c; color: var(--warn); }
+  .detail-tl-kind.blocked { background: #2c2630; color: var(--paused); }
+
+  @media (max-width: 380px) {
+    body { font-size: 13px; }
+    .card { padding: 8px 9px; }
+    .card-name { font-size: 13px; }
+    .detail-pane { padding: 12px 12px 24px; }
+    .detail-tl-date { flex-basis: 80px; }
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="head-row">
+      <h1>Project Checklist</h1>
+      <span class="meta" id="stamp">loading…</span>
+    </div>
+    <div class="view-tabs">
+      <button class="view-tab on" id="tab-projects" type="button">Projects</button>
+      <button class="view-tab" id="tab-timeline" type="button">Timeline</button>
+    </div>
+    <div class="totals" id="totals"></div>
+  </div>
+  <main id="main">
+    <div class="empty-state">Loading…</div>
+  </main>
+
+  <!-- Detail overlay — populated by openDetail(projectId) -->
+  <div class="detail-overlay" id="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detail-heading">
+    <div class="detail-pane" id="detail-pane">
+      <button class="detail-close" id="detail-close" type="button" aria-label="Close detail view">Close ✕</button>
+      <div id="detail-body"></div>
+    </div>
+  </div>
+  <script>
+    window.CHECKLIST_DATA_URL = "./data/project-checklist.json";
+    const API = (window.CHECKLIST_DATA_URL) || (location.protocol === 'file:' ? 'http://localhost:7777/api/project-checklist' : '/api/project-checklist');
+    const POLL_MS = 30000;
+    const FILTER_LS_KEY = 'checklist.filters.v1';
+    const VIEW_LS_KEY = 'checklist.view.v1';
+    const $ = (id) => document.getElementById(id);
+    function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // ── State ────────────────────────────────────────────────────────
+    let _data = null;
+    const _filters = new Set(JSON.parse(localStorage.getItem(FILTER_LS_KEY) || '[]'));
+    let _view = localStorage.getItem(VIEW_LS_KEY) || 'projects';
+
+    function saveFilters() { localStorage.setItem(FILTER_LS_KEY, JSON.stringify([...(_filters)])); }
+    function saveView() { localStorage.setItem(VIEW_LS_KEY, _view); }
+
+    // ── Helpers ──────────────────────────────────────────────────────
+    function flattenProjects(data) {
+      const out = [];
+      for (const g of data.groups || []) for (const p of (g.projects || [])) out.push({ ...p, _group: g });
+      return out;
+    }
+    function statusBucket(p) {
+      if (p.status === 'done' || p.percent >= 100) return 'done';
+      if (p.status === 'active') return 'active';
+      if (p.status === 'planning' || p.status === 'planned') return 'planning';
+      if (p.status === 'on-hold') return 'on-hold';
+      return p.status || 'other';
+    }
+    function projectMatchesFilter(p) {
+      if (_filters.size === 0) return true;
+      return _filters.has(statusBucket(p));
+    }
+
+    // ── Header pills (clickable filters) ─────────────────────────────
+    function renderTotals() {
+      if (!_data) return;
+      const all = flattenProjects(_data);
+      const total = all.length;
+      const buckets = { active: 0, planning: 0, done: 0, 'on-hold': 0 };
+      for (const p of all) {
+        const b = statusBucket(p);
+        if (buckets.hasOwnProperty(b)) buckets[b] += 1;
+      }
+      const sum = all.reduce((a, p) => a + (Number(p.percent) || 0), 0);
+      const avg = total ? Math.round(sum / total) : 0;
+      const milestonesCount = (_data.milestones || []).length;
+
+      const pills = [];
+      pills.push(`<button class="pill static" type="button" title="Average completion across all projects"><strong>${avg}%</strong> avg</button>`);
+      for (const [bucket, count] of Object.entries(buckets)) {
+        if (!count && !_filters.has(bucket)) continue;
+        const on = _filters.has(bucket) ? ' on' : '';
+        pills.push(`<button class="pill${on} ${bucket}" data-filter="${bucket}" type="button" title="Click to filter — ${bucket}"><strong>${count}</strong> ${bucket}</button>`);
+      }
+      pills.push(`<button class="pill static" type="button" title="Total projects in catalog"><strong>${total}</strong> total</button>`);
+      pills.push(`<button class="pill static" type="button" title="Milestones tracked in timeline"><strong>${milestonesCount}</strong> milestones</button>`);
+      if (_filters.size) {
+        pills.push(`<button class="filter-clear" id="filter-clear" type="button" title="Clear all filters">clear</button>`);
+      }
+      $('totals').innerHTML = pills.join('');
+
+      // Wire filter pills.
+      $('totals').querySelectorAll('[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const f = btn.dataset.filter;
+          if (_filters.has(f)) _filters.delete(f); else _filters.add(f);
+          saveFilters();
+          render();
+        });
+      });
+      const clr = $('filter-clear');
+      if (clr) clr.addEventListener('click', () => { _filters.clear(); saveFilters(); render(); });
+    }
+
+    // ── Projects view ────────────────────────────────────────────────
+    function renderProjectCard(p) {
+      const pct = Math.max(0, Math.min(100, Number(p.percent) || 0));
+      const nextItems = Array.isArray(p.next) ? p.next : [];
+      const nextHtml = nextItems.length
+        ? `<div class="next-label">next</div><ul class="next-list">${nextItems.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`
+        : '';
+      return `
+        <div class="card" data-project-id="${esc(p.id)}" tabindex="0" role="button" aria-label="Open detail for ${esc(p.name)}">
+          <div class="card-row1">
+            <span class="card-name">${esc(p.name)}<span class="status ${esc(p.status || '')}">${esc(p.status || '')}</span></span>
+            <span class="pct">${pct}%</span>
+          </div>
+          <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+          ${p.summary ? `<p class="summary">${esc(p.summary)}</p>` : ''}
+          ${p.current ? `<p class="current">${esc(p.current)}</p>` : ''}
+          ${nextHtml}
+          ${p.owner ? `<div class="meta-line" style="margin-top:6px">owner · ${esc(p.owner)} · click for full timeline</div>` : '<div class="meta-line" style="margin-top:6px">click for full timeline</div>'}
+        </div>`;
+    }
+    function renderProjectsView() {
+      const groups = (_data.groups || []).map(g => {
+        const visible = (g.projects || []).filter(projectMatchesFilter);
+        if (!visible.length) return '';
+        return `
+          <div class="group">
+            <div class="group-title">
+              <span class="group-dot" style="background:${esc(g.color || '#7ec8e8')}"></span>
+              ${esc(g.title || g.id)}
+            </div>
+            ${visible.map(renderProjectCard).join('')}
+          </div>`;
+      }).join('');
+      $('main').innerHTML = groups || `<div class="empty-state">No projects match the active filter.</div>`;
+      wireCardClicks();
+    }
+
+    function wireCardClicks() {
+      $('main').querySelectorAll('[data-project-id]').forEach(el => {
+        el.addEventListener('click', () => openDetail(el.dataset.projectId));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(el.dataset.projectId); }
+        });
+      });
+    }
+
+    function findProjectById(id) {
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) {
+          if (p.id === id) return { project: p, group: g };
+        }
+      }
+      return null;
+    }
+
+    // ── Detail modal: full project context + chronological timeline ──
+    function openDetail(projectId) {
+      const found = findProjectById(projectId);
+      if (!found) return;
+      const { project: p, group: g } = found;
+      const pct = Math.max(0, Math.min(100, Number(p.percent) || 0));
+
+      // Project's own milestones, oldest → newest (so the user sees the
+      // growth path from inception to current state).
+      const projectMilestones = (_data.milestones || [])
+        .filter(m => m.project === p.id)
+        .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+
+      const tlHtml = projectMilestones.length
+        ? projectMilestones.map(m => {
+            const k = (m.kind || 'shipped').toLowerCase();
+            return `
+              <div class="detail-tl-row">
+                <div class="detail-tl-date">${esc(m.date || '')}</div>
+                <div class="detail-tl-body">
+                  <p class="detail-tl-title"><span class="detail-tl-kind ${esc(k)}">${esc(k)}</span>${esc(m.title)}</p>
+                  ${m.summary ? `<p class="detail-tl-summary">${esc(m.summary)}</p>` : ''}
+                </div>
+              </div>`;
+          }).join('')
+        : `<p style="color:var(--text-faint);font-size:12px;font-style:italic">No milestones recorded yet for this project.</p>`;
+
+      const related = Array.isArray(p.related) ? p.related : [];
+      const relatedHtml = related.length
+        ? related.map(rid => {
+            const f = findProjectById(rid);
+            const label = f ? f.project.name : rid;
+            return `<button class="related-chip" data-related-id="${esc(rid)}" type="button">${esc(label)}</button>`;
+          }).join('')
+        : `<span style="color:var(--text-faint);font-size:11px;font-style:italic">No related projects linked yet.</span>`;
+
+      const nextItems = Array.isArray(p.next) ? p.next : [];
+      const nextHtml = nextItems.length
+        ? `<ul>${nextItems.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`
+        : `<p style="color:var(--text-faint);font-size:12px;font-style:italic">No next steps recorded.</p>`;
+
+      $('detail-body').innerHTML = `
+        <h2 class="detail-title" id="detail-heading">${esc(p.name)}<span class="status ${esc(p.status || '')}" style="font-size:10px;margin-left:8px">${esc(p.status || '')}</span></h2>
+        <p class="detail-meta">${esc(g.title || g.id)} · ${pct}% · owner ${esc(p.owner || 'unassigned')}</p>
+        <div class="bar" style="margin:8px 0 0"><div class="bar-fill" style="width:${pct}%"></div></div>
+
+        ${p.summary ? `<div class="detail-section"><h3>What this is</h3><p>${esc(p.summary)}</p></div>` : ''}
+        ${p.current ? `<div class="detail-section"><h3>Where we are now</h3><p>${esc(p.current)}</p></div>` : ''}
+
+        <div class="detail-section">
+          <h3>Next steps</h3>
+          ${nextHtml}
+        </div>
+
+        <div class="detail-section">
+          <h3>Related projects</h3>
+          <div class="related-chips">${relatedHtml}</div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Project timeline (${projectMilestones.length} milestone${projectMilestones.length === 1 ? '' : 's'})</h3>
+          ${tlHtml}
+        </div>
+      `;
+
+      // Wire related-chip clicks to swap the modal content.
+      $('detail-body').querySelectorAll('[data-related-id]').forEach(btn => {
+        btn.addEventListener('click', () => openDetail(btn.dataset.relatedId));
+      });
+
+      $('detail-overlay').classList.add('open');
+      // Move keyboard focus into the modal for a11y; reset scroll.
+      $('detail-pane').scrollTop = 0;
+      $('detail-close').focus();
+    }
+
+    function closeDetail() {
+      $('detail-overlay').classList.remove('open');
+    }
+    $('detail-close').addEventListener('click', closeDetail);
+    $('detail-overlay').addEventListener('click', (e) => {
+      if (e.target === $('detail-overlay')) closeDetail();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && $('detail-overlay').classList.contains('open')) closeDetail();
+    });
+
+    // ── Timeline view ────────────────────────────────────────────────
+    function projectNameById(id) {
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) {
+          if (p.id === id) return p.name;
+        }
+      }
+      return id;
+    }
+    function renderTimelineView() {
+      const milestones = (_data.milestones || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      if (!milestones.length) {
+        $('main').innerHTML = `<div class="empty-state">No milestones yet. Add to <code>milestones[]</code> in <code>config/project-checklist.json</code>.</div>`;
+        return;
+      }
+      // Filter milestones by status bucket if filters are active.
+      // Map kind → bucket: shipped→done, planned→planning, decided/blocked→active.
+      const kindToBucket = { shipped: 'done', planned: 'planning', decided: 'active', blocked: 'on-hold' };
+      const filtered = _filters.size
+        ? milestones.filter(m => _filters.has(kindToBucket[m.kind] || m.kind))
+        : milestones;
+      if (!filtered.length) {
+        $('main').innerHTML = `<div class="empty-state">No milestones match the active filter.</div>`;
+        return;
+      }
+      // Group by date.
+      const byDate = new Map();
+      for (const m of filtered) {
+        const d = m.date || 'undated';
+        if (!byDate.has(d)) byDate.set(d, []);
+        byDate.get(d).push(m);
+      }
+      const html = [...byDate.entries()].map(([date, rows]) => {
+        const items = rows.map((m, i) => {
+          const k = (m.kind || 'shipped').toLowerCase();
+          const icon = k === 'shipped' ? '✓' : k === 'planned' ? '◷' : k === 'decided' ? '◆' : '!';
+          const proj = m.project ? `<span class="tl-tag">${esc(projectNameById(m.project))}</span>` : '';
+          // Stable id-by-position so click handlers can find the milestone.
+          const idx = (_data.milestones || []).indexOf(m);
+          return `
+            <div class="tl-row" data-milestone-idx="${idx}" tabindex="0" role="button" aria-label="Open milestone detail: ${esc(m.title)}">
+              <div class="tl-icon ${esc(k)}">${icon}</div>
+              <div class="tl-body">
+                <p class="tl-title">${proj}${esc(m.title)}</p>
+                ${m.summary ? `<p class="tl-summary">${esc(m.summary)}</p>` : ''}
+              </div>
+            </div>`;
+        }).join('');
+        return `<div class="tl-day"><div class="tl-date">${esc(date)}</div>${items}</div>`;
+      }).join('');
+      $('main').innerHTML = html;
+      wireMilestoneClicks();
+    }
+
+    function wireMilestoneClicks() {
+      $('main').querySelectorAll('[data-milestone-idx]').forEach(el => {
+        const idx = Number(el.dataset.milestoneIdx);
+        el.addEventListener('click', () => openMilestoneDetail(idx));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMilestoneDetail(idx); }
+        });
+      });
+    }
+
+    // Detail modal for a single milestone — title + summary + jump to
+    // its project + the project's full mini-timeline so the operator
+    // sees what was happening before and after.
+    function openMilestoneDetail(idx) {
+      const m = (_data.milestones || [])[idx];
+      if (!m) return;
+      const k = (m.kind || 'shipped').toLowerCase();
+      const projInfo = m.project ? findProjectById(m.project) : null;
+      const projName = projInfo ? projInfo.project.name : (m.project || 'unassigned');
+
+      const projectMilestones = m.project
+        ? (_data.milestones || [])
+            .map((row, i) => ({ row, i }))
+            .filter(({ row }) => row.project === m.project)
+            .sort((a, b) => (a.row.date || '').localeCompare(b.row.date || ''))
+        : [];
+
+      const tlHtml = projectMilestones.map(({ row, i }) => {
+        const rk = (row.kind || 'shipped').toLowerCase();
+        const isThis = i === idx;
+        const highlight = isThis ? 'style="background:#1b2436;border-radius:6px"' : '';
+        return `
+          <div class="detail-tl-row" ${highlight} data-jump-idx="${i}" tabindex="0" role="button">
+            <div class="detail-tl-date">${esc(row.date || '')}</div>
+            <div class="detail-tl-body">
+              <p class="detail-tl-title"><span class="detail-tl-kind ${esc(rk)}">${esc(rk)}</span>${esc(row.title)}${isThis ? ' ← this' : ''}</p>
+              ${row.summary ? `<p class="detail-tl-summary">${esc(row.summary)}</p>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+
+      const projectButton = m.project
+        ? `<button class="related-chip" data-jump-project="${esc(m.project)}" type="button">Open ${esc(projName)} →</button>`
+        : '';
+
+      $('detail-body').innerHTML = `
+        <h2 class="detail-title" id="detail-heading"><span class="detail-tl-kind ${esc(k)}" style="vertical-align:3px;margin-right:8px">${esc(k)}</span>${esc(m.title)}</h2>
+        <p class="detail-meta">${esc(m.date || '')} · ${esc(projName)}</p>
+
+        ${m.summary ? `<div class="detail-section"><h3>What landed</h3><p>${esc(m.summary)}</p></div>` : ''}
+
+        ${m.project ? `<div class="detail-section"><h3>Project</h3><div class="related-chips">${projectButton}</div></div>` : ''}
+
+        ${projectMilestones.length > 1 ? `
+          <div class="detail-section">
+            <h3>How this project grew (${projectMilestones.length} milestones)</h3>
+            ${tlHtml}
+          </div>` : ''}
+      `;
+
+      // Wire jumps: project chip opens project detail; mini-timeline
+      // rows open the milestone they represent.
+      const pjBtn = $('detail-body').querySelector('[data-jump-project]');
+      if (pjBtn) pjBtn.addEventListener('click', () => openDetail(pjBtn.dataset.jumpProject));
+      $('detail-body').querySelectorAll('[data-jump-idx]').forEach(row => {
+        const j = Number(row.dataset.jumpIdx);
+        if (j === idx) return; // current row, no-op
+        row.addEventListener('click', () => openMilestoneDetail(j));
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMilestoneDetail(j); }
+        });
+      });
+
+      $('detail-overlay').classList.add('open');
+      $('detail-pane').scrollTop = 0;
+      $('detail-close').focus();
+    }
+
+    // ── Top-level render + view tabs ─────────────────────────────────
+    function render() {
+      if (!_data) return;
+      renderTotals();
+      if (_view === 'timeline') renderTimelineView();
+      else renderProjectsView();
+      $('tab-projects').classList.toggle('on', _view === 'projects');
+      $('tab-timeline').classList.toggle('on', _view === 'timeline');
+      const stamp = _data.last_updated_iso ? new Date(_data.last_updated_iso) : null;
+      const updated = _data.updated ? `edited ${_data.updated}` : '';
+      const fresh = stamp ? `synced ${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : '';
+      $('stamp').textContent = [updated, fresh].filter(Boolean).join(' · ');
+    }
+
+    $('tab-projects').addEventListener('click', () => { _view = 'projects'; saveView(); render(); });
+    $('tab-timeline').addEventListener('click', () => { _view = 'timeline'; saveView(); render(); });
+
+    async function load() {
+      try {
+        const r = await fetch(API, { cache: 'no-store' });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        _data = await r.json();
+        render();
+      } catch (e) {
+        $('main').innerHTML = `<div class="err-state">Could not load checklist: ${esc(e.message)}<br><br>Set <code>window.CHECKLIST_DATA_URL</code> if you're hosting this offsite.</div>`;
+        $('stamp').textContent = 'error';
+      }
+    }
+
+    load();
+    setInterval(load, POLL_MS);
+  </script>
+</body>
+</html>

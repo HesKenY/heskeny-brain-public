@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heskeny Brain</title>
+  <style>
+    :root {
+      --ink: #17201b;
+      --muted: #617064;
+      --paper: #f3efe4;
+      --panel: #fff9ea;
+      --line: #d8cba9;
+      --field: #23593f;
+      --rust: #9f4d24;
+      --gold: #d6a73b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(214,167,59,.22), transparent 28rem),
+        radial-gradient(circle at 90% 5%, rgba(35,89,63,.18), transparent 24rem),
+        linear-gradient(135deg, #efe5cc, #f7f2e6 45%, #eadbbd);
+    }
+    header {
+      padding: 56px 24px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      color: var(--rust);
+      font: 700 12px/1.2 ui-sans-serif, system-ui, sans-serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      font-size: clamp(42px, 8vw, 92px);
+      line-height: .88;
+      max-width: 900px;
+      letter-spacing: -0.055em;
+    }
+    .lede {
+      font: 500 18px/1.55 ui-sans-serif, system-ui, sans-serif;
+      color: var(--muted);
+      max-width: 760px;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 72px;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr auto;
+      padding: 16px;
+      margin: 20px 0;
+      background: rgba(243,239,228,.86);
+      border: 1px solid rgba(216,203,169,.9);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      box-shadow: 0 18px 55px rgba(57, 43, 19, .11);
+    }
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--panel);
+      color: var(--ink);
+      font: 700 14px/1.2 ui-sans-serif, system-ui, sans-serif;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    article {
+      padding: 18px;
+      background: rgba(255,249,234,.88);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      min-height: 220px;
+      box-shadow: 0 16px 42px rgba(57, 43, 19, .09);
+    }
+    article h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: -.025em;
+    }
+    .meta {
+      font: 800 11px/1.4 ui-sans-serif, system-ui, sans-serif;
+      color: var(--field);
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      margin-bottom: 12px;
+    }
+    p {
+      font: 500 14px/1.55 ui-sans-serif, system-ui, sans-serif;
+      color: #3f4b43;
+    }
+    details {
+      margin-top: 12px;
+    }
+    summary {
+      cursor: pointer;
+      color: var(--rust);
+      font: 900 13px/1.2 ui-sans-serif, system-ui, sans-serif;
+    }
+    pre {
+      white-space: pre-wrap;
+      max-height: 420px;
+      overflow: auto;
+      padding: 14px;
+      border-radius: 14px;
+      background: #17201b;
+      color: #f7f2e6;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .counts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(35,89,63,.1);
+      color: var(--field);
+      font: 900 12px/1 ui-sans-serif, system-ui, sans-serif;
+    }
+    @media (max-width: 640px) {
+      .toolbar { grid-template-columns: 1fr; }
+      header { padding-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Sanitized Brain Portal</div>
+    <h1>Heskeny Brain</h1>
+    <p class="lede">A static operating-memory portal for handoffs, summaries, and agent evidence. Raw logs and BRAIN.db stay local; this export is safe-by-default.</p>
+    <p class="lede"><a href="investor.html">Open the CHERP + Brain investor progress snapshot</a></p>
+    <div class="counts" id="counts"></div>
+  </header>
+  <main>
+    <section class="toolbar">
+      <input id="q" placeholder="Search handoffs, diaries, roadmap...">
+      <select id="type">
+        <option value="all">All resources</option>
+        <option value="core">Core</option>
+        <option value="handoff">Handoffs</option>
+        <option value="diary">Diaries</option>
+      </select>
+    </section>
+    <section class="grid" id="cards"></section>
+  </main>
+  <script>
+    const state = { docs: [] };
+    const esc = (s) => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function render() {
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      const type = document.getElementById('type').value;
+      const rows = state.docs.filter(d => {
+        if (type !== 'all' && d.type !== type) return false;
+        if (!q) return true;
+        return [d.title, d.path, d.summary, d.content].join(' ').toLowerCase().includes(q);
+      });
+      document.getElementById('cards').innerHTML = rows.map(d => `
+        <article>
+          <div class="meta">${esc(d.type)} · ${esc(d.path)}</div>
+          <h2>${esc(d.title)}</h2>
+          <p>${esc(d.summary)}</p>
+          <details>
+            <summary>Read sanitized source</summary>
+            <pre>${esc(d.content)}</pre>
+          </details>
+        </article>
+      `).join('');
+    }
+    Promise.all([
+      fetch('data/core.json').then(r => r.json()),
+      fetch('data/handoffs.json').then(r => r.json()),
+      fetch('data/diaries.json').then(r => r.json()),
+      fetch('data/manifest.json').then(r => r.json())
+    ]).then(([core, handoffs, diaries, manifest]) => {
+      state.docs = [
+        ...core.map(d => ({...d, type: 'core'})),
+        ...handoffs.map(d => ({...d, type: 'handoff'})),
+        ...diaries.map(d => ({...d, type: 'diary'}))
+      ];
+      document.getElementById('counts').innerHTML = [
+        `${manifest.counts.core_docs} core`,
+        `${manifest.counts.handoffs} handoffs`,
+        `${manifest.counts.diaries} diaries`,
+        `generated ${manifest.generated_at}`
+      ].map(x => `<span class="pill">${esc(x)}</span>`).join('');
+      document.getElementById('q').addEventListener('input', render);
+      document.getElementById('type').addEventListener('change', render);
+      render();
+    });
+  </script>
+</body>
+</html>
