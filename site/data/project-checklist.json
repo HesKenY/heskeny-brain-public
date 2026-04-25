@@ -3,7 +3,8 @@
   "notes": "Operator-facing project status. Edit this file to update; the widget polls every 30s. Percentages are operator estimates. `next` = immediate next steps. `milestones` = shipped/decided things in reverse-chronological order. Internal file paths are intentionally absent — see handoffs for implementation detail.",
   "updated": "2026-04-24",
   "milestones": [
-    { "date": "2026-04-25", "project": "kenos-package", "kind": "shipped", "title": "KenOS package scaffold + builder", "summary": "Windows-targeted packaging started — kenos-package/ with installer stubs (PowerShell + WSL setup + onboard wizard + phone-app guide), starter checklist seed, and scripts/build-kenos-package.sh that assembles a 6.3 MB Ken-private-scrubbed payload. Plan + open decisions written. WSL2-backed approach picked." },
+    { "date": "2026-04-25", "project": "kenos-package", "kind": "decided", "title": "Pivot: Windows-native ZIP (no WSL)", "summary": "Approach reset — pure Windows-native, distributed as a ZIP, double-click setup wizard. Target: a working transfer ZIP today. Each operator gets own GitHub identity (wizard walks her through signup). Phone-push step uses adb sideload of KenOS Mobile APK. Doubles as BRAIN backup for Debe Corp continuity. Future: mold KenOS into the framework for CHERP customer packaging — sell each customer a personal IT department." },
+    { "date": "2026-04-25", "project": "kenos-package", "kind": "shipped", "title": "KenOS package scaffold + builder (now being rebuilt for Windows-native)", "summary": "Initial scaffold + builder shipped; pivoted to Windows-native — Linux/WSL stubs removed, PowerShell wizard + .bat launcher + ZIP build coming." },
     { "date": "2026-04-25", "project": "kenos-package", "kind": "decided", "title": "Per-project instance template framing", "summary": "Each KenOS instance is scoped to one operator + one project, not a generic clone. Onboarding captures identity + project name. Ken's BRAIN stays preserved as instance #1; new operators get fresh-stamped instances." },
     { "date": "2026-04-24", "project": "kenos-controller", "kind": "shipped", "title": "KenOS Controller live on HDMI-A-1", "summary": "Cutover applied — autostart swapped (legacy deck disabled, Controller enabled) and the live HDMI-A-1 chrome --app now serves the Controller. Pushed to git. Rollback is one command (`scripts/kenos-controller-cutover.sh undo --bounce`)." },
     { "date": "2026-04-24", "project": "kenos-controller", "kind": "shipped", "title": "Controller v2 follow-ups closed", "summary": "Halo wired via HTTP loopback to the existing /api/halo/* endpoints. Per-service log resolution covers files, journalctl, filtered shared.log, and orchestrator events. Pipe-R Restart button works end-to-end through ~/bin/pipe-r-restart.sh (double-fork via setsid)." },
@@ -161,17 +162,17 @@
         },
         {
           "id": "kenos-package",
-          "name": "KenOS Package — fresh-instance for new operator",
+          "name": "KenOS Package — Windows ZIP for fresh operator",
           "status": "active",
-          "percent": 25,
-          "summary": "Windows-installable packaging of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app) scaffolded as a per-project template. Each install is one operator + one project, not a clone of Ken's BRAIN.",
-          "current": "Scaffold + plan + builder shipped (6.3 MB payload, 55 files, Ken-private content scrubbed). Installer scripts are stubs with TODO markers for WSL2 install, Ollama-for-Windows, Tailscale, Claude/Codex login flows. Package assembled via scripts/build-kenos-package.sh.",
+          "percent": 30,
+          "summary": "Windows-native ZIP packaging of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template. Doubles as BRAIN backup for Debe Corp continuity.",
+          "current": "Pivot to Windows-native: WSL approach scrapped. Building PowerShell setup wizard + .bat launcher + Windows-native brain.ps1 + ZIP build script. Goal: working transfer ZIP today, not just scaffold.",
           "next": [
-            "Decide WSL2 distro: Ubuntu 22.04 (default) vs custom Pop!_OS image",
-            "Wire WSL2 + Ollama-for-Windows installs in install-windows.ps1",
-            "Wire MSI/Inno Setup wrapper around the PowerShell + payload",
-            "Confirm published package names for Claude Code CLI + Codex CLI",
-            "Settle: separate GitHub identity per operator, or skip git on first install"
+            "PowerShell setup wizard: identity, project, GitHub signup walkthrough, account paste, dependency installers (Node + Python + Ollama + Chrome + Tailscale + Git Bash)",
+            "Phone push step: bundled adb + KenOS Mobile APK sideload over USB",
+            "Windows launcher (.bat): start pipe-r server + open Controller in chrome --app",
+            "scripts/build-kenos-package.sh produces .zip output",
+            "Smoke-build the actual zip and validate the file list"
           ],
           "owner": "claude",
           "related": ["kenos-controller", "main-shell", "kenos-android", "kenai-v5"]
