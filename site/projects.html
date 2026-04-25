@@ -572,8 +572,15 @@
             ${visible.map(renderProjectCard).join('')}
           </div>`;
       }).join('');
-      $('main').innerHTML = groups || `<div class="empty-state">No projects match the active filter.</div>`;
-      wireCardClicks();
+      const next = groups || `<div class="empty-state">No projects match the active filter.</div>`;
+      // Skip swap if content unchanged — eliminates the black-flash on
+      // every 30s poll when nothing's actually moved.
+      const mainEl = $('main');
+      if (mainEl._lastHtml !== next) {
+        mainEl.innerHTML = next;
+        mainEl._lastHtml = next;
+        wireCardClicks();
+      }
     }
 
     function wireCardClicks() {
@@ -731,8 +738,12 @@
         }).join('');
         return `<div class="tl-day"><div class="tl-date">${esc(date)}</div>${items}</div>`;
       }).join('');
-      $('main').innerHTML = html;
-      wireMilestoneClicks();
+      const mainEl = $('main');
+      if (mainEl._lastHtml !== html) {
+        mainEl.innerHTML = html;
+        mainEl._lastHtml = html;
+        wireMilestoneClicks();
+      }
     }
 
     function wireMilestoneClicks() {

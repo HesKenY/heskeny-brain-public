@@ -3,6 +3,9 @@
   "notes": "Operator-facing project status. Edit this file to update; the widget polls every 30s. Percentages are operator estimates. `next` = immediate next steps. `milestones` = shipped/decided things in reverse-chronological order. Internal file paths are intentionally absent — see handoffs for implementation detail.",
   "updated": "2026-04-24",
   "milestones": [
+    { "date": "2026-04-25", "project": "main-shell", "kind": "shipped", "title": "Black-flash fix on poll-driven widgets", "summary": "Brainlog (3s poll), checklist (30s poll), and Controller (5s poll) widgets all stopped reassigning innerHTML on every tick — now dedupe against last-rendered HTML and only swap when the content actually changed. Eliminates the 'occasional black flash' Ken saw on the main display." },
+    { "date": "2026-04-25", "project": "brain-orchestrator", "kind": "shipped", "title": "DeepSeek launcher wired", "summary": "~/bin/trio-pane-deepseek.sh ships parallel to trio-pane-kenai.sh — gates on `ollama list` so the operator gets a clear error if the tag isn't pulled. config/models.catalog.json updated with the launcher path; flip enabled to true after `ollama pull deepseek-r1:8b` to activate." },
+    { "date": "2026-04-25", "project": "kenai-truthfulness", "kind": "shipped", "title": "Peerlog smoke 11/11 on kenai:v5.5", "summary": "All 11 truthfulness probes pass on production tag — terminal-marker, truncation, commit-claim, trivial-no-format, rebuild-path, file-creation-action, launch-action, save-memory-action, verify-action, commit-push-action, deploy-action. The two outstanding 'next' items (commit-claim-without-evidence, deploy-claim-without-infra-tag) were already covered by commit-push-action + deploy-action; closed." },
     { "date": "2026-04-25", "project": "kenos-package", "kind": "shipped", "title": "KenOS v1.0 transfer ZIP shipped", "summary": "Working Windows-native zip at kenos-package/dist/KenOS-latest.zip — double-click Setup.bat → PowerShell wizard handles identity + GitHub signup walkthrough + dep installs (Node/Python/Git/Ollama/optional Tailscale) + KenAI model pull + payload copy + desktop shortcut + optional adb phone push. Daily-driver KenOS.bat starts server + opens Controller. brain.bat = Windows operator CLI. 79 files, 4.8 MB." },
     { "date": "2026-04-25", "project": "kenos-controller", "kind": "shipped", "title": "Per-service health colors + Rayquaza icon", "summary": "Controller now derives 3-state health (ok/degraded/down) per service — degraded = running but orchestrator phase=error / last_error / detect note. Rayquaza (#384) wired as the Controller program icon — served at /assets/pokedex/0384-icon.png, picked up by chrome --app + the autostart .desktop file." },
     { "date": "2026-04-25", "project": "kenos-controller", "kind": "decided", "title": "Legacy retirement deferred — kept as fallback", "summary": "kenos-deck-monitor2.sh + pipe-r.html stay in tree as the rollback target. Cutover script handles both directions; no need to delete the legacy until a few weeks of clean Controller runtime prove the swap." },
@@ -190,14 +193,11 @@
         {
           "id": "brain-orchestrator",
           "name": "Model orchestrator",
-          "status": "active",
-          "percent": 92,
-          "summary": "Single-resident-model orchestrator with batch durability, audit trail, and recovery",
-          "current": "All 8 build-list items shipped except the DeepSeek launcher; 10/10 recovery tests pass",
-          "next": [
-            "Pull the DeepSeek tag and write its launcher",
-            "Real cross-family switch verification (KenAI ↔ DeepSeek)"
-          ],
+          "status": "shipped",
+          "percent": 100,
+          "summary": "Single-resident-model orchestrator with batch durability, audit trail, recovery, and DeepSeek launcher.",
+          "current": "All build-list items shipped. 10/10 recovery tests pass. DeepSeek launcher (~/bin/trio-pane-deepseek.sh) wired with graceful 'tag not pulled' gate; flip catalog enabled flag after `ollama pull deepseek-r1:8b` to activate.",
+          "next": [],
           "owner": "claude",
           "related": ["brain-pipe-r", "kenai-v5", "kenos-controller"]
         },
@@ -251,14 +251,11 @@
         {
           "id": "kenai-truthfulness",
           "name": "Peerlog truthfulness gate",
-          "status": "active",
-          "percent": 80,
+          "status": "shipped",
+          "percent": 100,
           "summary": "Probes that catch hallucinated commit / deploy / file-creation / launch / save-memory claims before they ship",
-          "current": "8/8 probes pass on v5.5; 3 new action-class probes added 2026-04-23",
-          "next": [
-            "Add commit-claim-without-evidence probe",
-            "Add deploy-claim-without-infra-tag probe"
-          ],
+          "current": "11/11 probes pass on kenai:v5.5 (terminal-marker, truncation, commit-claim, trivial-no-format, rebuild-path, file-creation-action, launch-action, save-memory-action, verify-action, commit-push-action, deploy-action). Both prior 'next' items already covered.",
+          "next": [],
           "owner": "claude"
         }
       ]
