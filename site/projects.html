@@ -341,6 +341,73 @@
   .pj-grid .num.real { color: var(--accent); }
   .pj-grid .num.best { color: var(--done); }
   .pj-note { font-size: 11px; color: var(--text-faint); margin-top: 6px; }
+  /* Index + Flow views (added 2026-04-26) */
+  .ix-search {
+    width: 100%; padding: 9px 12px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text); border-radius: 7px;
+    font-size: 13px; margin-bottom: 12px;
+    font-family: inherit;
+  }
+  .ix-search:focus { outline: none; border-color: var(--accent); }
+  .ix-section {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px; margin-bottom: 10px;
+  }
+  .ix-section h3 {
+    margin: 0 0 6px; font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .ix-row {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 8px; padding: 4px 0;
+    font-size: 12px;
+    border-top: 1px dashed var(--border);
+  }
+  .ix-row:first-of-type { border-top: 0; }
+  .ix-row .lbl { color: var(--text-faint); font-size: 11px; }
+  .ix-row .val { color: var(--text); }
+  .ix-row .val.kw { color: var(--accent); cursor: pointer; }
+  .ix-corpus-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    font-size: 11px;
+  }
+  .ix-corpus-cell {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px;
+  }
+  .ix-corpus-cell .name { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .ix-corpus-cell .num { font-variant-numeric: tabular-nums; color: var(--accent); font-size: 16px; font-weight: 700; }
+  .ix-corpus-cell .lbl { color: var(--text-faint); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+  /* Flow view: project status diagram */
+  .flow-board {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .flow-col {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px; min-height: 200px;
+  }
+  .flow-col h3 {
+    margin: 0 0 8px; font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .flow-col.col-active   h3 { color: var(--done); }
+  .flow-col.col-planned  h3 { color: var(--accent); }
+  .flow-col.col-blocked  h3 { color: var(--paused); }
+  .flow-col.col-shipped  h3 { color: var(--text-dim); }
+  .flow-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 8px; margin-bottom: 6px;
+    cursor: pointer; font-size: 11px;
+  }
+  .flow-card:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+  .flow-card .name { font-weight: 600; color: var(--text); }
+  .flow-card .pct  { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .flow-arrow {
+    text-align: center; color: var(--text-faint); font-size: 18px;
+    padding: 4px 0;
+  }
   /* Current Idea view */
   .ci-card {
     background: linear-gradient(180deg, #1a1f2e 0%, var(--bg-card) 70%);
@@ -584,6 +651,8 @@
       <button class="view-tab" id="tab-roadmap" type="button">Roadmap</button>
       <button class="view-tab" id="tab-projections" type="button">Projections</button>
       <button class="view-tab" id="tab-current-idea" type="button">Current Idea</button>
+      <button class="view-tab" id="tab-index" type="button">Index</button>
+      <button class="view-tab" id="tab-flow" type="button">Flow</button>
     </div>
     <div class="totals" id="totals"></div>
   </div>
@@ -1165,6 +1234,155 @@
       }
     }
 
+    // ── Index view ────────────────────────────────────────────────
+    // Searchable cross-cut over projects + milestones + current_ideas
+    // + corpus stats. Type into the box; rows filter live by substring
+    // across all titles, summaries, project ids, and idea fields.
+    let _ixQuery = '';
+    function renderIndexView() {
+      const q = _ixQuery.toLowerCase().trim();
+      const matches = (s) => !q || (String(s || '').toLowerCase().includes(q));
+      const projects = [];
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) projects.push({ ...p, group: g.title || g.id });
+      }
+      const matchedProjects = projects.filter(p =>
+        matches(p.id) || matches(p.name) || matches(p.summary) || matches(p.current) || matches(p.group)
+      );
+      const matchedMilestones = (_data.milestones || []).filter(m =>
+        matches(m.title) || matches(m.summary) || matches(m.project) || matches(m.kind) || matches(m.date)
+      );
+      const matchedIdeas = (_data.current_ideas || []).filter(idea =>
+        matches(idea.id) || matches(idea.title) || matches(idea.summary) ||
+        (idea.next || []).some(n => matches(n))
+      );
+
+      // Corpus stats — try to fetch counts from the seeds dirs (best-
+      // effort; no API for this so we show static placeholders the
+      // operator can refresh manually).
+      const corpusPromise = (async () => {
+        try {
+          const r = await fetch('/api/seeds-summary', { cache: 'no-store' });
+          if (r.ok) return await r.json();
+        } catch (e) {}
+        return null;
+      })();
+
+      const html = `
+        <input class="ix-search" id="ix-search" placeholder="Search projects, milestones, ideas, lessons…" value="${esc(_ixQuery)}">
+        <div class="ix-section">
+          <h3>Projects (${matchedProjects.length})</h3>
+          ${matchedProjects.length ? matchedProjects.map(p => `
+            <div class="ix-row">
+              <span class="lbl">${esc(p.status || '?')}/${(Number(p.percent) || 0)}%</span>
+              <span class="val kw" data-project-id="${esc(p.id)}">${esc(p.name || p.id)} <span class="lbl">— ${esc(p.group)}</span></span>
+            </div>
+          `).join('') : '<div class="lbl">No matches.</div>'}
+        </div>
+        <div class="ix-section">
+          <h3>Milestones (${matchedMilestones.length})</h3>
+          ${matchedMilestones.slice(0, 30).map(m => `
+            <div class="ix-row">
+              <span class="lbl">${esc(m.date || '')} ${esc(m.kind || '')}</span>
+              <span class="val">${esc(m.title || '')} <span class="lbl">— ${esc(m.project || '?')}</span></span>
+            </div>
+          `).join('')}
+          ${matchedMilestones.length > 30 ? `<div class="lbl" style="margin-top:6px">+ ${matchedMilestones.length - 30} more — narrow the search</div>` : ''}
+        </div>
+        <div class="ix-section">
+          <h3>Current Ideas (${matchedIdeas.length})</h3>
+          ${matchedIdeas.length ? matchedIdeas.map(idea => `
+            <div class="ix-row">
+              <span class="lbl">${esc(idea.captured || '')} ${esc(idea.status || '')}</span>
+              <span class="val">${esc(idea.title || idea.id)} <span class="lbl">${(idea.next || []).length} next-items</span></span>
+            </div>
+          `).join('') : '<div class="lbl">No matches.</div>'}
+        </div>
+        <div class="ix-section" id="ix-corpus">
+          <h3>KenAI Corpus / RAG Surfaces</h3>
+          <div class="ix-corpus-grid">
+            <div class="ix-corpus-cell"><div class="name">kenai-v5</div><div class="lbl">offline-dev primary</div><div class="num" id="cnum-v5">…</div></div>
+            <div class="ix-corpus-cell"><div class="name">kenai-trainer</div><div class="lbl">Pokémon arc</div><div class="num" id="cnum-trainer">…</div></div>
+            <div class="ix-corpus-cell"><div class="name">kenai-deep</div><div class="lbl">deeper reasoning</div><div class="num" id="cnum-deep">…</div></div>
+          </div>
+          <div class="lbl" style="margin-top:6px">Counts = approved seeds per model (corpus-isolation directive). RAG sources: peerlog (8,143 rows), dreams, manual seeds, bug-hunt findings, operator-walk lessons.</div>
+        </div>
+      `;
+      const mainEl = $('main');
+      if (mainEl._lastHtml !== html) {
+        mainEl.innerHTML = html;
+        mainEl._lastHtml = html;
+        $('ix-search').addEventListener('input', (ev) => {
+          _ixQuery = ev.target.value;
+          renderIndexView();
+          // Restore caret to keep typing smooth.
+          requestAnimationFrame(() => {
+            const s = $('ix-search');
+            if (s) { s.focus(); s.setSelectionRange(s.value.length, s.value.length); }
+          });
+        });
+        mainEl.querySelectorAll('[data-project-id]').forEach(el => {
+          el.addEventListener('click', () => openDetail(el.dataset.projectId));
+        });
+        // Best-effort corpus count fetch — no error if absent.
+        corpusPromise.then(d => {
+          if (!d) return;
+          const v = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n; };
+          v('cnum-v5',      (d['kenai-v5'] || {}).approved || '?');
+          v('cnum-trainer', (d['kenai-trainer'] || {}).approved || '?');
+          v('cnum-deep',    (d['kenai-deep'] || {}).approved || '?');
+        });
+      }
+    }
+
+    // ── Flow view ─────────────────────────────────────────────────
+    // Kanban-style status flow across all projects: Active → Planned
+    // → Blocked → Shipped. Each card is clickable into the project
+    // detail. Visualizes where work-in-flight sits in the pipeline.
+    function renderFlowView() {
+      const allProjects = [];
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) allProjects.push({ ...p, group: g.title || g.id });
+      }
+      const groups = {
+        active:  allProjects.filter(p => (p.status || '').toLowerCase() === 'active'),
+        planned: allProjects.filter(p => (p.status || '').toLowerCase() === 'planned'),
+        blocked: allProjects.filter(p => (p.status || '').toLowerCase() === 'blocked' || (p.status || '').toLowerCase() === 'paused'),
+        shipped: allProjects.filter(p => (Number(p.percent) || 0) >= 100 || (p.status || '').toLowerCase() === 'shipped'),
+      };
+      const renderCol = (key, title) => `
+        <div class="flow-col col-${key}">
+          <h3>${title} (${groups[key].length})</h3>
+          ${groups[key].sort((a,b) => (Number(b.percent)||0) - (Number(a.percent)||0)).map(p => `
+            <div class="flow-card" data-project-id="${esc(p.id)}">
+              <div class="name">${esc(p.name || p.id)}</div>
+              <div class="pct">${(Number(p.percent) || 0)}% · ${esc(p.group)}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      const html = `
+        <div class="flow-board">
+          ${renderCol('active', '⚡ Active')}
+          ${renderCol('planned', '📋 Planned')}
+          ${renderCol('blocked', '⛔ Blocked / Paused')}
+          ${renderCol('shipped', '✅ Shipped')}
+        </div>
+        <div class="pj-note" style="margin-top:12px">
+          Flow: planned → active → shipped (or → blocked when stuck).
+          Click any card to open its detail timeline.
+        </div>
+      `;
+      const mainEl = $('main');
+      if (mainEl._lastHtml !== html) {
+        mainEl.innerHTML = html;
+        mainEl._lastHtml = html;
+        mainEl.querySelectorAll('[data-project-id]').forEach(el => {
+          el.addEventListener('click', () => openDetail(el.dataset.projectId));
+        });
+      }
+    }
+
     function renderTimelineSourcePills() {
       // Per-source toggle pills above the timeline. Backed by counts
       // returned in the /api/timeline response (or zeros when the
@@ -1360,12 +1578,16 @@
       else if (_view === 'roadmap') renderRoadmapView();
       else if (_view === 'projections') renderProjectionsView();
       else if (_view === 'current-idea') renderCurrentIdeaView();
+      else if (_view === 'index') renderIndexView();
+      else if (_view === 'flow') renderFlowView();
       else renderProjectsView();
       $('tab-projects').classList.toggle('on', _view === 'projects');
       $('tab-timeline').classList.toggle('on', _view === 'timeline');
       $('tab-roadmap').classList.toggle('on', _view === 'roadmap');
       $('tab-projections').classList.toggle('on', _view === 'projections');
       $('tab-current-idea').classList.toggle('on', _view === 'current-idea');
+      $('tab-index').classList.toggle('on', _view === 'index');
+      $('tab-flow').classList.toggle('on', _view === 'flow');
       const stamp = _data.last_updated_iso ? new Date(_data.last_updated_iso) : null;
       const updated = _data.updated ? `edited ${_data.updated}` : '';
       const fresh = stamp ? `synced ${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : '';
@@ -1377,6 +1599,8 @@
     $('tab-roadmap').addEventListener('click', () => { _view = 'roadmap'; saveView(); render(); });
     $('tab-projections').addEventListener('click', () => { _view = 'projections'; saveView(); render(); });
     $('tab-current-idea').addEventListener('click', () => { _view = 'current-idea'; saveView(); render(); });
+    $('tab-index').addEventListener('click', () => { _view = 'index'; saveView(); render(); });
+    $('tab-flow').addEventListener('click', () => { _view = 'flow'; saveView(); render(); });
 
     async function loadTimeline() {
       // Best-effort fetch of /api/timeline. Failures are non-fatal —
