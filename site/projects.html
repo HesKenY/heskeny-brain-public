@@ -408,6 +408,40 @@
     text-align: center; color: var(--text-faint); font-size: 18px;
     padding: 4px 0;
   }
+  /* System-flow diagram (boxes-and-arrows) */
+  .sys-board { padding: 4px 0; }
+  .sys-tier {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 6px;
+  }
+  .sys-tier .tier-label {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 6px; font-weight: 700;
+  }
+  .sys-row {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .sys-node {
+    flex: 1; min-width: 130px;
+    background: var(--bg); border: 1px solid var(--border-strong);
+    border-radius: 6px; padding: 8px 10px;
+    font-size: 12px;
+  }
+  .sys-node .name { font-weight: 700; color: var(--text); }
+  .sys-node .sub { color: var(--text-dim); font-size: 11px; margin-top: 2px; }
+  .sys-node.live { border-color: var(--done); }
+  .sys-node.live .name::after { content: " ●"; color: var(--done); }
+  .sys-node.pending { border-color: var(--warn); opacity: 0.85; }
+  .sys-node.pending .name::after { content: " ○"; color: var(--warn); }
+  .sys-arrow {
+    text-align: center; padding: 2px 0; color: var(--text-faint);
+    font-size: 14px; font-family: ui-monospace, SFMono-Regular, monospace;
+  }
+  .sys-legend {
+    margin-top: 10px; padding: 8px; font-size: 11px; color: var(--text-faint);
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px;
+  }
+  .sys-legend strong { color: var(--text); }
   /* Current Idea view */
   .ci-card {
     background: linear-gradient(180deg, #1a1f2e 0%, var(--bg-card) 70%);
@@ -653,6 +687,7 @@
       <button class="view-tab" id="tab-current-idea" type="button">Current Idea</button>
       <button class="view-tab" id="tab-index" type="button">Index</button>
       <button class="view-tab" id="tab-flow" type="button">Flow</button>
+      <button class="view-tab" id="tab-systemflow" type="button">System</button>
     </div>
     <div class="totals" id="totals"></div>
   </div>
@@ -1383,6 +1418,67 @@
       }
     }
 
+    // ── System Flow view ──────────────────────────────────────────
+    // Boxes-and-arrows visual of how the CHERP fleet fits together:
+    // worker solo PWAs → company instances → KenOS master controller,
+    // plus the SharePoint integration data direction.
+    function renderSystemFlowView() {
+      const html = `
+        <div class="sys-board">
+          <div class="sys-tier">
+            <div class="tier-label">Tier 0 · KenOS Master Controller (Ken's instance)</div>
+            <div class="sys-row">
+              <div class="sys-node live"><div class="name">KenOS Controller</div><div class="sub">12 services, autostart</div></div>
+              <div class="sys-node live"><div class="name">main-shell</div><div class="sub">trio + 6 frame deck</div></div>
+              <div class="sys-node live"><div class="name">project tracker</div><div class="sub">frame 5 (this widget)</div></div>
+              <div class="sys-node live"><div class="name">Nest provisioner</div><div class="sub">spawns customer instances</div></div>
+            </div>
+          </div>
+          <div class="sys-arrow">▼  Nest emits per-customer instance from instance-config-200man.json</div>
+          <div class="sys-tier">
+            <div class="tier-label">Tier 1 · Customer CHERP instances (paid 200-man tier)</div>
+            <div class="sys-row">
+              <div class="sys-node live"><div class="name">cherp.live</div><div class="sub">testbed instance (Debe Corp)</div></div>
+              <div class="sys-node pending"><div class="name">customer 2 instance</div><div class="sub">future via Nest</div></div>
+              <div class="sys-node pending"><div class="name">customer N…</div><div class="sub">paid subscription tier</div></div>
+            </div>
+          </div>
+          <div class="sys-arrow">▼  Crew workers connect their per-trade PWA to a company instance</div>
+          <div class="sys-tier">
+            <div class="tier-label">Tier 2 · Per-trade solo PWAs (worker, app-store, free + $5 ad-removal)</div>
+            <div class="sys-row">
+              <div class="sys-node live"><div class="name">Cherp · Pipe Trades</div><div class="sub">/solo/?trade=pipe-trades</div></div>
+              <div class="sys-node live"><div class="name">Cherp · Electricians</div><div class="sub">NEC suite shipped</div></div>
+              <div class="sys-node live"><div class="name">Cherp · HVAC</div><div class="sub">duct/CFM stub</div></div>
+              <div class="sys-node live"><div class="name">Cherp · Fire Sprinkler</div></div>
+              <div class="sys-node live"><div class="name">Cherp · Carpentry</div></div>
+              <div class="sys-node live"><div class="name">Cherp · Concrete</div></div>
+              <div class="sys-node live"><div class="name">Cherp · General</div></div>
+            </div>
+          </div>
+          <div class="sys-arrow">▼  Each PWA: Calc · FieldRef · Tasks · Docs · Messages · AI · Notes (offline-first, localStorage SHARED across variants on device)</div>
+          <div class="sys-tier" style="border-color:var(--accent)">
+            <div class="tier-label">Data integration · CHERP ↔ SharePoint (Debe Corp)</div>
+            <div class="sys-row">
+              <div class="sys-node pending"><div class="name">PUSH</div><div class="sub">DailyLogs / JSAs / Timecards → SP lists</div></div>
+              <div class="sys-node pending"><div class="name">PUSH</div><div class="sub">PDFs + photos → Projects/&lt;code&gt;/</div></div>
+              <div class="sys-node pending"><div class="name">PULL</div><div class="sub">published reports + spec sheets ← SP</div></div>
+              <div class="sys-node pending"><div class="name">Per-employee folders</div><div class="sub">EmployeeFiles/&lt;id&gt;/{6 subfolders}</div></div>
+            </div>
+            <div class="sys-arrow">via netlify/functions/sharepoint-push.js (live, awaiting secret-value fix) + sharepoint-pull.js (planned)</div>
+          </div>
+        </div>
+        <div class="sys-legend">
+          <strong>● live</strong> — shipped + working today.
+          <strong style="color:var(--warn)">○ pending</strong> — designed, awaiting next push or operator setup step.
+          See handoffs/HANDOFF_2026-04-26_sharepoint_setup_pending_secret_value.md for SP unblock,
+          Codex/nest/blueprints/200-man-instance.md for company tier architecture.
+        </div>
+      `;
+      const mainEl = $('main');
+      if (mainEl._lastHtml !== html) { mainEl.innerHTML = html; mainEl._lastHtml = html; }
+    }
+
     function renderTimelineSourcePills() {
       // Per-source toggle pills above the timeline. Backed by counts
       // returned in the /api/timeline response (or zeros when the
@@ -1580,6 +1676,7 @@
       else if (_view === 'current-idea') renderCurrentIdeaView();
       else if (_view === 'index') renderIndexView();
       else if (_view === 'flow') renderFlowView();
+      else if (_view === 'systemflow') renderSystemFlowView();
       else renderProjectsView();
       $('tab-projects').classList.toggle('on', _view === 'projects');
       $('tab-timeline').classList.toggle('on', _view === 'timeline');
@@ -1588,6 +1685,7 @@
       $('tab-current-idea').classList.toggle('on', _view === 'current-idea');
       $('tab-index').classList.toggle('on', _view === 'index');
       $('tab-flow').classList.toggle('on', _view === 'flow');
+      $('tab-systemflow').classList.toggle('on', _view === 'systemflow');
       const stamp = _data.last_updated_iso ? new Date(_data.last_updated_iso) : null;
       const updated = _data.updated ? `edited ${_data.updated}` : '';
       const fresh = stamp ? `synced ${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : '';
@@ -1601,6 +1699,7 @@
     $('tab-current-idea').addEventListener('click', () => { _view = 'current-idea'; saveView(); render(); });
     $('tab-index').addEventListener('click', () => { _view = 'index'; saveView(); render(); });
     $('tab-flow').addEventListener('click', () => { _view = 'flow'; saveView(); render(); });
+    $('tab-systemflow').addEventListener('click', () => { _view = 'systemflow'; saveView(); render(); });
 
     async function loadTimeline() {
       // Best-effort fetch of /api/timeline. Failures are non-fatal —
