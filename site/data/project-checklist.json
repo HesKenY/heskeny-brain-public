@@ -773,11 +773,15 @@
           "summary": "Pipe Trades / Electricians / HVAC variants on Play + cherp.live picker, single backend, runtime trade flag",
           "current": "Live on cherp.live (3 pushes today): per-trade detail pages + 7 distinct PWA manifests (manifest-pipe-trades.json … manifest-general.json) so each variant installs as Cherp — <Trade>; /select-variant.html chooser between Demo click and demo load (Pipe Trades highlighted as default — only fully built-out variant); Netlify pretty-URLs (/pipe-trades, /electricians, /hvac, /fire-sprinkler, /carpentry, /concrete, /general) wired to trade.html with path-based slug fallback. Same Supabase accounts work across every variant. Pipe Trades has full toolset; other trades install with matching branding while sharing the General toolset until per-trade content lands.",
           "next": [
-            "Per-trade content build-out — Electricians is the next-most-likely first paid trade after Pipe Trades; need NEC-aware calculator suite",
-            "HVAC, Fire Sprinkler, Carpentry, Concrete: prioritize after first paid customer signal",
-            "Per-trade icons / theme tints in the manifest so installed apps visually distinguish on the home screen",
-            "Trade-flag wiring inside the app (CHERP_TRADE runtime flag) so calculators / field-reference scope to the active trade — currently branding-only swap",
-            "Play Store: ship trade-named apps (single backend, runtime CHERP_TRADE flag) per the original 2026-04-22 plan"
+            "**Priority — Ken 2026-04-26**: build out FULL-FEATURED per-trade variants (calc + field-ref content depth equivalent to Pipe Trades). Generic ref content is unacceptable; must be trade-relevant.",
+            "Cherp - Safety: 4 calcs + 6 ref tables shipped 2026-04-26 (commit 2959d78), tagged status: dev. Next: incident logging, audit trail, training records, compliance dashboard for company-instance role-lens.",
+            "Cherp - Electricians: NEC suite shipped — voltage drop, conductor sizing, conduit fill, motor FLA + OCPD, Ohm law (5 calcs, 6 ref tables). Already production-ready depth.",
+            "Cherp - HVAC: 1 calc (CFM-from-room). NEXT: Manual J-lite, refrigerant charge, static pressure, duct sizing (Friction rate), psychrometric ref tables.",
+            "Cherp - Fire Sprinkler: 1 calc (K-factor flow). NEXT: NFPA hydraulic chain, Hazen-Williams, hanger spacing, head coverage tables.",
+            "Cherp - Carpentry: 2 calcs (stair rise, board feet). NEXT: rafter cuts (common+hip), framing takeoffs, header sizing tables, fastener schedules.",
+            "Cherp - Concrete: 1 calc (cubic yards). NEXT: form pressure, rebar spacing, slump+air log, mix design selector.",
+            "Cherp - General: 1 calc (in↔mm). NEXT: multi-trade hub showcasing top-3 from each variant.",
+            "Bubblewrap each variant for Play Store publication once content depth is complete per trade."
           ],
           "owner": "ken"
         }
