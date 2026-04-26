@@ -1460,10 +1460,10 @@
           <div class="sys-tier" style="border-color:var(--accent)">
             <div class="tier-label">Data integration · CHERP ↔ SharePoint (Debe Corp)</div>
             <div class="sys-row">
-              <div class="sys-node pending"><div class="name">PUSH</div><div class="sub">DailyLogs / JSAs / Timecards → SP lists</div></div>
-              <div class="sys-node pending"><div class="name">PUSH</div><div class="sub">PDFs + photos → Projects/&lt;code&gt;/</div></div>
-              <div class="sys-node pending"><div class="name">PULL</div><div class="sub">published reports + spec sheets ← SP</div></div>
-              <div class="sys-node pending"><div class="name">Per-employee folders</div><div class="sub">EmployeeFiles/&lt;id&gt;/{6 subfolders}</div></div>
+              <div class="sys-node live"><div class="name">PUSH function</div><div class="sub">sharepoint-push.js · daily_log/jsa/timecard</div></div>
+              <div class="sys-node live"><div class="name">PULL function</div><div class="sub">sharepoint-pull.js · list-children / list-items / item-content</div></div>
+              <div class="sys-node live"><div class="name">Per-employee folder auto-create</div><div class="sub">on first timecard sync — 6 subfolders</div></div>
+              <div class="sys-node pending"><div class="name">List provisioning</div><div class="sub">awaits secret-VALUE fix · batch payload at /tmp/sp-batch.json</div></div>
             </div>
             <div class="sys-arrow">via netlify/functions/sharepoint-push.js (live, awaiting secret-value fix) + sharepoint-pull.js (planned)</div>
           </div>

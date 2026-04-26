@@ -5,10 +5,24 @@
   "milestones": [
     {
       "date": "2026-04-26",
+      "project": "cherp-sharepoint",
+      "kind": "shipped",
+      "title": "Pull-direction function + per-employee folder auto-create",
+      "summary": "Pushed bffb37f to CHERP main: netlify/functions/sharepoint-pull.js (3 ops: list-children, list-items, item-content) so SharePoint published reports + spec sheets flow back into CHERP screens. push.js extended with per-employee folder ensure (EmployeeFiles/<id>/{Timecards,Certifications,Employment,DailyLogs,JSAs,Training} on first sync). SharePoint = failsafe+backdoor for office; CHERP = field frontend + connection point."
+    },
+    {
+      "date": "2026-04-26",
       "project": "cherp-trade-variants",
       "kind": "shipped",
-      "title": "Solo offline-only trade variants — installable per-trade PWAs",
-      "summary": "Pushed 53c31b3 to CHERP main: /solo/index.html + app.js + sw.js shell. Each manifest-<slug>.json now points at /solo/?trade=<slug> so PWA installs land on auth-stripped, network-stripped, localStorage-only build. 7 trade variants (Pipe Trades / Electricians / HVAC / Fire Sprinkler / Carpentry / Concrete / General) each install as their own Bubblewrap-ready app. Per-trade calc + field-reference content. Shared localStorage across variants with trade_origin tags — designed for cherp.live account federation in Phase B."
+      "title": "Solo PWA hook-ends — Docs/Messages/AI tabs + Electricians NEC suite",
+      "summary": "Pushed ecdb576 (Docs+Messages+AI tabs, shared cross-variant localStorage, connect-to-company UX seed) + d838259 (Electricians 5-calc NEC suite + 6 reference tables). Solo build is real shippable PWA with hook-ends for future federation."
+    },
+    {
+      "date": "2026-04-26",
+      "project": "cherp-trade-variants",
+      "kind": "shipped",
+      "title": "Solo offline shell shipped — installable per-trade PWAs",
+      "summary": "Pushed 53c31b3: /solo/index.html + app.js + sw.js. Each manifest-<slug>.json points at /solo/?trade=<slug>. 7 variants, shared localStorage with trade_origin tags."
     },
     {
       "date": "2026-04-26",
