@@ -266,6 +266,138 @@
     font-size: 12px;
     font-weight: 700;
   }
+  .today-card {
+    background: linear-gradient(180deg, #14201a 0%, var(--bg-card) 70%);
+    border: 1px solid var(--done);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 0 0 12px;
+  }
+  .today-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 8px; margin-bottom: 6px;
+  }
+  .today-head h2 {
+    margin: 0; font-size: 13px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--done);
+  }
+  .today-meta { font-size: 11px; color: var(--text-faint); }
+  .today-row {
+    display: flex; gap: 8px; padding: 4px 0;
+    border-top: 1px dashed var(--border);
+    font-size: 12px; color: var(--text);
+  }
+  .today-row:first-of-type { border-top: 0; }
+  .today-row .kind {
+    flex: 0 0 60px; font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-faint); padding-top: 2px;
+  }
+  .today-row .kind.shipped { color: var(--done); }
+  .today-row .kind.decided { color: var(--accent); }
+  .today-row .body { flex: 1; min-width: 0; }
+  .today-row .body .ttl { font-weight: 600; }
+  .today-row .body .sub { color: var(--text-dim); font-size: 11px; margin-top: 1px; }
+  .today-empty { font-size: 12px; color: var(--text-faint); padding: 4px 0; }
+  /* Roadmap + Projections views */
+  .rm-section {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;
+  }
+  .rm-section h3 {
+    margin: 0 0 6px; font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+  .rm-phase {
+    border-left: 3px solid var(--border-strong);
+    padding: 4px 10px; margin: 6px 0;
+  }
+  .rm-phase.now    { border-left-color: var(--done); }
+  .rm-phase.next   { border-left-color: var(--accent); }
+  .rm-phase.future { border-left-color: var(--paused); opacity: 0.92; }
+  .rm-phase .when {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .rm-phase .ph-title { font-size: 13px; font-weight: 700; color: var(--text); margin: 1px 0; }
+  .rm-phase .ph-sub   { font-size: 11px; color: var(--text-dim); }
+  .rm-phase ul {
+    margin: 4px 0 0 16px; padding: 0;
+    color: var(--text-dim); font-size: 11px;
+  }
+  .rm-phase li { margin-bottom: 2px; }
+  .pj-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr 1fr;
+    gap: 6px 10px;
+    font-size: 11px; align-items: baseline;
+  }
+  .pj-grid .head {
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint); border-bottom: 1px dashed var(--border); padding-bottom: 2px;
+  }
+  .pj-grid .ph     { font-weight: 600; color: var(--text); }
+  .pj-grid .num    { font-variant-numeric: tabular-nums; }
+  .pj-grid .num.cons { color: var(--text-dim); }
+  .pj-grid .num.real { color: var(--accent); }
+  .pj-grid .num.best { color: var(--done); }
+  .pj-note { font-size: 11px; color: var(--text-faint); margin-top: 6px; }
+  /* Current Idea view */
+  .ci-card {
+    background: linear-gradient(180deg, #1a1f2e 0%, var(--bg-card) 70%);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .ci-card .ci-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 8px; flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .ci-card .ci-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 0; }
+  .ci-card .ci-meta {
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .ci-card .ci-status {
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .ci-card .ci-status.scoping { background: rgba(126, 200, 232, 0.14); color: var(--accent); }
+  .ci-card .ci-status.active  { background: rgba(108, 194, 74, 0.14); color: var(--done); }
+  .ci-card .ci-status.parked  { background: rgba(192, 132, 252, 0.14); color: var(--paused); }
+  .ci-card .ci-summary { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin: 4px 0 8px; }
+  .ci-section {
+    margin-top: 8px; padding-top: 6px;
+    border-top: 1px dashed var(--border);
+  }
+  .ci-section-h {
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-faint); margin-bottom: 4px;
+  }
+  .ci-section ul { margin: 2px 0 0 18px; padding: 0; font-size: 12px; color: var(--text); }
+  .ci-section ul li { margin-bottom: 2px; line-height: 1.4; }
+  .ci-section ul li.muted { color: var(--text-dim); }
+  .ci-model-grid {
+    display: grid; gap: 8px; margin-top: 4px;
+  }
+  .ci-model {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 10px;
+  }
+  .ci-model .ci-model-name {
+    font-size: 12px; font-weight: 700; color: var(--text);
+  }
+  .ci-model .ci-model-tag {
+    font-size: 10px; letter-spacing: 0.04em; color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, monospace;
+  }
+  .ci-model .ci-model-role { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+  .ci-model .ci-model-corpus { font-size: 11px; color: var(--text-faint); margin-top: 3px; }
+  .ci-mon-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ci-mon-pill {
+    font-size: 11px; padding: 3px 8px; border-radius: 999px;
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  }
   .tl-icon.shipped { background: #1b3429; color: var(--done); }
   .tl-icon.decided { background: #1b2436; color: var(--accent); }
   .tl-icon.planned { background: #2a2e1c; color: var(--warn); }
@@ -449,6 +581,9 @@
     <div class="view-tabs">
       <button class="view-tab on" id="tab-projects" type="button">Projects</button>
       <button class="view-tab" id="tab-timeline" type="button">Timeline</button>
+      <button class="view-tab" id="tab-roadmap" type="button">Roadmap</button>
+      <button class="view-tab" id="tab-projections" type="button">Projections</button>
+      <button class="view-tab" id="tab-current-idea" type="button">Current Idea</button>
     </div>
     <div class="totals" id="totals"></div>
   </div>
@@ -466,19 +601,27 @@
   <script>
     window.CHECKLIST_DATA_URL = "./data/project-checklist.json";
     const API = (window.CHECKLIST_DATA_URL) || (location.protocol === 'file:' ? 'http://localhost:7777/api/project-checklist' : '/api/project-checklist');
+    const TIMELINE_API = (window.TIMELINE_DATA_URL) || (location.protocol === 'file:' ? 'http://localhost:7777/api/timeline?limit=300' : '/api/timeline?limit=300');
     const POLL_MS = 30000;
     const FILTER_LS_KEY = 'checklist.filters.v1';
     const VIEW_LS_KEY = 'checklist.view.v1';
+    const TL_SOURCES_LS_KEY = 'checklist.timeline.sources.v1';
     const $ = (id) => document.getElementById(id);
     function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
     // ── State ────────────────────────────────────────────────────────
     let _data = null;
+    let _timeline = null; // unified events from /api/timeline (may be null if endpoint missing)
     const _filters = new Set(JSON.parse(localStorage.getItem(FILTER_LS_KEY) || '[]'));
     let _view = localStorage.getItem(VIEW_LS_KEY) || 'projects';
+    // Default: show milestones + handoffs + dreams; logs/events off (chatty)
+    const _tlSources = new Set(JSON.parse(
+      localStorage.getItem(TL_SOURCES_LS_KEY) || '["milestone","handoff","dream"]'
+    ));
 
     function saveFilters() { localStorage.setItem(FILTER_LS_KEY, JSON.stringify([...(_filters)])); }
     function saveView() { localStorage.setItem(VIEW_LS_KEY, _view); }
+    function saveTlSources() { localStorage.setItem(TL_SOURCES_LS_KEY, JSON.stringify([...(_tlSources)])); }
 
     // ── Helpers ──────────────────────────────────────────────────────
     function flattenProjects(data) {
@@ -559,6 +702,43 @@
           ${p.owner ? `<div class="meta-line" style="margin-top:6px">owner · ${esc(p.owner)} · click for full timeline</div>` : '<div class="meta-line" style="margin-top:6px">click for full timeline</div>'}
         </div>`;
     }
+    const TODAY_VISIBLE = 6;
+    function renderTodayCard() {
+      const today = new Date().toISOString().slice(0, 10);
+      const items = (_data.milestones || [])
+        .filter(m => (m.date || '').slice(0, 10) === today);
+      const projects = new Set(items.map(m => m.project)).size;
+      const shippedCount = items.filter(m => (m.kind || 'shipped') === 'shipped').length;
+      const decidedCount = items.filter(m => m.kind === 'decided').length;
+      const meta = items.length
+        ? `${shippedCount} shipped · ${decidedCount} decided · ${projects} project${projects === 1 ? '' : 's'}`
+        : 'no milestones logged yet today';
+      const visible = items.slice(0, TODAY_VISIBLE);
+      const hidden = Math.max(0, items.length - TODAY_VISIBLE);
+      const rows = items.length
+        ? visible.map(m => {
+            const k = (m.kind || 'shipped').toLowerCase();
+            const proj = esc(m.project || '');
+            return `
+              <div class="today-row">
+                <div class="kind ${esc(k)}">${esc(k)}</div>
+                <div class="body">
+                  <div class="ttl">${esc(m.title || '')}</div>
+                  <div class="sub">${proj} · ${esc((m.summary || '').slice(0, 140))}${(m.summary || '').length > 140 ? '…' : ''}</div>
+                </div>
+              </div>`;
+          }).join('') + (hidden ? `<div class="today-empty">+ ${hidden} more — open Timeline for the full day.</div>` : '')
+        : `<div class="today-empty">Day's still young — milestones will land here as they ship.</div>`;
+      return `
+        <div class="today-card">
+          <div class="today-head">
+            <h2>Today · ${esc(today)}</h2>
+            <span class="today-meta">${esc(meta)}</span>
+          </div>
+          ${rows}
+        </div>`;
+    }
+
     function renderProjectsView() {
       const groups = (_data.groups || []).map(g => {
         const visible = (g.projects || []).filter(projectMatchesFilter);
@@ -572,7 +752,8 @@
             ${visible.map(renderProjectCard).join('')}
           </div>`;
       }).join('');
-      const next = groups || `<div class="empty-state">No projects match the active filter.</div>`;
+      const todayHtml = renderTodayCard();
+      const next = todayHtml + (groups || `<div class="empty-state">No projects match the active filter.</div>`);
       // Skip swap if content unchanged — eliminates the black-flash on
       // every 30s poll when nothing's actually moved.
       const mainEl = $('main');
@@ -697,53 +878,400 @@
       }
       return id;
     }
-    function renderTimelineView() {
-      const milestones = (_data.milestones || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      if (!milestones.length) {
-        $('main').innerHTML = `<div class="empty-state">No milestones yet. Add to <code>milestones[]</code> in <code>config/project-checklist.json</code>.</div>`;
-        return;
+    // Source-tagged event icons + colors. Mirror the existing milestone
+    // icon vocabulary so the unified feed reads consistently.
+    const TL_SOURCE_META = {
+      milestone: { glyph: '✓', label: 'milestone', color: '#6cc24a' },
+      handoff:   { glyph: '⇄', label: 'handoff',   color: '#7ec8e8' },
+      dream:     { glyph: '☾', label: 'dream',     color: '#c084fc' },
+      event:     { glyph: '◉', label: 'event',     color: '#ffd819' },
+      log:       { glyph: '·', label: 'log',       color: '#8993a8' },
+    };
+    const TL_SOURCES = ['milestone','handoff','dream','event','log'];
+
+    function dayKey(ts) {
+      // YYYY-MM-DD for grouping; cope with date-only milestone strings.
+      if (!ts) return 'undated';
+      return String(ts).slice(0, 10);
+    }
+
+    // ── Roadmap view ─────────────────────────────────────────────────
+    // Cross-project roadmap: every project's `next` items as a phased
+    // arc keyed by status. Active first, then planned, then completed/
+    // paused. Operators can scan the whole BRAIN backlog at a glance.
+    function renderRoadmapView() {
+      const allProjects = [];
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) {
+          if (!projectMatchesFilter(p)) continue;
+          allProjects.push({ ...p, group: g });
+        }
       }
-      // Filter milestones by status bucket if filters are active.
-      // Map kind → bucket: shipped→done, planned→planning, decided/blocked→active.
-      const kindToBucket = { shipped: 'done', planned: 'planning', decided: 'active', blocked: 'on-hold' };
-      const filtered = _filters.size
-        ? milestones.filter(m => _filters.has(kindToBucket[m.kind] || m.kind))
-        : milestones;
-      if (!filtered.length) {
-        $('main').innerHTML = `<div class="empty-state">No milestones match the active filter.</div>`;
-        return;
-      }
-      // Group by date.
-      const byDate = new Map();
-      for (const m of filtered) {
-        const d = m.date || 'undated';
-        if (!byDate.has(d)) byDate.set(d, []);
-        byDate.get(d).push(m);
-      }
-      const html = [...byDate.entries()].map(([date, rows]) => {
-        const items = rows.map((m, i) => {
-          const k = (m.kind || 'shipped').toLowerCase();
-          const icon = k === 'shipped' ? '✓' : k === 'planned' ? '◷' : k === 'decided' ? '◆' : '!';
-          const proj = m.project ? `<span class="tl-tag">${esc(projectNameById(m.project))}</span>` : '';
-          // Stable id-by-position so click handlers can find the milestone.
-          const idx = (_data.milestones || []).indexOf(m);
+      const byStatus = (s) => allProjects.filter(p => (p.status || '').toLowerCase() === s);
+      const active  = byStatus('active');
+      const planned = byStatus('planned');
+      const blocked = byStatus('blocked').concat(byStatus('paused'));
+
+      function bucket(label, kind, list) {
+        if (!list.length) return '';
+        const phases = list.map(p => {
+          const next = (p.next || []).slice(0, 4);
+          const more = Math.max(0, (p.next || []).length - next.length);
+          const ul = next.length
+            ? `<ul>${next.map(n => `<li>${esc(n)}</li>`).join('')}${more ? `<li style="color:var(--text-faint)">+ ${more} more in detail view</li>` : ''}</ul>`
+            : `<div class="ph-sub" style="font-style:italic">No queued next items.</div>`;
           return `
-            <div class="tl-row" data-milestone-idx="${idx}" tabindex="0" role="button" aria-label="Open milestone detail: ${esc(m.title)}">
-              <div class="tl-icon ${esc(k)}">${icon}</div>
+            <div class="rm-phase ${kind}" data-project-id="${esc(p.id)}" tabindex="0" role="button">
+              <div class="when">${esc(p.group.title || p.group.id)} · ${esc(p.status || '')} · ${Number(p.percent) || 0}%</div>
+              <div class="ph-title">${esc(p.name || p.id)}</div>
+              <div class="ph-sub">${esc(p.summary || '')}</div>
+              ${ul}
+            </div>`;
+        }).join('');
+        return `<div class="rm-section"><h3>${esc(label)}</h3>${phases}</div>`;
+      }
+
+      const html =
+        bucket(`Active (${active.length})`,  'now',    active) +
+        bucket(`Planned (${planned.length})`, 'next',   planned) +
+        bucket(`Blocked / Paused (${blocked.length})`, 'future', blocked);
+
+      const mainEl = $('main');
+      const next = html || `<div class="empty-state">No projects match the active filter.</div>`;
+      if (mainEl._lastHtml !== next) {
+        mainEl.innerHTML = next;
+        mainEl._lastHtml = next;
+        mainEl.querySelectorAll('[data-project-id]').forEach(el => {
+          el.addEventListener('click', () => openDetail(el.dataset.projectId));
+          el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(el.dataset.projectId); }
+          });
+        });
+      }
+    }
+
+    // ── Projections view ─────────────────────────────────────────────
+    // Revenue + completion projections. Bug-Hunter is the only project
+    // with quantified $ projections today; other projects show ETA-style
+    // projections derived from `percent` + status.
+    function renderProjectionsView() {
+      // Bug-Hunter $ projections (sourced from widgets-bughunter.html roadmap).
+      const bughunt = `
+        <div class="rm-section">
+          <h3>Bug Hunter — Revenue Pipeline (USD)</h3>
+          <div class="pj-grid">
+            <div class="head">Phase</div>
+            <div class="head">Conservative</div>
+            <div class="head">Realistic</div>
+            <div class="head">Best</div>
+
+            <div class="ph">Phase 1 · 4 drafted</div>
+            <div class="num cons">$10K</div>
+            <div class="num real">$35K</div>
+            <div class="num best">$120K</div>
+
+            <div class="ph">Phase 2 · queue + Azure</div>
+            <div class="num cons">$5K</div>
+            <div class="num real">$20K</div>
+            <div class="num best">$80K</div>
+
+            <div class="ph">Phase 3 · multi-cloud (annual)</div>
+            <div class="num cons">$20K</div>
+            <div class="num real">$80K</div>
+            <div class="num best">$250K+</div>
+          </div>
+          <div class="pj-note">
+            Conservative = floor × 25% accept-rate. Realistic = mid × 50%. Best = ceiling × accept-rate.
+            Triage 7–60 days; payout 2–12 weeks. Phase 3 numbers are 12-month recurring once continuous-scan + AWS/GCP/Linux modules ship.
+          </div>
+        </div>`;
+
+      // Sprint goal — Mon AM.
+      const sprint = `
+        <div class="rm-section">
+          <h3>Sprint Goal · 2026-04-27 (Mon AM)</h3>
+          <div class="pj-grid">
+            <div class="head">Target</div>
+            <div class="head">Now</div>
+            <div class="head">Realistic by Mon</div>
+            <div class="head">Stretch</div>
+
+            <div class="ph">$ paid</div>
+            <div class="num cons">$0</div>
+            <div class="num real">$0–$500</div>
+            <div class="num best">$5,000</div>
+
+            <div class="ph">Packets submitted</div>
+            <div class="num cons">0 / 4</div>
+            <div class="num real">4 / 4</div>
+            <div class="num best">10 / 10</div>
+          </div>
+          <div class="pj-note">
+            Realistic read: triage cycles run days–weeks, so paid-by-Monday is a stretch. Path = max submission velocity now so pipeline weight is high when payouts land.
+          </div>
+        </div>`;
+
+      // Cross-project completion projections (derived from percent + status).
+      const allProjects = [];
+      for (const g of (_data.groups || [])) {
+        for (const p of (g.projects || [])) {
+          if (!projectMatchesFilter(p)) continue;
+          if ((p.status || '').toLowerCase() !== 'active') continue;
+          allProjects.push({ ...p, group: g });
+        }
+      }
+      allProjects.sort((a, b) => (Number(b.percent) || 0) - (Number(a.percent) || 0));
+      const eta = (pct) => {
+        if (pct >= 95) return 'this week';
+        if (pct >= 75) return '1–2 weeks';
+        if (pct >= 50) return '3–6 weeks';
+        if (pct >= 25) return '6–12 weeks';
+        return 'long-tail';
+      };
+      const projRows = allProjects.length
+        ? allProjects.map(p => {
+            const pct = Number(p.percent) || 0;
+            return `
+              <div class="ph">${esc(p.name || p.id)}</div>
+              <div class="num cons">${pct}%</div>
+              <div class="num real">${esc(eta(pct))}</div>
+              <div class="num best">${esc((p.next || [])[0] || '—').slice(0, 60)}</div>`;
+          }).join('')
+        : '';
+      const completion = projRows ? `
+        <div class="rm-section">
+          <h3>Active Projects — Completion ETA</h3>
+          <div class="pj-grid">
+            <div class="head">Project</div>
+            <div class="head">Percent</div>
+            <div class="head">ETA</div>
+            <div class="head">Top next item</div>
+            ${projRows}
+          </div>
+          <div class="pj-note">ETA buckets are heuristic — derived from the project percent. Actual ship dates depend on operator queue order.</div>
+        </div>` : '';
+
+      const mainEl = $('main');
+      const next = sprint + bughunt + completion;
+      if (mainEl._lastHtml !== next) {
+        mainEl.innerHTML = next;
+        mainEl._lastHtml = next;
+      }
+    }
+
+    // ── Current Idea view ────────────────────────────────────────
+    // Live snapshot of what's actively being thought through. Each
+    // entry is a captured idea with its monetization / next steps /
+    // status. Sourced from /api/project-checklist `current_ideas[]`.
+    function renderCurrentIdeaView() {
+      const ideas = (_data && _data.current_ideas) || [];
+      const mainEl = $('main');
+      if (!ideas.length) {
+        const next = '<div class="empty-state">No current ideas captured yet — they appear here as Ken sketches new directions.</div>';
+        if (mainEl._lastHtml !== next) { mainEl.innerHTML = next; mainEl._lastHtml = next; }
+        return;
+      }
+      const html = ideas.map(function (idea) {
+        const status = String(idea.status || 'scoping').toLowerCase();
+        const sections = [];
+
+        if (idea.summary) {
+          sections.push('<div class="ci-summary">' + esc(idea.summary) + '</div>');
+        }
+        if (Array.isArray(idea.monetization) && idea.monetization.length) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Monetization</div>' +
+            '<ul>' + idea.monetization.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul></div>'
+          );
+        }
+        if (Array.isArray(idea.free_tools) && idea.free_tools.length) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Free tools</div>' +
+            '<ul>' + idea.free_tools.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>'
+          );
+        }
+        if (Array.isArray(idea.verification) && idea.verification.length) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Verification</div>' +
+            '<ul>' + idea.verification.map(function (v) { return '<li>' + esc(v) + '</li>'; }).join('') + '</ul></div>'
+          );
+        }
+        if (idea.company_track && typeof idea.company_track === 'object') {
+          const ct = idea.company_track;
+          const feat = Array.isArray(ct.features_unlocked) ? ct.features_unlocked.join(', ') : '';
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Company track</div>' +
+            '<div class="ci-mon-pills">' +
+              (ct.model    ? '<span class="ci-mon-pill">' + esc(ct.model) + '</span>' : '') +
+              (ct.backend  ? '<span class="ci-mon-pill">' + esc(ct.backend) + '</span>' : '') +
+              (ct.pricing  ? '<span class="ci-mon-pill">' + esc(ct.pricing) + '</span>' : '') +
+              (feat        ? '<span class="ci-mon-pill">unlocks: ' + esc(feat) + '</span>' : '') +
+            '</div></div>'
+          );
+        }
+        if (idea.production_anchor) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Production anchor</div>' +
+            '<div style="font-size:12px;color:var(--text)">' + esc(idea.production_anchor) + '</div></div>'
+          );
+        }
+        if (Array.isArray(idea.models) && idea.models.length) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Model lineup</div>' +
+            '<div class="ci-model-grid">' +
+              idea.models.map(function (m) {
+                return '<div class="ci-model">' +
+                  '<div class="ci-model-name">' + esc(m.slot || '') + '</div>' +
+                  (m.tag ? '<div class="ci-model-tag">' + esc(m.tag) + '</div>' : '') +
+                  (m.role ? '<div class="ci-model-role">' + esc(m.role) + '</div>' : '') +
+                  (m.corpus ? '<div class="ci-model-corpus">corpus: ' + esc(m.corpus) + '</div>' : '') +
+                  (m.status ? '<div class="ci-model-corpus">' + esc(m.status) + '</div>' : '') +
+                  (m.isolation_note ? '<div class="ci-model-corpus" style="color:var(--accent)">' + esc(m.isolation_note) + '</div>' : '') +
+                  '</div>';
+              }).join('') +
+            '</div></div>'
+          );
+        }
+        if (idea.swappability) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Swappability</div>' +
+            '<div style="font-size:12px;color:var(--text-dim)">' + esc(idea.swappability) + '</div></div>'
+          );
+        }
+        if (Array.isArray(idea.next) && idea.next.length) {
+          sections.push(
+            '<div class="ci-section"><div class="ci-section-h">Next</div>' +
+            '<ul>' + idea.next.map(function (n) { return '<li class="muted">' + esc(n) + '</li>'; }).join('') + '</ul></div>'
+          );
+        }
+
+        return (
+          '<div class="ci-card">' +
+            '<div class="ci-head">' +
+              '<h3 class="ci-title">' + esc(idea.title || idea.id || 'Untitled idea') + '</h3>' +
+              '<div style="display:flex;gap:8px;align-items:baseline">' +
+                (idea.captured ? '<span class="ci-meta">' + esc(idea.captured) + '</span>' : '') +
+                '<span class="ci-status ' + esc(status) + '">' + esc(status) + '</span>' +
+              '</div>' +
+            '</div>' +
+            sections.join('') +
+          '</div>'
+        );
+      }).join('');
+
+      if (mainEl._lastHtml !== html) {
+        mainEl.innerHTML = html;
+        mainEl._lastHtml = html;
+      }
+    }
+
+    function renderTimelineSourcePills() {
+      // Per-source toggle pills above the timeline. Backed by counts
+      // returned in the /api/timeline response (or zeros when the
+      // endpoint isn't reachable yet).
+      const counts = (_timeline && _timeline.counts) || {};
+      const pills = TL_SOURCES.map(src => {
+        const meta = TL_SOURCE_META[src];
+        const on = _tlSources.has(src);
+        const cls = on ? 'pill on' : 'pill';
+        const c = counts[src] || 0;
+        return `<button class="${cls}" data-tl-source="${src}" type="button" title="Toggle ${meta.label}" style="border-color:${meta.color}33${on ? `;background:${meta.color}1a` : ''}">
+          <strong style="color:${meta.color}">${c}</strong> ${meta.label}
+        </button>`;
+      });
+      if (_timeline === null) {
+        pills.push(`<span class="meta" style="color:var(--text-faint);font-size:11px;align-self:center">timeline endpoint offline — showing milestones only</span>`);
+      }
+      return `<div class="totals" style="margin:6px 0 8px">${pills.join('')}</div>`;
+    }
+
+    function renderTimelineView() {
+      // Use the unified /api/timeline feed when available; fall back to
+      // the legacy milestones-only feed if the endpoint hasn't shipped
+      // yet (server.js needs a restart after the endpoint addition).
+      let events;
+      if (_timeline && Array.isArray(_timeline.events)) {
+        events = _timeline.events.filter(e => _tlSources.has(e.source));
+      } else {
+        events = (_data.milestones || []).slice()
+          .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+          .map(m => ({
+            ts: `${m.date || ''}T00:00:00Z`,
+            source: 'milestone',
+            kind: m.kind || 'shipped',
+            project: m.project,
+            title: m.title || '',
+            body: m.summary || '',
+            _milestoneRef: m,
+          }));
+      }
+
+      const sourcePills = renderTimelineSourcePills();
+
+      if (!events.length) {
+        $('main').innerHTML = sourcePills + `<div class="empty-state">No events match the active filter.</div>`;
+        wireTimelineSourcePills();
+        return;
+      }
+
+      // Group by day (YYYY-MM-DD)
+      const byDate = new Map();
+      for (const e of events) {
+        const d = dayKey(e.ts);
+        if (!byDate.has(d)) byDate.set(d, []);
+        byDate.get(d).push(e);
+      }
+
+      const html = sourcePills + [...byDate.entries()].map(([date, rows]) => {
+        const items = rows.map((e) => {
+          const meta = TL_SOURCE_META[e.source] || TL_SOURCE_META.log;
+          const proj = e.project ? `<span class="tl-tag">${esc(projectNameById(e.project))}</span>` : '';
+          const tag = `<span class="tl-tag" style="background:${meta.color}22;color:${meta.color}">${esc(e.source)}</span>`;
+          // Hover/title shows full body for log lines so they're readable
+          // without expanding the layout.
+          const titleAttr = e.body ? ` title="${esc(e.body)}"` : '';
+          // Click-through only for milestones (open detail modal); other
+          // sources show inline only — no modal yet.
+          const isMs = e.source === 'milestone';
+          // Try to resolve milestone idx for click-through.
+          let attr = `tabindex="0" role="button"${titleAttr}`;
+          if (isMs) {
+            const idx = (_data.milestones || []).findIndex(m =>
+              m.title === e.title && (m.date === (e.ts || '').slice(0,10)));
+            if (idx >= 0) attr = `data-milestone-idx="${idx}" ${attr} aria-label="Open milestone detail: ${esc(e.title)}"`;
+          }
+          const k = (e.kind || '').toLowerCase();
+          return `
+            <div class="tl-row" ${attr}>
+              <div class="tl-icon ${esc(k)}" style="background:${meta.color}33;color:${meta.color}">${meta.glyph}</div>
               <div class="tl-body">
-                <p class="tl-title">${proj}${esc(m.title)}</p>
-                ${m.summary ? `<p class="tl-summary">${esc(m.summary)}</p>` : ''}
+                <p class="tl-title">${tag}${proj}${esc(e.title)}</p>
+                ${e.body && e.source !== 'log' ? `<p class="tl-summary">${esc(e.body).slice(0, 280)}</p>` : ''}
               </div>
             </div>`;
         }).join('');
         return `<div class="tl-day"><div class="tl-date">${esc(date)}</div>${items}</div>`;
       }).join('');
+
       const mainEl = $('main');
       if (mainEl._lastHtml !== html) {
         mainEl.innerHTML = html;
         mainEl._lastHtml = html;
         wireMilestoneClicks();
+        wireTimelineSourcePills();
       }
+    }
+
+    function wireTimelineSourcePills() {
+      document.querySelectorAll('[data-tl-source]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const src = btn.dataset.tlSource;
+          if (_tlSources.has(src)) _tlSources.delete(src);
+          else _tlSources.add(src);
+          saveTlSources();
+          renderTimelineView();
+        });
+      });
     }
 
     function wireMilestoneClicks() {
@@ -829,9 +1357,15 @@
       if (!_data) return;
       renderTotals();
       if (_view === 'timeline') renderTimelineView();
+      else if (_view === 'roadmap') renderRoadmapView();
+      else if (_view === 'projections') renderProjectionsView();
+      else if (_view === 'current-idea') renderCurrentIdeaView();
       else renderProjectsView();
       $('tab-projects').classList.toggle('on', _view === 'projects');
       $('tab-timeline').classList.toggle('on', _view === 'timeline');
+      $('tab-roadmap').classList.toggle('on', _view === 'roadmap');
+      $('tab-projections').classList.toggle('on', _view === 'projections');
+      $('tab-current-idea').classList.toggle('on', _view === 'current-idea');
       const stamp = _data.last_updated_iso ? new Date(_data.last_updated_iso) : null;
       const updated = _data.updated ? `edited ${_data.updated}` : '';
       const fresh = stamp ? `synced ${stamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : '';
@@ -840,12 +1374,31 @@
 
     $('tab-projects').addEventListener('click', () => { _view = 'projects'; saveView(); render(); });
     $('tab-timeline').addEventListener('click', () => { _view = 'timeline'; saveView(); render(); });
+    $('tab-roadmap').addEventListener('click', () => { _view = 'roadmap'; saveView(); render(); });
+    $('tab-projections').addEventListener('click', () => { _view = 'projections'; saveView(); render(); });
+    $('tab-current-idea').addEventListener('click', () => { _view = 'current-idea'; saveView(); render(); });
+
+    async function loadTimeline() {
+      // Best-effort fetch of /api/timeline. Failures are non-fatal —
+      // the Timeline view falls back to milestones-only when _timeline
+      // is null.
+      try {
+        const r = await fetch(TIMELINE_API, { cache: 'no-store' });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        _timeline = await r.json();
+      } catch (e) {
+        _timeline = null;
+      }
+    }
 
     async function load() {
       try {
-        const r = await fetch(API, { cache: 'no-store' });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        _data = await r.json();
+        const [checklistRes] = await Promise.all([
+          fetch(API, { cache: 'no-store' }),
+          loadTimeline(),
+        ]);
+        if (!checklistRes.ok) throw new Error(`HTTP ${checklistRes.status}`);
+        _data = await checklistRes.json();
         render();
       } catch (e) {
         $('main').innerHTML = `<div class="err-state">Could not load checklist: ${esc(e.message)}<br><br>Set <code>window.CHECKLIST_DATA_URL</code> if you're hosting this offsite.</div>`;
