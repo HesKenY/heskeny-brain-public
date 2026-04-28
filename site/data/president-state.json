@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T03:25:50Z",
+  "generated_at": "2026-04-28T03:29:06Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1597,13 +1597,13 @@
         "tech": "Supabase Postgres + RLS + Storage"
       },
       {
-        "id": "sharepoint",
-        "label": "Debe Corp SharePoint",
+        "id": "vault",
+        "label": "On-VM company vault",
         "kind": "service",
         "row": 1,
         "col": 2,
-        "biz": "where office staff already work \u2014 we sync to it",
-        "tech": "Microsoft Graph app-only auth, daily-folder routing"
+        "biz": "customer files on the tenant's dedicated VM \u2014 office staff browse them directly",
+        "tech": "/company partition on tenant Azure VM, SMB-shared, role-gated"
       },
       {
         "id": "brain",
@@ -1651,8 +1651,8 @@
       },
       {
         "from": "cherp",
-        "to": "sharepoint",
-        "label": "sync"
+        "to": "vault",
+        "label": "files"
       },
       {
         "from": "kenos",
@@ -1705,26 +1705,7 @@
       "note": "Offline-capable solo PWA (CHERP-Reloaded). Distributed via app stores; no network deploy required."
     }
   ],
-  "sharepoint": [
-    {
-      "customer": "Debe Corp",
-      "title": "Daily folders (field \u2192 office)",
-      "url": null,
-      "note": "Per-day folders Wave-1b auto-routes daily logs, photos, and signed JSAs into."
-    },
-    {
-      "customer": "Debe Corp",
-      "title": "Project library",
-      "url": null,
-      "note": "Per-project document libraries (drawings, submittals, RFIs)."
-    },
-    {
-      "customer": "Debe Corp",
-      "title": "Sign-off archive",
-      "url": null,
-      "note": "Long-term archive of completed JSAs and timekeeping exports."
-    }
-  ],
+  "sharepoint": [],
   "stats": {
     "active_projects": 11,
     "total_milestones": 118,

@@ -810,3 +810,57 @@ body[data-mode="technical"] .biz  { display: none; }
   font-size: 20px; color: var(--cyan); opacity: .55;
   font-weight: 700;
 }
+
+/* ── customer file vault (partition map) ─────────── */
+.vault-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px; margin-top: 10px;
+}
+.vault-tile {
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px 18px; background: var(--panel);
+  border-left-width: 3px;
+  display: grid; gap: 6px; align-content: start;
+  position: relative; overflow: hidden;
+}
+.vault-tile.system  { border-left-color: var(--magenta); }
+.vault-tile.system::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,102,204,.05), transparent 50%);
+  pointer-events: none;
+}
+.vault-tile.company { border-left-color: var(--lime); }
+.vault-tile.company::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(85,255,136,.05), transparent 50%);
+  pointer-events: none;
+}
+.vault-tile.barrier { border-left-color: var(--cyan); }
+.vault-tile.barrier::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,229,255,.04), transparent 50%);
+  pointer-events: none;
+}
+.vault-tile > * { position: relative; z-index: 1; }
+.vault-tile .vt-tag {
+  font: 10px ui-monospace, Menlo, Consolas, monospace;
+  color: var(--magenta); letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 800;
+}
+.vault-tile.company .vt-tag { color: var(--lime); }
+.vault-tile.barrier .vt-tag { color: var(--cyan); }
+.vault-tile .vt-title {
+  font-size: 14px; font-weight: 800; color: var(--text);
+  letter-spacing: -.005em; margin: 2px 0 4px;
+}
+.vault-tile .vt-note {
+  font-size: 12.5px; color: var(--text-dim); line-height: 1.55;
+}
+.vault-tile code {
+  background: rgba(0,229,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font: 11px ui-monospace, Menlo, Consolas, monospace;
+  color: var(--cyan);
+}

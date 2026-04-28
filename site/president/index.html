@@ -136,10 +136,10 @@
       <li>
         <div class="va-num">2</div>
         <div class="va-body">
-          <h3 class="biz">Monetization: company-tier instances</h3>
-          <h3 class="tech">Per-company isolation with SharePoint integration</h3>
-          <p class="biz">Each customer receives a dedicated CHERP environment with company-level data isolation. Daily logs, photos, and signed JSAs flow into the customer's existing Microsoft 365 SharePoint site, eliminating the need for office staff to adopt new software.</p>
-          <p class="tech">Tier-A architecture: single Supabase project with RLS isolation per company_id. Wave-1 and Wave-1b SharePoint daily-folder routing in production for Debe Corp, the first paid instance.</p>
+          <h3 class="biz">Monetization: company-tier instances on dedicated VMs</h3>
+          <h3 class="tech">Per-company Azure VM with partitioned storage isolation</h3>
+          <p class="biz">Each paying customer receives their own dedicated virtual machine. Their CHERP application, their data, and their files all live there — no shared infrastructure, no third-party storage to keep paying for. Office staff access company files directly from the VM through a partitioned customer drive, while the system files (CHERP and KenOS internals) are walled off and inaccessible from the customer end.</p>
+          <p class="tech">Per-tenant Azure VM with a two-partition layout: <code>/system</code> holds CHERP + KenOS internals (locked, no customer-side write or read), <code>/company</code> is the customer's accessible vault (SMB-shared back to office staff, read/write per company role). Drive-level isolation protects the customer's data from system mutations and protects our IP from the customer end. SharePoint integration is retired; the VM's company partition is the office-side surface.</p>
         </div>
       </li>
       <li>
@@ -176,8 +176,8 @@
   <section class="section bet">
     <div class="eyebrow">Current bet · active hypothesis</div>
     <h2>Per-customer AI dev team on Azure</h2>
-    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked directly into that company's CHERP environment. The AI runs the day-to-day for the customer: it processes the field-side data as it lands, watches the dashboards, runs the routine maintenance, and emails periodic reports straight to the customer's inbox. Funded during the test phase by Azure's startup credit allocation; if it works, every paying customer ships with what is effectively a private AI dev team without the operator team having to grow.</p>
-    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Hookends into the tenant's CHERP Supabase project + SharePoint surfaces, controlled by a tenant-scoped KenOS variant jailed to that workspace. Daily-operations loop processes inbound field data, runs scheduled maintenance, and emits report digests via SMTP to the customer's email. Today's test target is the operator's own KenOS deployment, metered against Azure-for-Startups credits.</p>
+    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked directly into that company's CHERP environment. The customer's files live on a partitioned drive on the same VM — accessible to their office staff, walled off from our system code. The AI runs the day-to-day: it processes field-side data as it lands, watches the dashboards, runs the routine maintenance, and emails periodic reports straight to the customer's inbox. Funded during the test phase by Azure's startup credit allocation; if it works, every paying customer ships with what is effectively a private AI dev team without the operator team having to grow.</p>
+    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Two-partition disk layout: <code>/system</code> holds CHERP + KenOS internals (read-only to customer); <code>/company</code> is the customer's accessible file vault (SMB-shared, role-gated). Tenant-scoped KenOS variant jailed to the workspace. Daily-operations loop processes inbound field data, runs scheduled maintenance, and emits report digests via SMTP. SharePoint integration retired in favor of the on-VM partitioned vault — fewer moving parts, cleaner isolation, no third-party storage dependency.</p>
 
     <div class="bet-hyp">
       <div class="bh-label">Hypothesis</div>
@@ -193,15 +193,15 @@
       </div>
       <div class="op-arrow">→</div>
       <div class="op-step">
-        <div class="op-icon">⇋</div>
-        <div class="op-title">Hookends into company CHERP</div>
-        <div class="op-note">Reads from the tenant Supabase project + SharePoint; writes back through the same RLS-isolated channels.</div>
+        <div class="op-icon">⫼</div>
+        <div class="op-title">Partitioned drive · system + company</div>
+        <div class="op-note"><code>/system</code> is locked (CHERP + KenOS internals). <code>/company</code> is the customer's accessible vault — SMB-shared back to their office staff.</div>
       </div>
       <div class="op-arrow">→</div>
       <div class="op-step">
         <div class="op-icon">⚙</div>
         <div class="op-title">Runs the day-to-day</div>
-        <div class="op-note">Processes daily logs, photos, and JSAs as they land. Watches dashboards. Handles routine maintenance work.</div>
+        <div class="op-note">Processes daily logs, photos, and JSAs as they land. Watches dashboards. Files company-side outputs into the company partition. Handles routine maintenance.</div>
       </div>
       <div class="op-arrow">→</div>
       <div class="op-step">
@@ -281,8 +281,8 @@
       </div>
       <div class="market-tile">
         <div class="mt-label">Office integration</div>
-        <div class="mt-value">Microsoft 365 + SharePoint</div>
-        <div class="mt-note">Office staff don't have to log into a new system — daily logs, photos, signed JSAs land in the customer's existing SharePoint daily folder.</div>
+        <div class="mt-value">On-VM company file vault</div>
+        <div class="mt-note">Customer files live on a partitioned drive of the customer's dedicated VM, SMB-shared to office staff. No third-party storage dependency, no extra subscription, no shared infrastructure with our system files.</div>
       </div>
       <div class="market-tile">
         <div class="mt-label">Geography</div>
@@ -306,13 +306,29 @@
     <div class="deploy-grid" id="deploy-grid">loading…</div>
   </section>
 
-  <!-- ── SECTION: CUSTOMER SHAREPOINT SURFACES ──────────────── -->
-  <section class="section sharepoint">
-    <div class="eyebrow">Customer SharePoint</div>
-    <h2>Office-side surfaces</h2>
-    <p class="lede biz">Direct shortcuts into the customer's existing Microsoft 365 environment — daily folders, project libraries, sign-off archives. These are the surfaces office staff already use; CHERP feeds them automatically.</p>
-    <p class="lede tech">App-only Graph auth handles the writes. Folder structure is per-tenant. Links below open the tenant's web portal — Sean and the operator both need an authorized account to view.</p>
-    <div class="sp-grid" id="sp-grid">loading…</div>
+  <!-- ── SECTION: CUSTOMER FILE VAULT (on-VM partitioned storage) ── -->
+  <section class="section vault">
+    <div class="eyebrow">Customer file vault</div>
+    <h2>On-VM partitioned storage</h2>
+    <p class="lede biz">Each customer's files live on their own dedicated VM, in a partition isolated from our system code. Office staff can browse and edit those files directly. Our CHERP and KenOS internals live on a separate partition the customer can't see, write to, or accidentally damage. Cleaner than a SharePoint sync, no extra subscriptions, and no shared infrastructure to worry about.</p>
+    <p class="lede tech">Two-partition disk layout per tenant VM. <code>/system</code> mounts the CHERP runtime, KenOS controller, KenAI weights, and journal/evidence files — root-owned, no customer-side mount. <code>/company</code> mounts the customer's vault — SMB / WebDAV exposed to the office network, role-gated by AD or a CHERP-issued credential. Nothing in <code>/system</code> traverses through customer-accessible paths; nothing in <code>/company</code> is reachable from customer-untrusted writes into <code>/system</code>.</p>
+    <div class="vault-grid">
+      <div class="vault-tile system">
+        <div class="vt-tag">/system · locked</div>
+        <div class="vt-title">CHERP + KenOS internals</div>
+        <div class="vt-note">CHERP application binaries, Supabase configuration, the KenOS controller, KenAI model weights, evidence ledger, agent jails, and the operator-side audit log. Customer end has no read or write — protects our IP, prevents accidental damage by an office user.</div>
+      </div>
+      <div class="vault-tile company">
+        <div class="vt-tag">/company · customer-accessible</div>
+        <div class="vt-title">Customer file vault</div>
+        <div class="vt-note">Daily logs, photos, signed JSAs, project documents, drawings, submittals, sign-off archives, and the AI-generated reports. Mounted as an SMB share to the customer's office network; per-role read/write gating. This is the surface customer staff actually use day-to-day.</div>
+      </div>
+      <div class="vault-tile barrier">
+        <div class="vt-tag">Isolation barrier</div>
+        <div class="vt-title">Why two partitions</div>
+        <div class="vt-note">Customer data stays customer-owned and customer-recoverable; our system code stays operator-owned and customer-tamper-proof. A misconfigured office workstation can't reach the AI weights; a model retrain on our side can't accidentally touch customer documents. Disk-level guarantee, not just a permissions guarantee.</div>
+      </div>
+    </div>
   </section>
 
   <!-- ── SECTION: SYSTEM FLOW ────────────────────────────────── -->
@@ -320,8 +336,8 @@
     <div class="eyebrow">Architecture</div>
     <h2>System overview</h2>
     <div class="flow-canvas" id="flow-canvas"></div>
-    <p class="flow-note biz">Field crews and office staff interact through the CHERP application. All entries are written to the cloud database and, for enabled customers, mirrored to their existing SharePoint environment. Engineering and remediation are performed by AI agents running on local GPU infrastructure, with every action recorded in a unified evidence ledger.</p>
-    <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions → Microsoft Graph (SharePoint). Local KenAI on Ollama via litellm Anthropic-compatible proxy → KenOS v1.2 controller → workspace-jailed tools. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
+    <p class="flow-note biz">Field crews and office staff both interact through CHERP. Field-side data lands in the cloud database; office-side files live on the customer's own VM in a partitioned company vault their staff can browse directly. Engineering and per-tenant operations are performed by AI agents on dedicated infrastructure, with every action recorded in a unified evidence ledger.</p>
+    <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions for the field application. Per-tenant Azure VM with /system + /company partitioned drive — KenAI + KenOS in /system, customer files in /company (SMB-shared). Local KenAI on Ollama via litellm Anthropic-compatible proxy. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
   </section>
 
   <!-- ── SECTION: CONNECTIONS / LINKED SURFACES ──────────────── -->
@@ -351,9 +367,9 @@
       </a>
       <div class="conn-tile private">
         <div class="ct-eyebrow">Customer environment</div>
-        <div class="ct-title">Debe Corp SharePoint</div>
-        <div class="ct-url">tenant: debecorp.sharepoint.com</div>
-        <div class="ct-note">Where field-side daily logs, photos, and JSAs land for office consumption. Daily-folder routing in production.</div>
+        <div class="ct-title">Debe Corp · on-VM file vault</div>
+        <div class="ct-url">SMB share · /company partition</div>
+        <div class="ct-note">Customer file vault for Debe Corp. Office staff browse and edit company files directly from the partitioned drive on the customer's dedicated VM.</div>
       </div>
       <div class="conn-tile locked">
         <div class="ct-eyebrow">Internal · operator</div>
@@ -405,8 +421,8 @@
       </div>
       <div class="stack-tile">
         <div class="st-label">Office integration</div>
-        <div class="st-value">Microsoft Graph</div>
-        <div class="st-note">App-only auth, daily-folder routing into customer SharePoint.</div>
+        <div class="st-value">SMB · on-VM /company vault</div>
+        <div class="st-note">Per-tenant SMB share off a partitioned drive. No Microsoft Graph dependency.</div>
       </div>
       <div class="stack-tile">
         <div class="st-label">AI runtime</div>
@@ -451,8 +467,8 @@
       <div class="tl-item done">
         <div class="tl-when">Q1 2026</div>
         <div class="tl-title">Debe Corp · first paid instance</div>
-        <div class="tl-note biz">First paying customer onboarded with their own CHERP environment. Logs and photos sync automatically into their existing Microsoft 365 SharePoint.</div>
-        <div class="tl-note tech">Tier-A multi-tenant deployment, Wave-1 + Wave-1b SharePoint daily-folder routing, app-only auth.</div>
+        <div class="tl-note biz">First paying customer onboarded with their own CHERP environment. Pivoting to on-VM customer file vault as the office-side surface — same workflow, simpler architecture, no third-party storage subscription.</div>
+        <div class="tl-note tech">First paid tenant. Initial deployment used SharePoint daily-folder routing; transitioning to per-tenant Azure VM with /system + /company partitioned drive layout (SharePoint integration retired).</div>
       </div>
       <div class="tl-item now">
         <div class="tl-when">Now</div>
