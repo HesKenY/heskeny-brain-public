@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T03:19:33Z",
+  "generated_at": "2026-04-28T03:20:30Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1474,6 +1474,18 @@
     ]
   },
   "wins": [
+    {
+      "ts": "2026-04-28T03:19:57Z",
+      "channel": "ship",
+      "summary": "president-panel periodic sync wired \u2014 scripts/sync-president-panel.sh + cron */15 \u00b7 auto-mirrors panel files + state JSON to .heskeny-brain-public on every refresh",
+      "business_summary": "president-panel periodic sync wired \u2014 scripts/sync-president-panel.sh + cron */15 \u00b7 auto-mirrors panel files + state JSON to .heskeny-brain-public on every refresh"
+    },
+    {
+      "ts": "2026-04-28T03:19:57Z",
+      "channel": "ship",
+      "summary": "KenOS v1.2 mobile app shipped to phone \u2014 versionCode 9 / 2.2.1, default URL = main-shell, app label rebrand Trio\u2192KenOS \u00b7 APK staged at android/KenOS.apk for /android/KenOS.apk distribution route",
+      "business_summary": "KenOS v1.2 mobile app shipped to phone \u2014 versionCode 9 / 2.2.1, default URL = main-shell, app label rebrand Trio\u2192KenOS \u00b7 APK staged at android/KenOS.apk for /android/KenOS.apk distribution route"
+    },
     {
       "ts": "2026-04-28T02:49:14Z",
       "channel": "ship",

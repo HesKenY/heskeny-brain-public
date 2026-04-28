@@ -129,8 +129,8 @@
         <div class="va-body">
           <h3 class="biz">Distribution: trade-specific entry points</h3>
           <h3 class="tech">CHERP solo→company funnel with per-trade variants</h3>
-          <p class="biz">Each trade discipline receives a branded mobile application available at no cost. Individual crews adopt the application standalone; conversion to paid company-wide deployment occurs once a connection request is approved by a foreman.</p>
-          <p class="tech">Seven trade-named PWAs (Pipe Trades, Electricians, HVAC, Fire Sprinkler, Carpentry, Concrete, Safety, General) on cherp.live, plus a federation-v0 device-code flow that attaches a worker's solo app to a company instance. Single Supabase backend, runtime CHERP_TRADE flag.</p>
+          <p class="biz">Each trade discipline ships as a branded mobile application across three tiers: <strong>free with ads</strong> for organic adoption by individual crew members, <strong>paid ad-unlock</strong> as a one-time in-app purchase for crews who want a clean experience, and <strong>company tether</strong> once a foreman approves a connection request — the crew's solo apps roll up into a paid company instance with shared data and office-side visibility.</p>
+          <p class="tech">Seven trade-named PWAs (Pipe Trades, Electricians, HVAC, Fire Sprinkler, Carpentry, Concrete, Safety, General) on cherp.live. Three monetization tiers: ad-supported free, IAP ad-unlock, and company tether via the federation-v0 device-code flow. Single Supabase backend, runtime CHERP_TRADE flag, ads gated by an entitlement boolean per user.</p>
         </div>
       </li>
       <li>
@@ -190,9 +190,9 @@
         <div class="mt-note">Same backend, trade-named PWAs. Each unlocks a separate sales motion.</div>
       </div>
       <div class="market-tile">
-        <div class="mt-label">Acquisition motion</div>
-        <div class="mt-value">Solo → company attach</div>
-        <div class="mt-note">Free per-trade apps for individual crew members. Foreman approves the connection request, the company instance is sold.</div>
+        <div class="mt-label">Three-tier monetization</div>
+        <div class="mt-value">Free (ads) · IAP unlock · Company tether</div>
+        <div class="mt-note">Ad-supported free entry for organic adoption. One-time in-app purchase removes ads for crews who want it clean. Company tether is the paid sale once a foreman approves the connection.</div>
       </div>
       <div class="market-tile">
         <div class="mt-label">Office integration</div>
