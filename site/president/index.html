@@ -22,7 +22,6 @@
   <div class="mode-toggle">
     <button class="mode-btn on" data-mode="business">Business</button>
     <button class="mode-btn"    data-mode="technical">Technical</button>
-    <button class="mode-btn"    data-mode="deck">Deck</button>
   </div>
 </header>
 
@@ -37,20 +36,64 @@
     <p class="lede tech">Seven trade variants on cherp.live plus offline-capable solo PWAs. Supabase REST + RLS, Microsoft Graph SharePoint sync. KenAI on Ollama drives migrations and remediation through the KenOS v1.2 controller. Every shipped change passes a cross-agent claim verifier.</p>
   </section>
 
+  <!-- ── SECTION: KPI STRIP ──────────────────────────────────── -->
+  <section class="section kpis">
+    <div class="eyebrow">At a glance</div>
+    <div class="kpi-strip">
+      <div class="kpi"><div class="v" id="kpi-active">—</div><div class="l">Active projects</div></div>
+      <div class="kpi lime"><div class="v" id="kpi-shipped">—</div><div class="l">Milestones shipped</div></div>
+      <div class="kpi"><div class="v" id="kpi-truth">—</div><div class="l">Verifier pass rate</div></div>
+      <div class="kpi amber"><div class="v" id="kpi-bounty">$10K–$120K</div><div class="l">Bounty pipeline</div></div>
+      <div class="kpi violet"><div class="v" id="kpi-customers">1</div><div class="l">Paid instances</div></div>
+    </div>
+  </section>
+
   <!-- ── SECTION: WHO ─────────────────────────────────────────── -->
   <section class="section who">
     <div class="eyebrow">Leadership</div>
     <div class="who-grid">
       <div class="who-card">
-        <div class="who-role">President</div>
+        <div class="who-role">President &middot; Co-founder</div>
         <div class="who-name">Sean</div>
-        <div class="who-line">Co-founder. Customer relationships, market positioning, and external representation.</div>
+        <div class="who-line">External-facing principal. Owns customer acquisition and account relationships, partner and channel development, contract negotiation, and corporate governance &mdash; including the entity formation and ongoing legal &amp; regulatory standing of the business. Leads market positioning, sales strategy, and the commercial roadmap that turns engineering output into revenue.</div>
       </div>
       <div class="who-card">
-        <div class="who-role">Operator</div>
+        <div class="who-role">Operator &middot; Co-founder</div>
         <div class="who-name">Ken Deibel</div>
-        <div class="who-line biz">Co-founder and principal architect. Designs and operates the platform, the autonomous engineering stack, and the AI infrastructure.</div>
+        <div class="who-line biz">Principal architect and operator. Designs and runs the CHERP platform end-to-end: the customer-facing application, the autonomous engineering stack that maintains it, and the on-premises AI infrastructure that powers both. Translates strategic direction into shipped product.</div>
         <div class="who-line tech">CHERP architect. Owns the BRAIN agent framework, the KenOS controller stack, the KenAI model lineup, and the GPU infrastructure that drives them.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION: HOW WE OPERATE (operator/president partnership) ─── -->
+  <section class="section how-we-operate">
+    <div class="eyebrow">Operating model</div>
+    <h2>How the partnership runs</h2>
+    <p class="lede biz">Two co-founders, two non-overlapping mandates. Sean owns everything outside the build; the operator owns everything inside it. The autonomous engineering layer expands the operator's capacity, which is what lets a two-person company carry an enterprise-grade roadmap.</p>
+    <p class="lede tech">Strict separation of concerns: revenue + governance vs. product + infrastructure. KenOS controller widens the engineering side without proportional headcount, so commercial growth is no longer rate-limited by builder bandwidth.</p>
+    <div class="two-col">
+      <div class="col">
+        <h4>President · Sean</h4>
+        <ul>
+          <li>Customer acquisition &amp; account ownership — direct relationships with construction principals and their procurement contacts.</li>
+          <li>Channel &amp; partner development — trade associations, suppliers, distributors, and referral networks.</li>
+          <li>Contract negotiation, MSAs, and SOWs.</li>
+          <li>Corporate governance — entity formation, registered agent, EIN, banking, insurance, regulatory standing.</li>
+          <li>Market positioning, pricing strategy, and the commercial roadmap.</li>
+          <li>Investor &amp; advisor relations; external storytelling.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Operator · Ken</h4>
+        <ul>
+          <li>CHERP product end-to-end — schema, mobile UX, office views, SharePoint sync, deployment.</li>
+          <li>BRAIN agent framework + KenOS controller — the autonomous engineering surface.</li>
+          <li>KenAI model lineup + on-premises GPU infrastructure.</li>
+          <li>Customer onboarding from a technical standpoint — provisioning, data migration, integrations.</li>
+          <li>Security research pipeline (drives the bounty revenue line).</li>
+          <li>Evidence ledger + verifier — keeps every shipped change auditable.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -107,6 +150,92 @@
     </ol>
   </section>
 
+  <!-- ── SECTION: CUSTOMER + MARKET ─────────────────────────── -->
+  <section class="section market">
+    <div class="eyebrow">Customer &amp; market</div>
+    <h2>Who we sell to</h2>
+    <p class="lede biz">CHERP is a vertical product. Each release is sized to a specific construction trade, sold first to mid-sized contractors who already run on Microsoft 365 and need their field paperwork to land in the same place their office staff already work.</p>
+    <p class="lede tech">ICP is a 50–500-employee MEP / specialty contractor on M365 with an existing SharePoint deployment, doing daily field reporting on paper or via a generic forms tool. SharePoint integration is the wedge.</p>
+    <div class="market-grid">
+      <div class="market-tile">
+        <div class="mt-label">Beachhead vertical</div>
+        <div class="mt-value">Pipe trades</div>
+        <div class="mt-note">Plumbing, mechanical, fire-sprinkler — Debe Corp is the lead reference customer.</div>
+      </div>
+      <div class="market-tile">
+        <div class="mt-label">Adjacent verticals</div>
+        <div class="mt-value">Electrical · HVAC · Concrete · Carpentry · Safety</div>
+        <div class="mt-note">Same backend, trade-named PWAs. Each unlocks a separate sales motion.</div>
+      </div>
+      <div class="market-tile">
+        <div class="mt-label">Acquisition motion</div>
+        <div class="mt-value">Solo → company attach</div>
+        <div class="mt-note">Free per-trade apps for individual crew members. Foreman approves the connection request, the company instance is sold.</div>
+      </div>
+      <div class="market-tile">
+        <div class="mt-label">Office integration</div>
+        <div class="mt-value">Microsoft 365 + SharePoint</div>
+        <div class="mt-note">Office staff don't have to log into a new system — daily logs, photos, signed JSAs land in the customer's existing SharePoint daily folder.</div>
+      </div>
+      <div class="market-tile">
+        <div class="mt-label">Geography</div>
+        <div class="mt-value">United States · construction-licensed states</div>
+        <div class="mt-note">No regional limits in the platform; sales focus follows Sean's network.</div>
+      </div>
+      <div class="market-tile">
+        <div class="mt-label">Paid instances</div>
+        <div class="mt-value">1 live · pipeline forming</div>
+        <div class="mt-note">Debe Corp in production. Wave-1b SharePoint routing shipped. Capacity exists for additional company instances.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION: REVENUE LADDER ─────────────────────────────── -->
+  <section class="section revenue">
+    <div class="eyebrow">Revenue lines</div>
+    <h2>Two streams, parallel during growth</h2>
+    <p class="lede biz">Bounty submissions provide near-term cash and produce hardening data that feeds CHERP itself. Paid CHERP instances are the durable line and the long-term valuation driver.</p>
+    <p class="lede tech">Phase-1 packets are drafted for four enterprise programs; the floor reflects the lowest qualifying-payout per program, the ceiling the maximum at the documented severity tier. Paid CHERP instances are tier-A multi-tenant; per-customer ARR scales with seat count.</p>
+    <div class="rev-grid">
+      <div class="rev-tile paid">
+        <div class="rv-target">Live · paid CHERP</div>
+        <div class="rv-name">Debe Corp</div>
+        <div class="rv-amount">Active</div>
+        <div class="rv-note">First paid company instance. Wave-1 + Wave-1b SharePoint routing in production.</div>
+      </div>
+      <div class="rev-tile draft">
+        <div class="rv-target">Bounty · drafted</div>
+        <div class="rv-name">Nexon</div>
+        <div class="rv-amount">$10K–$30K</div>
+        <div class="rv-note">Phase-1 packet drafted. Submission pending operator review.</div>
+      </div>
+      <div class="rev-tile draft">
+        <div class="rv-target">Bounty · drafted</div>
+        <div class="rv-name">Epic Games</div>
+        <div class="rv-amount">$10K–$30K</div>
+        <div class="rv-note">Phase-1 packet drafted.</div>
+      </div>
+      <div class="rev-tile draft">
+        <div class="rv-target">Bounty · drafted</div>
+        <div class="rv-name">Ubisoft</div>
+        <div class="rv-amount">$10K–$30K</div>
+        <div class="rv-note">Phase-1 packet drafted.</div>
+      </div>
+      <div class="rev-tile draft">
+        <div class="rv-target">Bounty · drafted</div>
+        <div class="rv-name">Google VRP</div>
+        <div class="rv-amount">$10K–$30K</div>
+        <div class="rv-note">Phase-1 packet drafted.</div>
+      </div>
+      <div class="rev-tile research">
+        <div class="rv-target">Future · expansion</div>
+        <div class="rv-name">Trade-2 / Trade-3 instances</div>
+        <div class="rv-amount">Pipeline</div>
+        <div class="rv-note">Each adjacent trade variant carries an independent sales motion under the same platform.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── SECTION: SYSTEM FLOW ────────────────────────────────── -->
   <section class="section systemflow">
     <div class="eyebrow">Architecture</div>
@@ -114,6 +243,169 @@
     <div class="flow-canvas" id="flow-canvas"></div>
     <p class="flow-note biz">Field crews and office staff interact through the CHERP application. All entries are written to the cloud database and, for enabled customers, mirrored to their existing SharePoint environment. Engineering and remediation are performed by AI agents running on local GPU infrastructure, with every action recorded in a unified evidence ledger.</p>
     <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions → Microsoft Graph (SharePoint). Local KenAI on Ollama via litellm Anthropic-compatible proxy → KenOS v1.2 controller → workspace-jailed tools. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
+  </section>
+
+  <!-- ── SECTION: CONNECTIONS / LINKED SURFACES ──────────────── -->
+  <section class="section connections">
+    <div class="eyebrow">Linked surfaces</div>
+    <h2>Where everything lives</h2>
+    <p class="lede biz">Public-facing pages, customer environments, and internal control surfaces. Use the public links freely; internal surfaces are operator-only and listed for context.</p>
+    <p class="lede tech">External hosts are GitHub Pages or Netlify; internal hosts run on the operator workstation behind Tailscale. The evidence portal is the single source of truth for what's been shipped.</p>
+    <div class="conn-grid">
+      <a class="conn-tile public" href="https://cherp.live" target="_blank" rel="noopener">
+        <div class="ct-eyebrow">Public · product</div>
+        <div class="ct-title">cherp.live</div>
+        <div class="ct-url">cherp.live</div>
+        <div class="ct-note">The CHERP application and its trade variants. Customer-facing.</div>
+      </a>
+      <a class="conn-tile public" href="https://heskeny.github.io/heskeny-brain-public/" target="_blank" rel="noopener">
+        <div class="ct-eyebrow">Public · evidence</div>
+        <div class="ct-title">Heskeny-Brain evidence portal</div>
+        <div class="ct-url">heskeny.github.io/heskeny-brain-public</div>
+        <div class="ct-note">Continuously-updated record of shipped work, claim-verifier results, and recent milestones.</div>
+      </a>
+      <a class="conn-tile public" href="https://debecorp.com" target="_blank" rel="noopener">
+        <div class="ct-eyebrow">Public · customer</div>
+        <div class="ct-title">debecorp.com</div>
+        <div class="ct-url">debecorp.com</div>
+        <div class="ct-note">First paid customer's corporate site. Built and maintained as part of the engagement.</div>
+      </a>
+      <div class="conn-tile private">
+        <div class="ct-eyebrow">Customer environment</div>
+        <div class="ct-title">Debe Corp SharePoint</div>
+        <div class="ct-url">tenant: debecorp.sharepoint.com</div>
+        <div class="ct-note">Where field-side daily logs, photos, and JSAs land for office consumption. Daily-folder routing in production.</div>
+      </div>
+      <div class="conn-tile locked">
+        <div class="ct-eyebrow">Internal · operator</div>
+        <div class="ct-title">KenOS v1.2 control panel</div>
+        <div class="ct-url">localhost:8090 · Tailscale-only</div>
+        <div class="ct-note">Operator dashboard for the agent stack. Drives migrations, dispatches goals, holds the running checklist.</div>
+      </div>
+      <div class="conn-tile locked">
+        <div class="ct-eyebrow">Internal · memory</div>
+        <div class="ct-title">BRAIN repository</div>
+        <div class="ct-url">/home/ken/Documents/The Brain</div>
+        <div class="ct-note">Canonical state: master.log JSONL, handoffs, evidence. Backed up and indexed for retrieval.</div>
+      </div>
+      <div class="conn-tile locked">
+        <div class="ct-eyebrow">Internal · compute</div>
+        <div class="ct-title">KenAI on Ollama</div>
+        <div class="ct-url">RTX 4070 · litellm proxy</div>
+        <div class="ct-note">Local model lineup. Anthropic-compatible bridge means the same controllers can swap to cloud models if needed.</div>
+      </div>
+      <div class="conn-tile">
+        <div class="ct-eyebrow">Communication</div>
+        <div class="ct-title">Note → operator</div>
+        <div class="ct-url">heskeny@gmail.com</div>
+        <div class="ct-note">The note-form below routes here. Use it for copy revisions, customer feedback, or anything you want filed in the pickup queue.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION: TECH STACK (technical mode reference card) ─── -->
+  <section class="section stack tech">
+    <div class="eyebrow">Stack reference</div>
+    <h2>Component map</h2>
+    <p class="lede tech">Quick reference for the technical reader: which technology covers which responsibility. Useful for due-diligence conversations or when partners ask "what's it built on."</p>
+    <div class="stack-grid">
+      <div class="stack-tile">
+        <div class="st-label">Frontend</div>
+        <div class="st-value">Static PWA · vanilla JS</div>
+        <div class="st-note">Per-trade variants on cherp.live. Offline-capable solo builds.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Backend</div>
+        <div class="st-value">Supabase Postgres · RLS</div>
+        <div class="st-note">Single project, per-company isolation by company_id.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Hosting</div>
+        <div class="st-value">Netlify · GitHub Pages</div>
+        <div class="st-note">Static + functions on Netlify; evidence portal on Pages.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Office integration</div>
+        <div class="st-value">Microsoft Graph</div>
+        <div class="st-note">App-only auth, daily-folder routing into customer SharePoint.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">AI runtime</div>
+        <div class="st-value">Ollama · litellm proxy</div>
+        <div class="st-note">Local KenAI variants exposed as Anthropic-compatible API.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Controller</div>
+        <div class="st-value">KenOS v1.2 · Python</div>
+        <div class="st-note">Agent dispatcher with chains, tools, and workspace jail.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Verifier</div>
+        <div class="st-value">brain-agent-claim-checks</div>
+        <div class="st-note">File + commit token verification across BRAIN/CHERP/home roots.</div>
+      </div>
+      <div class="stack-tile">
+        <div class="st-label">Memory</div>
+        <div class="st-value">JSONL · SQLite FTS5</div>
+        <div class="st-note">master.log JSONL for events, BRAIN.db for retrieval.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION: TIMELINE ───────────────────────────────────── -->
+  <section class="section timeline-sec">
+    <div class="eyebrow">Where we've been · where we're going</div>
+    <h2>Roadmap timeline</h2>
+    <div class="timeline">
+      <div class="tl-item done">
+        <div class="tl-when">Q1 2026</div>
+        <div class="tl-title">Linux cutover · BRAIN consolidation</div>
+        <div class="tl-note biz">Migrated the entire engineering environment to a Linux operator workstation. All projects, logs, and references now live in a single canonical location.</div>
+        <div class="tl-note tech">Pop!_OS migration off Windows; BRAIN repo absorbed prior Codex/Claude session state and standardized on shared.log + handoffs.</div>
+      </div>
+      <div class="tl-item done">
+        <div class="tl-when">Q1 2026</div>
+        <div class="tl-title">CHERP product line · trade variants</div>
+        <div class="tl-note biz">Ship-ready trade-named applications for the seven primary construction disciplines. Each looks bespoke; backend is shared.</div>
+        <div class="tl-note tech">Seven PWAs on cherp.live with runtime CHERP_TRADE flag. Solo offline builds (CHERP-Reloaded variant) for app-store distribution.</div>
+      </div>
+      <div class="tl-item done">
+        <div class="tl-when">Q1 2026</div>
+        <div class="tl-title">Debe Corp · first paid instance</div>
+        <div class="tl-note biz">First paying customer onboarded with their own CHERP environment. Logs and photos sync automatically into their existing Microsoft 365 SharePoint.</div>
+        <div class="tl-note tech">Tier-A multi-tenant deployment, Wave-1 + Wave-1b SharePoint daily-folder routing, app-only auth.</div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-when">Now</div>
+        <div class="tl-title">Autonomous engineering layer · KenOS v1.2</div>
+        <div class="tl-note biz">Local AI agents now perform routine engineering work. Every claimed change is verified against the codebase before it counts.</div>
+        <div class="tl-note tech">kenai-fullstack and kenai-wolverine variants drive controller-jailed tool calls. Cross-agent claim verifier produces continuous evidence.</div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-when">Now</div>
+        <div class="tl-title">Capability validation · live-response training</div>
+        <div class="tl-note biz">Public demonstration that the autonomous engineering capability works end-to-end, in a controlled environment, before scaling it up against more customer work.</div>
+        <div class="tl-note tech">kenai-trainer drives mGBA via xdotool; lesson seeds banked into a separate corpus per the no-dilution rule.</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-when">Next</div>
+        <div class="tl-title">Phase-1 bounty submissions</div>
+        <div class="tl-note biz">Submit drafted security research packets to the four enterprise programs. Near-term revenue and reputation building.</div>
+        <div class="tl-note tech">Nexon, Epic, Ubisoft, Google VRP packets ready for operator review and submission.</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-when">Next</div>
+        <div class="tl-title">Customer-2 onboarding · trade-2 expansion</div>
+        <div class="tl-note biz">Convert the first sales pipeline conversations into a second paid instance, ideally in a different trade vertical to validate the multi-trade thesis.</div>
+        <div class="tl-note tech">Per-tenant provisioning automation and tenant-specific SharePoint config to be promoted from one-shot scripts into a repeatable onboarding flow.</div>
+      </div>
+      <div class="tl-item future">
+        <div class="tl-when">Later</div>
+        <div class="tl-title">Cloud BRAIN node · always-on agent surface</div>
+        <div class="tl-note biz">A cloud-hosted control surface so the operator panel and agent runtime remain reachable independently of the workstation being online.</div>
+        <div class="tl-note tech">Azure Linux VM bridged to the local 4070 via Tailscale. State + UI + agents move; KenAI compute stays local.</div>
+      </div>
+    </div>
   </section>
 
   <!-- ── SECTION: PROJECTS (live-synced from operator) ───────── -->
