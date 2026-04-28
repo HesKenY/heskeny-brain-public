@@ -172,6 +172,91 @@
     </ol>
   </section>
 
+  <!-- ── SECTION: CURRENT BET / ACTIVE HYPOTHESIS ──────────── -->
+  <section class="section bet">
+    <div class="eyebrow">Current bet · active hypothesis</div>
+    <h2>Per-customer AI dev team on Azure</h2>
+    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked directly into that company's CHERP environment. The AI runs the day-to-day for the customer: it processes the field-side data as it lands, watches the dashboards, runs the routine maintenance, and emails periodic reports straight to the customer's inbox. Funded during the test phase by Azure's startup credit allocation; if it works, every paying customer ships with what is effectively a private AI dev team without the operator team having to grow.</p>
+    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Hookends into the tenant's CHERP Supabase project + SharePoint surfaces, controlled by a tenant-scoped KenOS variant jailed to that workspace. Daily-operations loop processes inbound field data, runs scheduled maintenance, and emits report digests via SMTP to the customer's email. Today's test target is the operator's own KenOS deployment, metered against Azure-for-Startups credits.</p>
+
+    <div class="bet-hyp">
+      <div class="bh-label">Hypothesis</div>
+      <div class="bh-text">A dedicated tenant-scoped AI on Azure can absorb enough daily CHERP operations + maintenance load that the operator team scales linearly with sold instances <em>only</em> for net-new feature work — not for per-tenant operations — and the price premium covers the per-tenant VM cost.</div>
+    </div>
+
+    <h3 style="margin-top:18px;color:var(--text);font-size:14px;letter-spacing:0.16em;text-transform:uppercase;font-weight:800;">What it does day-to-day</h3>
+    <div class="op-flow">
+      <div class="op-step">
+        <div class="op-icon">▣</div>
+        <div class="op-title">KenAI on Azure VM</div>
+        <div class="op-note">Current production model deployed per tenant. Same lineup that runs on the operator's local 4070, just hosted.</div>
+      </div>
+      <div class="op-arrow">→</div>
+      <div class="op-step">
+        <div class="op-icon">⇋</div>
+        <div class="op-title">Hookends into company CHERP</div>
+        <div class="op-note">Reads from the tenant Supabase project + SharePoint; writes back through the same RLS-isolated channels.</div>
+      </div>
+      <div class="op-arrow">→</div>
+      <div class="op-step">
+        <div class="op-icon">⚙</div>
+        <div class="op-title">Runs the day-to-day</div>
+        <div class="op-note">Processes daily logs, photos, and JSAs as they land. Watches dashboards. Handles routine maintenance work.</div>
+      </div>
+      <div class="op-arrow">→</div>
+      <div class="op-step">
+        <div class="op-icon">✉</div>
+        <div class="op-title">Email reports to customer</div>
+        <div class="op-note">Periodic digests delivered straight to the customer's inbox — no portal login required to consume the value.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:18px;color:var(--text);font-size:14px;letter-spacing:0.16em;text-transform:uppercase;font-weight:800;">Probability bands · today's read</h3>
+    <div class="prob-grid">
+      <div class="prob-tile high">
+        <div class="pt-row1"><span class="pt-label">Technical viability</span><span class="pt-value">75%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:75%"></div></div>
+        <div class="pt-note">KenAI on Ollama already runs locally. An Azure GPU-VM is the same architecture in a different host; the controller already supports tenant-scoped workspace jails.</div>
+      </div>
+      <div class="prob-tile high">
+        <div class="pt-row1"><span class="pt-label">Test-phase cost containment</span><span class="pt-value">80%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:80%"></div></div>
+        <div class="pt-note">Azure-for-Startups credits cover a single GPU-VM test deployment for 6–24 months at typical sizing. Test scope is bounded to the operator's tenant.</div>
+      </div>
+      <div class="prob-tile mid">
+        <div class="pt-row1"><span class="pt-label">Customer adoption at price</span><span class="pt-value">50%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:50%"></div></div>
+        <div class="pt-note">Customers value the dedicated, isolated, "your own AI" framing. Whether they'll pay enough on top of base CHERP to absorb the per-tenant VM cost (~$400–$1500/mo) is the open commercial question.</div>
+      </div>
+      <div class="prob-tile low">
+        <div class="pt-row1"><span class="pt-label">Unit economics vs shared model</span><span class="pt-value">35%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:35%"></div></div>
+        <div class="pt-note">A shared multi-tenant AI layer is materially cheaper. The dedicated-VM thesis depends on the sales premium covering the cost gap. If it doesn't, we fall back to shared with per-tenant memory + tooling jail.</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:18px;">
+      <div class="col">
+        <h4>How we're testing it</h4>
+        <ul>
+          <li>The operator's KenOS deployment is the prototype tenant — same stack we'd ship to a customer.</li>
+          <li>Cost is metered against the Azure-for-Startups credit allocation; burn-rate is the bounding constraint.</li>
+          <li>Outcome metric is operator hours of intervention per week. Goal: under 2 hours / tenant / week steady-state.</li>
+          <li>Feature parity check: tenant AI handles the same operational surface KenOS handles locally.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Decision gate</h4>
+        <ul>
+          <li><strong>Green:</strong> stays under 2 hr/wk operator intervention <em>and</em> per-tenant VM cost ≤ price premium → ship as paid add-on at first customer renewal.</li>
+          <li><strong>Yellow:</strong> meets one of the two thresholds → pivot to shared-pool model with dedicated-tenant memory + tooling jail.</li>
+          <li><strong>Red:</strong> fails both → collapse fully to operator-driven service for the foreseeable future, revisit when local-model economics shift.</li>
+          <li>Decision date: tied to the first paid-customer renewal cycle, not a calendar gate.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- ── SECTION: CUSTOMER + MARKET ─────────────────────────── -->
   <section class="section market">
     <div class="eyebrow">Customer &amp; market</div>
