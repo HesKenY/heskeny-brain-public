@@ -176,8 +176,8 @@
   <section class="section bet">
     <div class="eyebrow">Current bet · active hypothesis</div>
     <h2>Per-customer AI dev team on Azure</h2>
-    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked into that company's CHERP environment. The customer's files live on a partitioned drive on the same VM — accessible to their office staff, walled off from our system code. The AI is intentionally gated: it can <strong>read</strong> the customer's files (employee records, daily logs, project documents) and <strong>copy</strong> them into its working area for analysis, but it cannot edit them. It can also <strong>create new files</strong> — the periodic reports it generates drop straight into the customer's vault so the customer picks them up the same way they pick up everything else. Funded during the test phase by Azure's startup credit allocation.</p>
-    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Two-partition disk layout: <code>/system</code> holds CHERP + KenOS internals (read-only to customer); <code>/company</code> is the customer's accessible file vault (SMB-shared, role-gated). Tenant-scoped KenOS variant jailed to the workspace. AI-side mount of <code>/company</code> uses a narrow capability set: <code>read</code>, <code>copy-out</code>, and <code>create-new</code> only — no <code>write-existing</code>, no <code>delete</code>. Customer source-of-truth files are immutable to the AI; only AI-authored report files land back in <code>/company</code>. SharePoint integration retired in favor of the on-VM partitioned vault.</p>
+    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running a trio of AI minds: our local KenAI model as the primary, plus Claude and Codex subscriptions as an online backup and frontier-reasoning tier. KenAI does the bulk of the day-to-day for the cost of the VM only; the cloud tier covers the cases where the local model needs more horsepower, or where the local model is offline and continuity matters. The customer's files live on a partitioned drive on the same VM — accessible to their office staff, walled off from our system code. The AI is intentionally gated: it can <strong>read</strong> the customer's files (employee records, daily logs, project documents) and <strong>copy</strong> them into its working area for analysis, but it cannot edit them. It can also <strong>create new files</strong> — the periodic reports it generates drop straight into the customer's vault so the customer picks them up the same way they pick up everything else. Funded during the test phase by Azure's startup credit allocation.</p>
+    <p class="lede tech">Per-tenant Azure VM running the trio: KenAI on Ollama (local primary), Claude API, and Codex API (cloud backup + frontier). Tenant-scoped KenOS variant routes through litellm so the model is swappable without code change. Two-partition disk layout: <code>/system</code> holds CHERP + KenOS internals (read-only to customer); <code>/company</code> is the customer's accessible file vault (SMB-shared, role-gated). AI-side mount of <code>/company</code> uses a narrow capability set: <code>read</code>, <code>copy-out</code>, and <code>create-new</code> only — no <code>write-existing</code>, no <code>delete</code>. Customer source-of-truth files are immutable to the AI; only AI-authored report files land back in <code>/company</code>. SharePoint integration retired in favor of the on-VM partitioned vault.</p>
 
     <div class="bet-hyp">
       <div class="bh-label">Hypothesis</div>
@@ -188,8 +188,8 @@
     <div class="op-flow">
       <div class="op-step">
         <div class="op-icon">▣</div>
-        <div class="op-title">KenAI on Azure VM</div>
-        <div class="op-note">Current production model deployed per tenant. Same lineup that runs on the operator's local 4070, just hosted.</div>
+        <div class="op-title">Trio AI on tenant VM · KenAI primary, online backup</div>
+        <div class="op-note"><strong>KenAI</strong> (our local model, runs on the VM) is the primary — handles the bulk of day-to-day work for the cost of the VM only. <strong>Claude</strong> and <strong>Codex</strong> subscriptions are the online backup tier: frontier reasoning and code-side support when KenAI hits its limits, plus a continuity guarantee if the local model is offline. Same trio composition that powers the operator's own KenOS — local-first, cloud as fallback.</div>
       </div>
       <div class="op-arrow">→</div>
       <div class="op-step">
@@ -214,24 +214,24 @@
     <h3 style="margin-top:18px;color:var(--text);font-size:14px;letter-spacing:0.16em;text-transform:uppercase;font-weight:800;">Probability bands · today's read</h3>
     <div class="prob-grid">
       <div class="prob-tile high">
-        <div class="pt-row1"><span class="pt-label">Technical viability</span><span class="pt-value">75%</span></div>
-        <div class="pt-bar"><div class="pt-fill" style="width:75%"></div></div>
-        <div class="pt-note">KenAI on Ollama already runs locally. An Azure GPU-VM is the same architecture in a different host; the controller already supports tenant-scoped workspace jails.</div>
+        <div class="pt-row1"><span class="pt-label">Technical viability</span><span class="pt-value">80%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:80%"></div></div>
+        <div class="pt-note">KenAI on Ollama already runs locally and the trio composition (KenAI + Claude + Codex) is the operator's daily driver today. The Azure-VM port is the same architecture in a different host. Cloud-as-backup gives us a continuity guarantee the local-only design didn't have.</div>
       </div>
       <div class="prob-tile high">
-        <div class="pt-row1"><span class="pt-label">Test-phase cost containment</span><span class="pt-value">80%</span></div>
-        <div class="pt-bar"><div class="pt-fill" style="width:80%"></div></div>
-        <div class="pt-note">Azure-for-Startups credits cover a single GPU-VM test deployment for 6–24 months at typical sizing. Test scope is bounded to the operator's tenant.</div>
+        <div class="pt-row1"><span class="pt-label">Test-phase cost containment</span><span class="pt-value">75%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:75%"></div></div>
+        <div class="pt-note">Azure-for-Startups credits cover the GPU-VM. Anthropic and OpenAI subscriptions are a separate cost line on top — bounded by usage caps and the local-primary posture (cloud only fires when KenAI escalates). Test scope is the operator's own tenant.</div>
       </div>
       <div class="prob-tile mid">
-        <div class="pt-row1"><span class="pt-label">Customer adoption at price</span><span class="pt-value">50%</span></div>
-        <div class="pt-bar"><div class="pt-fill" style="width:50%"></div></div>
-        <div class="pt-note">Customers value the dedicated, isolated, "your own AI" framing. Whether they'll pay enough on top of base CHERP to absorb the per-tenant VM cost (~$400–$1500/mo) is the open commercial question.</div>
+        <div class="pt-row1"><span class="pt-label">Customer adoption at price</span><span class="pt-value">55%</span></div>
+        <div class="pt-bar"><div class="pt-fill" style="width:55%"></div></div>
+        <div class="pt-note">"Three AI minds dedicated to your company, with a continuity backup, on isolated infrastructure" is a stronger pitch than a single local model. Whether the price premium covers the trio's combined cost is still the open commercial question.</div>
       </div>
       <div class="prob-tile low">
         <div class="pt-row1"><span class="pt-label">Unit economics vs shared model</span><span class="pt-value">35%</span></div>
         <div class="pt-bar"><div class="pt-fill" style="width:35%"></div></div>
-        <div class="pt-note">A shared multi-tenant AI layer is materially cheaper. The dedicated-VM thesis depends on the sales premium covering the cost gap. If it doesn't, we fall back to shared with per-tenant memory + tooling jail.</div>
+        <div class="pt-note">A shared multi-tenant AI layer is materially cheaper. The dedicated-VM-plus-trio thesis depends on the sales premium covering the cost gap (VM + Claude sub + Codex sub). Local-primary keeps cloud burn bounded; if it still doesn't pencil, fall back to shared with per-tenant memory + tooling jail.</div>
       </div>
     </div>
 

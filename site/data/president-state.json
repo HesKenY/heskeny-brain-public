@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T03:37:03Z",
+  "generated_at": "2026-04-28T03:39:43Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1474,6 +1474,12 @@
     ]
   },
   "wins": [
+    {
+      "ts": "2026-04-28T03:37:11Z",
+      "channel": "pivot",
+      "summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI",
+      "business_summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI"
+    },
     {
       "ts": "2026-04-28T03:29:14Z",
       "channel": "pivot",
