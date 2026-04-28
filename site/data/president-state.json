@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T04:00:02Z",
+  "generated_at": "2026-04-28T04:15:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1475,6 +1475,12 @@
   },
   "wins": [
     {
+      "ts": "2026-04-28T04:00:23Z",
+      "channel": "improve",
+      "summary": "wolverine self-write hardened \u2014 anti-regression guard on file_ops blocks placeholder stubs / mass deletion / wrong-language comments / adjacent dup blocks (informed by today's f22a98f self-improvement run)",
+      "business_summary": "wolverine self-write hardened \u2014 anti-regression guard on file_ops blocks placeholder stubs / mass deletion / wrong-language comments / adjacent dup blocks (informed by today's f22a98f self-improvement run)"
+    },
+    {
       "ts": "2026-04-28T03:39:51Z",
       "channel": "pivot",
       "summary": "trio composition documented per-tenant \u2014 KenAI primary + Claude/Codex subscriptions as online backup + frontier tier \u00b7 probability bands recalibrated (tech viability 75\u219280, cost 80\u219275, adoption 50\u219255)",
@@ -1551,12 +1557,6 @@
       "channel": "deploy",
       "summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)",
       "business_summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)"
-    },
-    {
-      "ts": "2026-04-24T16:33:08Z",
-      "channel": "push",
-      "summary": "debecorp.com: Try CHERP links repointed to /trades (14 links across 6 pages)",
-      "business_summary": "debecorp.com: Try CHERP links repointed to /trades (14 links across 6 pages)"
     }
   ],
   "truth_gate": {
