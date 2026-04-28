@@ -26,7 +26,10 @@
       const stats = data.stats || {};
       $('pill-active').innerHTML = `<strong>Active</strong>${stats.active_projects || 0}`;
 
+      renderKpis(data, stats);
       renderFlow(data.system_flow || {});
+      renderDeploys(data.deployments || []);
+      renderSharePoint(data.sharepoint || []);
       renderProjects(data.checklist || {});
       renderWins(data.wins || []);
       renderTruth(data.truth_gate || {});
@@ -36,6 +39,74 @@
       $('pill-stamp').innerHTML = `<strong>Synced</strong>offline`;
       $('pill-stamp').classList.add('err');
     });
+
+  // ── KPI strip values ─────────────────────────────────────
+  function renderKpis(data, stats) {
+    if ($('kpi-active'))   $('kpi-active').textContent   = stats.active_projects ?? '—';
+    if ($('kpi-progress')) $('kpi-progress').textContent = (stats.avg_progress != null) ? `${stats.avg_progress}%` : '—';
+    if ($('kpi-truth')) {
+      const t = data.truth_gate || {};
+      $('kpi-truth').textContent = (t.available && (t.total||0) > 0)
+        ? `${Math.round(((t.pass||0)/t.total)*100)}%`
+        : '—';
+    }
+    if ($('kpi-deploy')) {
+      const d = data.deployments || [];
+      const last = d.map(x => x.last_deploy_at).filter(Boolean).sort().pop();
+      $('kpi-deploy').textContent = last ? last.replace('T', ' ').replace('Z', '') : '—';
+    }
+    if ($('kpi-customers')) $('kpi-customers').textContent = stats.paid_customers ?? 1;
+    if ($('kpi-shipped'))   $('kpi-shipped').textContent   = stats.total_milestones ?? '—';
+  }
+
+  // ── deployment status grid ──────────────────────────────
+  function renderDeploys(deploys) {
+    const wrap = $('deploy-grid');
+    if (!wrap) return;
+    if (!deploys.length) { wrap.innerHTML = '<div style="color:#5c6b61">no deployment data</div>'; return; }
+    wrap.innerHTML = deploys.map(d => {
+      const cls = (d.state === 'live' || d.state === 'ready') ? 'live'
+                : (d.state === 'failed' || d.state === 'error') ? 'failing'
+                : 'unknown';
+      const stateLabel = d.state || 'unknown';
+      const badge = d.badge_url
+        ? `<div class="dp-badge"><img src="${esc(d.badge_url)}" alt="${esc(d.name)} status"></div>`
+        : '';
+      const meta = d.last_deploy_at ? `last: ${esc(d.last_deploy_at)}` : '';
+      const tag = d.url ? 'a' : 'div';
+      const href = d.url ? `href="${esc(d.url)}" target="_blank" rel="noopener"` : '';
+      return `<${tag} class="deploy-tile ${cls}" ${href}>
+        <div class="dp-row1">
+          <span class="dp-name">${esc(d.name || '')}</span>
+          <span class="dp-state">${esc(stateLabel)}</span>
+        </div>
+        <div class="dp-host">${esc(d.url || d.host || '')}</div>
+        ${meta ? `<div class="dp-meta">${meta}</div>` : ''}
+        ${d.note ? `<div class="dp-note">${esc(d.note)}</div>` : ''}
+        ${badge}
+      </${tag}>`;
+    }).join('');
+  }
+
+  // ── customer SharePoint surfaces ────────────────────────
+  function renderSharePoint(items) {
+    const wrap = $('sp-grid');
+    if (!wrap) return;
+    if (!items.length) {
+      wrap.innerHTML = '<div style="color:#5c6b61">no customer SharePoint surfaces filed</div>';
+      return;
+    }
+    wrap.innerHTML = items.map(it => {
+      const tag = it.url ? 'a' : 'div';
+      const href = it.url ? `href="${esc(it.url)}" target="_blank" rel="noopener"` : '';
+      return `<${tag} class="sp-tile" ${href}>
+        <div class="sp-customer">${esc(it.customer || '')}</div>
+        <div class="sp-title">${esc(it.title || '')}</div>
+        ${it.url ? `<div class="sp-url">${esc(it.url)}</div>` : ''}
+        ${it.note ? `<div class="sp-note">${esc(it.note)}</div>` : ''}
+      </${tag}>`;
+    }).join('');
+  }
 
   // ── system flow chart ────────────────────────────────────
   function renderFlow(flow) {

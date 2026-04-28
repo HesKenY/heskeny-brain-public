@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T01:51:23Z",
+  "generated_at": "2026-04-28T02:23:20Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1475,6 +1475,12 @@
   },
   "wins": [
     {
+      "ts": "2026-04-28T02:15:24Z",
+      "channel": "ship",
+      "summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections",
+      "business_summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections"
+    },
+    {
       "ts": "2026-04-28T01:44:43Z",
       "channel": "milestone",
       "summary": "test message after fix",
@@ -1641,9 +1647,65 @@
       }
     ]
   },
+  "deployments": [
+    {
+      "name": "cherp.live",
+      "host": "Netlify",
+      "url": "https://cherp.live",
+      "state": "live",
+      "last_deploy_at": null,
+      "note": "Main CHERP application + trade variants (Pipe Trades, Electricians, HVAC, Fire Sprinkler, Carpentry, Concrete, Safety, General)."
+    },
+    {
+      "name": "Heskeny-Brain evidence portal",
+      "host": "GitHub Pages",
+      "url": "https://heskeny.github.io/heskeny-brain-public/",
+      "state": "live",
+      "last_deploy_at": null,
+      "note": "Public mirror of BRAIN evidence + this president panel. Republished on every push to heskeny-brain-public."
+    },
+    {
+      "name": "debecorp.com",
+      "host": "Netlify",
+      "url": "https://debecorp.com",
+      "state": "live",
+      "last_deploy_at": null,
+      "note": "First paid customer's corporate site."
+    },
+    {
+      "name": "CHERP solo (offline build)",
+      "host": "Static / app-store",
+      "url": null,
+      "state": "ready",
+      "last_deploy_at": null,
+      "note": "Offline-capable solo PWA (CHERP-Reloaded). Distributed via app stores; no network deploy required."
+    }
+  ],
+  "sharepoint": [
+    {
+      "customer": "Debe Corp",
+      "title": "Daily folders (field \u2192 office)",
+      "url": null,
+      "note": "Per-day folders Wave-1b auto-routes daily logs, photos, and signed JSAs into."
+    },
+    {
+      "customer": "Debe Corp",
+      "title": "Project library",
+      "url": null,
+      "note": "Per-project document libraries (drawings, submittals, RFIs)."
+    },
+    {
+      "customer": "Debe Corp",
+      "title": "Sign-off archive",
+      "url": null,
+      "note": "Long-term archive of completed JSAs and timekeeping exports."
+    }
+  ],
   "stats": {
     "active_projects": 11,
-    "total_milestones": 118
+    "total_milestones": 118,
+    "avg_progress": 62,
+    "paid_customers": 1
   },
   "operator_panel": "http://localhost:8090/",
   "contact_operator_email": "heskeny@gmail.com"

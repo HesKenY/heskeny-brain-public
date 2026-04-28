@@ -488,3 +488,70 @@ body[data-mode="technical"] .biz  { display: none; }
 }
 .tl-item .tl-title { font-size: 14px; font-weight: 800; color: var(--text); margin: 2px 0; }
 .tl-item .tl-note  { font-size: 12.5px; color: var(--text-dim); line-height: 1.5; }
+
+/* ── deployment status grid ──────────────────────── */
+.deploy-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+}
+.deploy-tile {
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; background: var(--panel);
+  display: grid; gap: 6px;
+  border-left-width: 3px; border-left-color: var(--cyan);
+  text-decoration: none; color: var(--text);
+  transition: all 120ms ease;
+}
+.deploy-tile:hover { border-color: var(--border-strong); background: var(--panel-2); }
+.deploy-tile.live    { border-left-color: var(--lime); }
+.deploy-tile.failing { border-left-color: var(--danger); }
+.deploy-tile.unknown { border-left-color: var(--muted); }
+.deploy-tile .dp-row1 {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+}
+.deploy-tile .dp-name { font-size: 14px; font-weight: 800; color: var(--text); letter-spacing: -.01em; }
+.deploy-tile .dp-state {
+  font: 9px ui-monospace, Menlo, Consolas, monospace;
+  letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800;
+  padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border);
+  color: var(--muted);
+}
+.deploy-tile.live    .dp-state { color: var(--lime);   border-color: rgba(85,255,136,.5); background: rgba(85,255,136,.06); }
+.deploy-tile.failing .dp-state { color: var(--danger); border-color: rgba(255,68,102,.5); background: rgba(255,68,102,.06); }
+.deploy-tile.unknown .dp-state { color: var(--muted); }
+.deploy-tile .dp-host {
+  font: 11px ui-monospace, Menlo, Consolas, monospace;
+  color: var(--cyan); word-break: break-all;
+}
+.deploy-tile .dp-meta {
+  font-size: 10px; color: var(--muted);
+  font-family: ui-monospace, Menlo, Consolas, monospace; letter-spacing: 0.04em;
+}
+.deploy-tile .dp-note { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-top: 2px; }
+.deploy-tile .dp-badge { margin-top: 4px; }
+.deploy-tile .dp-badge img { display: block; max-width: 100%; }
+
+/* ── SharePoint surfaces grid ────────────────────── */
+.sp-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+.sp-tile {
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; background: var(--panel);
+  border-left: 3px solid var(--magenta);
+  display: grid; gap: 4px;
+  text-decoration: none; color: var(--text);
+  transition: all 120ms ease;
+}
+.sp-tile:hover { border-color: var(--border-strong); background: var(--panel-2); }
+.sp-tile .sp-customer {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--magenta); font-weight: 800;
+}
+.sp-tile .sp-title { font-size: 14px; font-weight: 800; color: var(--text); margin: 2px 0 4px; }
+.sp-tile .sp-url {
+  font: 11px ui-monospace, Menlo, Consolas, monospace;
+  color: var(--text-dim); word-break: break-all;
+}
+.sp-tile .sp-note { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-top: 4px; }

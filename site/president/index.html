@@ -12,7 +12,7 @@
   <div class="brand">
     <span class="brand-mark">◆</span>
     <span class="brand-name">CHERP</span>
-    <span class="brand-sub">President Panel</span>
+    <span class="brand-sub">Access Panel · live system status</span>
   </div>
   <div class="status-strip">
     <span class="pill" id="pill-active"><strong>Active</strong>—</span>
@@ -27,13 +27,13 @@
 
 <main>
 
-  <!-- ── SECTION: HERO / what we are ─────────────────────────── -->
+  <!-- ── SECTION: HERO / what this panel is ─────────────────── -->
   <section class="section hero">
-    <div class="eyebrow">Overview</div>
-    <h1 class="biz">A field-intelligence platform for construction operations, paired with an autonomous engineering layer that maintains the product itself.</h1>
-    <h1 class="tech">CHERP — multi-tenant construction-operations PWA on Supabase, maintained by an autonomous agent stack on dedicated GPU infrastructure, evidence-gated and offline-capable.</h1>
-    <p class="lede biz">CHERP delivers daily logs, job-safety analyses, timekeeping, trade-specific calculators, and reference materials to construction crews on mobile devices, with synchronized office-side visibility. Engineering and maintenance is performed by a local AI system, providing release velocity and operational continuity without proportional headcount.</p>
-    <p class="lede tech">Seven trade variants on cherp.live plus offline-capable solo PWAs. Supabase REST + RLS, Microsoft Graph SharePoint sync. KenAI on Ollama drives migrations and remediation through the KenOS v1.2 controller. Every shipped change passes a cross-agent claim verifier.</p>
+    <div class="eyebrow">Sean · access panel</div>
+    <h1 class="biz">Your live window into the CHERP system — what's deployed, what's syncing, what's in flight, and what's been shipped.</h1>
+    <h1 class="tech">President access panel — read-mostly mirror of operator state. Deployment status, customer SharePoint surfaces, project completion percentages, and the verifier-backed activity ledger.</h1>
+    <p class="lede biz">This page refreshes in the background. Use it to check on customer deployments, follow build progress on initiatives that affect customer conversations, jump straight to the SharePoint folders the office side is using, and see what's been shipped recently. Use the note form at the bottom to send anything that needs the operator's attention.</p>
+    <p class="lede tech">Static page + data JSON regenerated on a cron from the operator workstation. Project percentages come from project-checklist.json. Deployment status surfaces Netlify deploy state and GitHub Pages publish status. SharePoint links are filed per customer environment.</p>
   </section>
 
   <!-- ── SECTION: KPI STRIP ──────────────────────────────────── -->
@@ -41,9 +41,9 @@
     <div class="eyebrow">At a glance</div>
     <div class="kpi-strip">
       <div class="kpi"><div class="v" id="kpi-active">—</div><div class="l">Active projects</div></div>
-      <div class="kpi lime"><div class="v" id="kpi-shipped">—</div><div class="l">Milestones shipped</div></div>
+      <div class="kpi lime"><div class="v" id="kpi-progress">—</div><div class="l">Avg build progress</div></div>
       <div class="kpi"><div class="v" id="kpi-truth">—</div><div class="l">Verifier pass rate</div></div>
-      <div class="kpi amber"><div class="v" id="kpi-bounty">$10K–$120K</div><div class="l">Bounty pipeline</div></div>
+      <div class="kpi amber"><div class="v" id="kpi-deploy">—</div><div class="l">Latest deploy</div></div>
       <div class="kpi violet"><div class="v" id="kpi-customers">1</div><div class="l">Paid instances</div></div>
     </div>
   </section>
@@ -91,7 +91,6 @@
           <li>BRAIN agent framework + KenOS controller — the autonomous engineering surface.</li>
           <li>KenAI model lineup + on-premises GPU infrastructure.</li>
           <li>Customer onboarding from a technical standpoint — provisioning, data migration, integrations.</li>
-          <li>Security research pipeline (drives the bounty revenue line).</li>
           <li>Evidence ledger + verifier — keeps every shipped change auditable.</li>
         </ul>
       </div>
@@ -135,16 +134,16 @@
           <h3 class="biz">Capability validation: live-response training</h3>
           <h3 class="tech">kenai-trainer — Pokémon Crystal completion as a Play→Break→Fix benchmark</h3>
           <p class="biz">We validate the autonomous engineering capability by tasking a dedicated AI variant with completing a complex video game environment without human intervention. The decision loop required — observe state, attempt action, learn from outcome, refine — is the same loop used to remediate CHERP defects in production. Successful completion is a public, externally-verifiable demonstration that the system is capable of multi-step reasoning under uncertainty.</p>
-          <p class="tech">kenai-trainer:latest drives mGBA via xdotool, produces lesson seeds (84 banked to date), maintains a separate corpus from the kenai-v5 development corpus per the no-dilution rule. The same loop pattern feeds the bug-bounty pipeline (find vulnerability → patch → seed) and CHERP migrations.</p>
+          <p class="tech">kenai-trainer:latest drives mGBA via xdotool, produces lesson seeds (84 banked to date), maintains a separate corpus from the kenai-v5 development corpus per the no-dilution rule. The same loop pattern is reused for CHERP migrations and live remediation.</p>
         </div>
       </li>
       <li>
         <div class="va-num">5</div>
         <div class="va-body">
-          <h3 class="biz">Revenue lines</h3>
-          <h3 class="tech">Phase-1 bounty packets and paid CHERP instances</h3>
-          <p class="biz">Two revenue lines operate in parallel during the platform's growth phase. First, paid security research: documented vulnerability submissions to enterprise bounty programs. Second, paid CHERP company instances. The security work also produces training data that hardens CHERP itself.</p>
-          <p class="tech">$10K floor / $120K ceiling across four drafted Phase-1 packets (Nexon, Epic, Ubisoft, Google). Debe Corp is the first paid CHERP instance; Heskeny-Brain hosts the public evidence portal.</p>
+          <h3 class="biz">Operator visibility: shared real-time access</h3>
+          <h3 class="tech">President access surface mirrored from operator state</h3>
+          <p class="biz">The President side and the Operator side share a single source of truth. Build progress, deployment health, customer SharePoint surfaces, and recently-shipped work all surface here automatically — no separate status meeting required to know where things stand.</p>
+          <p class="tech">This panel is regenerated from BRAIN canonical state (project-checklist.json, master.log JSONL, claim-checks evidence) on a cron and pushed to the public mirror. No hand-curated status decks; the data is always the data.</p>
         </div>
       </li>
     </ol>
@@ -190,50 +189,22 @@
     </div>
   </section>
 
-  <!-- ── SECTION: REVENUE LADDER ─────────────────────────────── -->
-  <section class="section revenue">
-    <div class="eyebrow">Revenue lines</div>
-    <h2>Two streams, parallel during growth</h2>
-    <p class="lede biz">Bounty submissions provide near-term cash and produce hardening data that feeds CHERP itself. Paid CHERP instances are the durable line and the long-term valuation driver.</p>
-    <p class="lede tech">Phase-1 packets are drafted for four enterprise programs; the floor reflects the lowest qualifying-payout per program, the ceiling the maximum at the documented severity tier. Paid CHERP instances are tier-A multi-tenant; per-customer ARR scales with seat count.</p>
-    <div class="rev-grid">
-      <div class="rev-tile paid">
-        <div class="rv-target">Live · paid CHERP</div>
-        <div class="rv-name">Debe Corp</div>
-        <div class="rv-amount">Active</div>
-        <div class="rv-note">First paid company instance. Wave-1 + Wave-1b SharePoint routing in production.</div>
-      </div>
-      <div class="rev-tile draft">
-        <div class="rv-target">Bounty · drafted</div>
-        <div class="rv-name">Nexon</div>
-        <div class="rv-amount">$10K–$30K</div>
-        <div class="rv-note">Phase-1 packet drafted. Submission pending operator review.</div>
-      </div>
-      <div class="rev-tile draft">
-        <div class="rv-target">Bounty · drafted</div>
-        <div class="rv-name">Epic Games</div>
-        <div class="rv-amount">$10K–$30K</div>
-        <div class="rv-note">Phase-1 packet drafted.</div>
-      </div>
-      <div class="rev-tile draft">
-        <div class="rv-target">Bounty · drafted</div>
-        <div class="rv-name">Ubisoft</div>
-        <div class="rv-amount">$10K–$30K</div>
-        <div class="rv-note">Phase-1 packet drafted.</div>
-      </div>
-      <div class="rev-tile draft">
-        <div class="rv-target">Bounty · drafted</div>
-        <div class="rv-name">Google VRP</div>
-        <div class="rv-amount">$10K–$30K</div>
-        <div class="rv-note">Phase-1 packet drafted.</div>
-      </div>
-      <div class="rev-tile research">
-        <div class="rv-target">Future · expansion</div>
-        <div class="rv-name">Trade-2 / Trade-3 instances</div>
-        <div class="rv-amount">Pipeline</div>
-        <div class="rv-note">Each adjacent trade variant carries an independent sales motion under the same platform.</div>
-      </div>
-    </div>
+  <!-- ── SECTION: DEPLOYMENT STATUS ─────────────────────────── -->
+  <section class="section deploys">
+    <div class="eyebrow">Live deployment status</div>
+    <h2>What's live right now</h2>
+    <p class="lede biz">Each surface below is a live deployment customers or partners may interact with. Click through to open the running site. The status badge reflects whether the most recent build succeeded.</p>
+    <p class="lede tech">Netlify deploy badges + GitHub Pages publish state. Status pulled from the data JSON regenerated by the operator cron — see kpi-deploy in the strip above for the most recent successful deploy timestamp.</p>
+    <div class="deploy-grid" id="deploy-grid">loading…</div>
+  </section>
+
+  <!-- ── SECTION: CUSTOMER SHAREPOINT SURFACES ──────────────── -->
+  <section class="section sharepoint">
+    <div class="eyebrow">Customer SharePoint</div>
+    <h2>Office-side surfaces</h2>
+    <p class="lede biz">Direct shortcuts into the customer's existing Microsoft 365 environment — daily folders, project libraries, sign-off archives. These are the surfaces office staff already use; CHERP feeds them automatically.</p>
+    <p class="lede tech">App-only Graph auth handles the writes. Folder structure is per-tenant. Links below open the tenant's web portal — Sean and the operator both need an authorized account to view.</p>
+    <div class="sp-grid" id="sp-grid">loading…</div>
   </section>
 
   <!-- ── SECTION: SYSTEM FLOW ────────────────────────────────── -->
@@ -386,12 +357,6 @@
         <div class="tl-title">Capability validation · live-response training</div>
         <div class="tl-note biz">Public demonstration that the autonomous engineering capability works end-to-end, in a controlled environment, before scaling it up against more customer work.</div>
         <div class="tl-note tech">kenai-trainer drives mGBA via xdotool; lesson seeds banked into a separate corpus per the no-dilution rule.</div>
-      </div>
-      <div class="tl-item future">
-        <div class="tl-when">Next</div>
-        <div class="tl-title">Phase-1 bounty submissions</div>
-        <div class="tl-note biz">Submit drafted security research packets to the four enterprise programs. Near-term revenue and reputation building.</div>
-        <div class="tl-note tech">Nexon, Epic, Ubisoft, Google VRP packets ready for operator review and submission.</div>
       </div>
       <div class="tl-item future">
         <div class="tl-when">Next</div>
