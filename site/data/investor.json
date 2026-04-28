@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-23T11:43:15Z",
+  "generated_at": "2026-04-27T19:17:07Z",
   "headline": "CHERP is becoming a construction operations platform backed by a local AI maintenance system with a live truthfulness gate.",
   "metrics": {
     "brain_records": 69239,
     "maintenance_steps_passing": "5/5",
     "cherp_simulator_probes": "13/13",
     "kenai_truth_gate": "11/11",
-    "peerlog_rows": 8321,
-    "unsupported_claims_detected": 524,
-    "ledger_events_window": 1040,
+    "peerlog_rows": 10187,
+    "unsupported_claims_detected": 680,
+    "ledger_events_window": 876,
     "production_policy": "cherp.live hold"
   },
   "proof_points": [
@@ -16,7 +16,7 @@
     "Maintenance loop runs 5/5 steps green: peerlog parse, evidence ledger, CHERP simulation, dashboard, status.",
     "CHERP simulator now covers 13/13 probes \u2014 7/7 static features plus 6/6 real-flow wiring checks that read actual CHERP source.",
     "KenAI truthfulness gate passes 11/11 probes on kenai:v5.5, including action-class probes seeded from real unsupported-claim patterns.",
-    "Unsupported AI claims (524) are surfaced as evidence, not trusted as fact.",
+    "Unsupported AI claims (680) are surfaced as evidence, not trusted as fact.",
     "Claude + Codex workflow is codified with handoffs, shared-log coordination, and dirty-repo guards.",
     "CHERP live site is protected while the ecosystem matures."
   ],

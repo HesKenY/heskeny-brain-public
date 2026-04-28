@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CHERP · President Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="business">
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◆</span>
+    <span class="brand-name">CHERP</span>
+    <span class="brand-sub">President Panel</span>
+  </div>
+  <div class="status-strip">
+    <span class="pill" id="pill-active"><strong>Active</strong>—</span>
+    <span class="pill" id="pill-truth"><strong>Truth gate</strong>—</span>
+    <span class="pill" id="pill-stamp"><strong>Synced</strong>—</span>
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn on" data-mode="business">Business</button>
+    <button class="mode-btn"    data-mode="technical">Technical</button>
+    <button class="mode-btn"    data-mode="deck">Deck</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── SECTION: HERO / what we are ─────────────────────────── -->
+  <section class="section hero">
+    <div class="eyebrow">What we're building</div>
+    <h1 class="biz">A field-intelligence platform for construction crews, with an AI maintenance layer that keeps it running and learning.</h1>
+    <h1 class="tech">CHERP — multi-tenant construction crew PWA on Supabase, maintained by an autonomous agent stack on a local 4070, evidence-gated and offline-capable.</h1>
+    <p class="lede biz">Crews use CHERP on their phones for daily logs, JSAs, timecards, calculators, and trade-specific reference. Office staff see everything in real time without installing anything. The AI behind it keeps the code shipping safely.</p>
+    <p class="lede tech">7 trade variants on cherp.live + offline-capable solo PWAs. Supabase RLS-bound. KenAI on Ollama drives migrations + bug-fixing via the KenOS v1.2 controller. Cross-agent claim verifier gates every shipped change.</p>
+  </section>
+
+  <!-- ── SECTION: WHO ─────────────────────────────────────────── -->
+  <section class="section who">
+    <div class="eyebrow">Who's behind it</div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-role">President</div>
+        <div class="who-name">Sean</div>
+        <div class="who-line">Co-founder · the face · customer + market lead.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-role">Operator</div>
+        <div class="who-name">Ken Deibel</div>
+        <div class="who-line biz">Inventor + technical operator. Designs the system, runs the AI agents, writes the code that the AI doesn't yet.</div>
+        <div class="who-line tech">CHERP architect; runs the BRAIN agent framework, the KenOS controller stack, the KenAI model lineup, and the GPU infrastructure that drives them.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION: VISION ─────────────────────────────────────── -->
+  <section class="section vision">
+    <div class="eyebrow">Where we're heading</div>
+    <ol class="vision-arc">
+      <li>
+        <div class="va-num">1</div>
+        <div class="va-body">
+          <h3 class="biz">Get CHERP into more crews</h3>
+          <h3 class="tech">CHERP solo→company funnel + per-trade variants</h3>
+          <p class="biz">Each trade gets its own free phone app on the App Store. Crews try it solo, like it, and pay to connect their whole company.</p>
+          <p class="tech">7 trade-named PWAs (Pipe Trades / Electricians / HVAC / Fire Sprinkler / Carpentry / Concrete / Safety / General) on cherp.live + a federation-v0 device-code flow so a worker's solo app attaches to a company instance. Single Supabase, runtime CHERP_TRADE flag.</p>
+        </div>
+      </li>
+      <li>
+        <div class="va-num">2</div>
+        <div class="va-body">
+          <h3 class="biz">Sell company instances</h3>
+          <h3 class="tech">Per-company Supabase isolation + SharePoint sync</h3>
+          <p class="biz">When a company signs up, they get their own private CHERP space. Their existing Microsoft Office files and SharePoint sites all sync automatically.</p>
+          <p class="tech">Tier A architecture: single Supabase project, RLS isolation per company_id; Wave-1 + Wave-1b SharePoint daily-folder routing live for Debe Corp as the first paid instance.</p>
+        </div>
+      </li>
+      <li>
+        <div class="va-num">3</div>
+        <div class="va-body">
+          <h3 class="biz">AI that builds + fixes itself</h3>
+          <h3 class="tech">KenOS controller + wolverine self-write loop</h3>
+          <p class="biz">Most of CHERP's code now gets written and fixed by AI running on a single GPU in Ken's office. Customers get faster releases without us hiring a full dev team.</p>
+          <p class="tech">KenOS v1.2 dispatches goals to the kenai-fullstack/wolverine agents. Wolverine has gated self-write to its own controller source. Cross-agent claim verifier checks every claimed change.</p>
+        </div>
+      </li>
+      <li>
+        <div class="va-num">4</div>
+        <div class="va-body">
+          <h3 class="biz">Pokemon training — proof the AI learns live</h3>
+          <h3 class="tech">kenai-trainer: autonomous Pokémon Crystal completion as the Play→Break→Fix loop</h3>
+          <p class="biz">We're teaching one of our AI models to play and beat Pokémon Crystal — completely on its own. It's not for fun. It's the same loop we use to teach the AI to fix CHERP bugs: try something, see what happened, learn, try again. If the AI can finish Pokémon, it can finish a feature.</p>
+          <p class="tech">kenai-trainer:latest drives mGBA via xdotool, produces lesson seeds (84 banked), separate corpus from kenai-v5 dev corpus per the no-dilution rule. Same loop pattern feeds the bug-hunter pipeline (find vuln → patch → seed) and CHERP migrations.</p>
+        </div>
+      </li>
+      <li>
+        <div class="va-num">5</div>
+        <div class="va-body">
+          <h3 class="biz">Revenue: bug bounties + paid CHERP instances</h3>
+          <h3 class="tech">Phase-1 bounty packets (Nexon/Epic/Ubisoft/Google) + paid Debe Corp + future tier-A companies</h3>
+          <p class="biz">Two revenue streams while CHERP grows: (1) we find security bugs in big companies' software and get paid bounties; (2) construction companies pay monthly for CHERP. The bounties also train our AI to find bugs in CHERP itself.</p>
+          <p class="tech">$10K floor / $120K ceiling on the four drafted Phase-1 packets. Debe Corp is the first paid CHERP instance; Heskeny-Brain investor portal carries the public evidence.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── SECTION: SYSTEM FLOW ────────────────────────────────── -->
+  <section class="section systemflow">
+    <div class="eyebrow">How it connects</div>
+    <h2>The full stack at a glance</h2>
+    <div class="flow-canvas" id="flow-canvas"></div>
+    <p class="flow-note biz">Field crews and office staff use the CHERP app. Everything they enter goes into the cloud database and (for Debe Corp) into SharePoint at the same time. The AI agents on Ken's local GPU build and fix the code, and the BRAIN keeps every action logged so we can prove what happened.</p>
+    <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions → Microsoft Graph (SharePoint). Local KenAI on Ollama via litellm Anthropic-compat proxy → KenOS v1.2 controller → workspace-jailed tools. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
+  </section>
+
+  <!-- ── SECTION: PROJECTS (live-synced from operator) ───────── -->
+  <section class="section projects">
+    <div class="eyebrow">What we're shipping right now</div>
+    <h2>Active project list</h2>
+    <div class="project-grid" id="project-grid">loading…</div>
+    <details class="planning-fold">
+      <summary>+ planning / on-deck</summary>
+      <div class="project-grid" id="planning-grid"></div>
+    </details>
+  </section>
+
+  <!-- ── SECTION: RECENT WINS ────────────────────────────────── -->
+  <section class="section wins">
+    <div class="eyebrow">Recent wins</div>
+    <h2>What landed lately</h2>
+    <ul class="wins-list" id="wins-list">loading…</ul>
+  </section>
+
+  <!-- ── SECTION: TRUTH GATE ─────────────────────────────────── -->
+  <section class="section truth">
+    <div class="eyebrow">Trust signal</div>
+    <h2>Cross-agent claim verifier</h2>
+    <p class="biz">Every claim our AI makes ("I shipped X", "I fixed Y") gets automatically checked against reality. If the file doesn't exist or the commit isn't there, it fails. This is how we prove the AI did what it said.</p>
+    <p class="tech">scripts/brain-agent-claim-checks.py — file-path + commit-SHA token verification across BRAIN/CHERP/HOME roots. Per-actor breakdown. Hooked into the Heskeny-Brain dashboard.</p>
+    <div class="truth-stats" id="truth-stats">loading…</div>
+  </section>
+
+  <!-- ── SECTION: NOTE TO OPERATOR ──────────────────────────── -->
+  <section class="section contact">
+    <div class="eyebrow">Got a redline / question / note?</div>
+    <h2>Send it to Ken</h2>
+    <p class="biz">Pre-fills your email client. Use this for site copy edits, customer feedback to relay, market intel, anything you want him to see.</p>
+    <form class="note-form" id="note-form">
+      <label>Subject (optional)</label>
+      <input type="text" id="note-subject" placeholder="e.g. cherp.live homepage copy">
+      <label>Note</label>
+      <textarea id="note-body" rows="6" placeholder="What you want Ken to see…"></textarea>
+      <button type="submit" class="key-btn primary">Send</button>
+      <span class="meta" id="note-meta"></span>
+    </form>
+  </section>
+
+</main>
+
+<footer class="footbar">
+  <span>CHERP · President Panel · static snapshot</span>
+  <span id="foot-stamp"></span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

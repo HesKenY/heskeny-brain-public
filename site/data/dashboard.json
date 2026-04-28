@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-04-27T19:17:07Z",
+  "summary": {
+    "pass": 11,
+    "fail": 0,
+    "info": 5
+  },
+  "checks": [
+    {
+      "id": "maintenance.peerlog-parser",
+      "label": "Maintenance \u00b7 peerlog-parser",
+      "status": "pass",
+      "detail": "exit 0",
+      "evidence": "evidence/status.json",
+      "category": "maintenance"
+    },
+    {
+      "id": "maintenance.evidence-ledger",
+      "label": "Maintenance \u00b7 evidence-ledger",
+      "status": "pass",
+      "detail": "exit 0",
+      "evidence": "evidence/status.json",
+      "category": "maintenance"
+    },
+    {
+      "id": "maintenance.cherp-simulation",
+      "label": "Maintenance \u00b7 cherp-simulation",
+      "status": "pass",
+      "detail": "exit 0",
+      "evidence": "evidence/status.json",
+      "category": "maintenance"
+    },
+    {
+      "id": "maintenance.maintenance-dashboard",
+      "label": "Maintenance \u00b7 maintenance-dashboard",
+      "status": "pass",
+      "detail": "exit 0",
+      "evidence": "evidence/status.json",
+      "category": "maintenance"
+    },
+    {
+      "id": "maintenance.brain-status",
+      "label": "Maintenance \u00b7 brain-status",
+      "status": "pass",
+      "detail": "exit 0",
+      "evidence": "evidence/status.json",
+      "category": "maintenance"
+    },
+    {
+      "id": "cherp.simulator.total",
+      "label": "CHERP simulator \u2014 overall",
+      "status": "pass",
+      "detail": "13/13 probes",
+      "evidence": "evidence/cherp-simulation-latest.json",
+      "category": "simulation"
+    },
+    {
+      "id": "cherp.simulator.static",
+      "label": "CHERP simulator \u2014 static feature probes",
+      "status": "pass",
+      "detail": "7/7 probes",
+      "evidence": "evidence/cherp-simulation-latest.json",
+      "category": "simulation"
+    },
+    {
+      "id": "cherp.simulator.real_flow",
+      "label": "CHERP simulator \u2014 real-flow wiring",
+      "status": "pass",
+      "detail": "6/6 probes (read actual CHERP source)",
+      "evidence": "evidence/cherp-simulation-latest.json",
+      "category": "simulation"
+    },
+    {
+      "id": "kenai.peerlog_smoke",
+      "label": "KenAI truthfulness gate \u00b7 kenai:v5.5",
+      "status": "pass",
+      "detail": "11/11 probes (terminal-marker, truncation, commit-claim, action-class)",
+      "evidence": "evidence/kenai-peerlog-smoke-latest.json",
+      "category": "truthfulness"
+    },
+    {
+      "id": "peerlog.indexed",
+      "label": "Peerlog evidence corpus",
+      "status": "info",
+      "detail": "10,187 structured rows (claude 6,595, kenai 3,408, codex 78, pipe-r 65)",
+      "evidence": "evidence/status.json",
+      "category": "evidence"
+    },
+    {
+      "id": "peerlog.unsupported_flagged",
+      "label": "Unsupported AI claims surfaced",
+      "status": "info",
+      "detail": "680 flagged for triage (not trusted as fact)",
+      "evidence": "evidence/status.json",
+      "category": "evidence"
+    },
+    {
+      "id": "brain.records",
+      "label": "Brain corpus indexed",
+      "status": "info",
+      "detail": "69,239 records across CHERP, agent logs, handoffs, training data",
+      "evidence": "BRAIN.db",
+      "category": "evidence"
+    },
+    {
+      "id": "ledger.events",
+      "label": "Evidence ledger \u2014 recent window",
+      "status": "info",
+      "detail": "876 events linked to claims",
+      "evidence": "evidence/ledger.md",
+      "category": "evidence"
+    },
+    {
+      "id": "agents.claim_checks",
+      "label": "Cross-agent claim verifier",
+      "status": "pass",
+      "detail": "6/10 verified \u00b7 0 fail \u00b7 0 partial \u00b7 4 no testable tokens \u00b7 last 4h window",
+      "evidence": "evidence/agent-claim-checks-latest.json",
+      "category": "truthfulness"
+    },
+    {
+      "id": "agents.claim_checks.claude",
+      "label": "claude claim verifier",
+      "status": "pass",
+      "detail": "6/10 verified, 0 fail in last 4h",
+      "evidence": "evidence/agent-claim-checks-latest.json",
+      "category": "truthfulness"
+    },
+    {
+      "id": "policy.production_hold",
+      "label": "Production policy \u2014 cherp.live",
+      "status": "info",
+      "detail": "Live site protected; ecosystem matures around it before any merge",
+      "evidence": "BRAIN_CHARTER.md",
+      "category": "policy"
+    }
+  ],
+  "evidence_base": "https://github.com/HesKenY/Heskeny-Brain/blob/main"
+}

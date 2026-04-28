@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CHERP + Brain · Live Evidence Dashboard</title>
+  <style>
+    :root {
+      --ink: #18231d;
+      --muted: #5c6b61;
+      --paper: #f6f0df;
+      --panel: #fffaf0;
+      --line: #dacaa6;
+      --field: #174b35;
+      --clay: #a65328;
+      --sun: #dcae3c;
+      --pass: #1f7a3f;
+      --fail: #b54420;
+      --info: #5c6b61;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      background:
+        linear-gradient(120deg, rgba(23,75,53,.18), transparent 32rem),
+        radial-gradient(circle at 85% 8%, rgba(220,174,60,.34), transparent 24rem),
+        linear-gradient(150deg, #eadfc4, #fbf5e8 58%, #e5d2aa);
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+    .eyebrow {
+      color: var(--clay);
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    h1 {
+      margin: 12px 0 6px;
+      font-family: ui-serif, Georgia, serif;
+      font-size: clamp(36px, 6vw, 56px);
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+    .lede { color: var(--muted); font-size: 16px; max-width: 760px; line-height: 1.5; font-weight: 650; }
+    .meta { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .04em; margin-top: 4px; }
+    .meta a { color: var(--field); text-decoration: none; border-bottom: 1px dashed var(--line); }
+    .meta a:hover { border-bottom-style: solid; }
+
+    .summary {
+      display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 18px;
+    }
+    .pill {
+      display: inline-flex; align-items: baseline; gap: 8px;
+      padding: 10px 16px; border-radius: 999px;
+      background: rgba(255,250,240,.9);
+      border: 1px solid var(--line);
+      font-weight: 800; font-size: 14px;
+    }
+    .pill.pass { color: var(--pass); border-color: rgba(31,122,63,.5); background: rgba(31,122,63,.07); }
+    .pill.fail { color: var(--fail); border-color: rgba(181,68,32,.5); background: rgba(181,68,32,.06); }
+    .pill.info { color: var(--info); }
+    .pill strong { font-family: ui-serif, Georgia, serif; font-size: 22px; letter-spacing: -.02em; line-height: 1; }
+
+    .group { margin: 26px 0 8px; }
+    .group h2 {
+      margin: 0 0 8px;
+      font-family: ui-serif, Georgia, serif;
+      font-size: 24px;
+      letter-spacing: -.02em;
+      color: var(--field);
+    }
+    .group .group-meta { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: .04em; }
+
+    .checks {
+      display: grid; gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    }
+    .check {
+      border: 1px solid var(--line);
+      background: rgba(255,250,240,.9);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 6px 22px rgba(54,38,14,.06);
+    }
+    .check-row1 {
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .check-icon {
+      flex: 0 0 auto;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: inline-grid; place-items: center;
+      font-weight: 900; font-size: 13px;
+      color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+    .check.pass .check-icon { background: var(--pass); }
+    .check.pass .check-icon::before { content: '✓'; }
+    .check.fail .check-icon { background: var(--fail); }
+    .check.fail .check-icon::before { content: '✗'; }
+    .check.info .check-icon { background: var(--field); opacity: .55; }
+    .check.info .check-icon::before { content: 'i'; font-style: italic; }
+
+    .check-label {
+      font-weight: 800; color: var(--ink); flex: 1; min-width: 0;
+      font-size: 14px;
+    }
+    .check-detail { margin: 6px 0 4px 0; color: var(--muted); font-size: 13px; line-height: 1.4; font-weight: 650; }
+    .check-evidence {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; color: var(--clay);
+      text-decoration: none; font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .check-evidence:hover { text-decoration: underline; }
+    .check-evidence::before { content: '↗'; font-size: 12px; }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted); font-size: 12px; font-weight: 700;
+      display: flex; gap: 14px; justify-content: space-between; flex-wrap: wrap;
+    }
+    .footer a { color: var(--field); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      .pill { padding: 8px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Live Evidence Dashboard</div>
+    <h1>Green checks, with sources.</h1>
+    <p class="lede">Each card is a discrete signal pulled from the Brain's last maintenance run. Click any item's <strong>↗ evidence</strong> link to read the underlying file in the public Heskeny-Brain repo.</p>
+    <p class="meta" id="generated">Loading…</p>
+
+    <div class="summary" id="summary"></div>
+
+    <div id="groups"></div>
+
+    <div class="footer">
+      <span>BRAIN maintenance pipeline · operator surface</span>
+      <span>
+        <a href="investor.html">Investor snapshot →</a>
+        ·
+        <a href="projects.html">Project checklist →</a>
+        ·
+        <a href="index.html">Repo overview →</a>
+      </span>
+    </div>
+  </main>
+
+  <script>
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const CATEGORY_LABELS = {
+      maintenance:    'Maintenance loop',
+      simulation:     'CHERP simulator',
+      truthfulness:   'KenAI truthfulness gate',
+      evidence:       'Evidence corpus',
+      policy:         'Production policy',
+    };
+    const CATEGORY_ORDER = ['maintenance', 'simulation', 'truthfulness', 'evidence', 'policy'];
+
+    fetch('data/dashboard.json', { cache: 'no-store' }).then(r => r.json()).then(data => {
+      const gen = data.generated_at || '';
+      document.getElementById('generated').innerHTML =
+        'generated <strong>' + esc(gen) + '</strong> · regenerable via <code>./scripts/brain-investor-packet.py</code>';
+
+      const s = data.summary || {};
+      const summary = document.getElementById('summary');
+      summary.innerHTML = `
+        <span class="pill pass"><strong>${s.pass || 0}</strong> green</span>
+        <span class="pill fail"><strong>${s.fail || 0}</strong> red</span>
+        <span class="pill info"><strong>${s.info || 0}</strong> info</span>
+      `;
+
+      // Group checks by category, render in CATEGORY_ORDER order so the
+      // visual flow always reads maintenance → simulation → truthfulness
+      // → evidence → policy regardless of source ordering.
+      const groups = {};
+      for (const c of (data.checks || [])) {
+        const cat = c.category || 'other';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(c);
+      }
+      const evidenceBase = data.evidence_base || '';
+      const groupsEl = document.getElementById('groups');
+      const ordered = [...CATEGORY_ORDER, ...Object.keys(groups).filter(k => !CATEGORY_ORDER.includes(k))];
+      groupsEl.innerHTML = ordered.filter(cat => groups[cat] && groups[cat].length).map(cat => {
+        const arr = groups[cat];
+        const passCount = arr.filter(c => c.status === 'pass').length;
+        const failCount = arr.filter(c => c.status === 'fail').length;
+        const infoCount = arr.filter(c => c.status === 'info').length;
+        const meta = [
+          passCount && `${passCount} pass`,
+          failCount && `${failCount} fail`,
+          infoCount && `${infoCount} info`,
+        ].filter(Boolean).join(' · ');
+        const cards = arr.map(c => {
+          const evHref = c.evidence
+            ? (evidenceBase ? `${evidenceBase}/${c.evidence}` : c.evidence)
+            : '';
+          return `
+            <div class="check ${esc(c.status || 'info')}">
+              <div class="check-row1">
+                <span class="check-icon"></span>
+                <div class="check-label">${esc(c.label || c.id || '')}</div>
+              </div>
+              ${c.detail ? `<div class="check-detail">${esc(c.detail)}</div>` : ''}
+              ${evHref ? `<a class="check-evidence" href="${esc(evHref)}" target="_blank" rel="noopener">evidence · ${esc(c.evidence || '')}</a>` : ''}
+            </div>`;
+        }).join('');
+        return `
+          <section class="group">
+            <h2>${esc(CATEGORY_LABELS[cat] || cat)}</h2>
+            <div class="group-meta">${esc(meta)}</div>
+            <div class="checks" style="margin-top:10px">${cards}</div>
+          </section>`;
+      }).join('');
+    }).catch(err => {
+      document.getElementById('generated').textContent = 'failed to load: ' + err.message;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1650 @@
+{
+  "schema": "president-panel-v1",
+  "generated_at": "2026-04-28T01:51:23Z",
+  "operator": "Ken Deibel",
+  "president": "Sean",
+  "checklist": {
+    "schema": "brain-project-checklist-v1",
+    "notes": "Operator-facing project status. Edit this file to update; the widget polls every 30s. Percentages are operator estimates. `next` = immediate next steps. `milestones` = shipped/decided things in reverse-chronological order. Internal file paths are intentionally absent \u2014 see handoffs for implementation detail.",
+    "updated": "2026-04-27",
+    "milestones": [
+      {
+        "date": "2026-04-27",
+        "project": "kenos-dx-upgrade",
+        "kind": "shipped",
+        "title": "KenOS Remote v2 \u2014 brain-strip pills (Claims + brain-vm)",
+        "summary": "Codex/remote.html brain-strip extended with two operator-state pills. Claims pill = `<pass>\u2713 <fail>\u2717 \u00b7 <total>/<window>h` from /api/agent-claim-checks/latest, color-coded ok/warn/err, click to re-fetch. brain-vm pill = Azure VM power state from /api/azure/brain-vm/status (30s server-side cache wrapping `az vm get-instance-view`); click toggles start (when off) or deallocate-with-confirm (when running) via /api/azure/brain-vm/{start,deallocate}. Both new endpoints in Codex/server.js with `import { ..., spawn }` from child_process; live on next pipe-r restart. Visibility-aware 60s VM poll.",
+        "business_summary": "Codex/remote.html brain-strip extended with two operator-state pills"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "Cross-agent claim verifier \u2014 companion to peerlog-smoke",
+        "summary": "scripts/brain-agent-claim-checks.py \u2014 scans recent shared.log for claude/codex/kenai claims, extracts file-path + commit-SHA tokens, verifies via filesystem + git log against BRAIN/CHERP/home roots (with prefix-alias resolution for `home/ken/` and `Brain/` agent shorthand). Bare-filename tokens use a depth-capped recursive index. Verdict: pass | fail | partial | indeterminate, per-actor breakdown. Writes evidence/agent-claim-checks-latest.json. brain.sh claim-checks subcommand. brain-investor-packet.py extended to surface 3 new dashboard cards (overall + per-actor). Sample run: 25/30 pass, 0 fail, 2 partial, 7 indeterminate.",
+        "business_summary": "scripts/brain-agent-claim-checks.py \u2014 scans recent shared.log for claude/codex/kenai claims, extracts file-path + commit-SHA tokens, verifies via filesystem + git log against BRAIN/CHERP/home roots (with prefix-alias resolution for and agent shorthand)"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "heskeny-brain",
+        "kind": "shipped",
+        "title": "Live evidence dashboard \u2014 green checks + evidence links",
+        "summary": "Heskeny-Brain/site/dashboard.html renders 14 cards across 5 groups (maintenance / simulator / truthfulness / evidence / policy), each linking to the underlying evidence file. Pulls from data/dashboard.json which scripts/brain-investor-packet.py now emits alongside investor.json \u2014 same idempotent generator. Current state: 9 pass \u00b7 0 fail \u00b7 5 info. Cross-link from investor.html added. Bumped heskeny-brain 75\u219290%.",
+        "business_summary": "Heskeny-Brain/site/dashboard.html renders 14 cards across 5 groups (maintenance / simulator / truthfulness / evidence / policy), each linking to the underlying evidence file"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "Azure findings card on widgets-bughunter.html",
+        "summary": "Added .az-find-list + per-card markup below the existing Azure summary chips. Pulls from /widgets-bughunter/azure, sorts findings by severity (crit\u2192info), renders title + check id + detail + copy-pasteable remediation + CWE + region + resource-id tail. Verified headless: 5 findings render (3 HIGH, 1 LOW, 1 INFO from the 2026-04-25 baseline scan against cherp-bughunt-test). Bump kenos-bughunter 45\u219250%.",
+        "business_summary": "Added .az-find-list + per-card markup below the existing Azure summary chips"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "kenos-dx-upgrade",
+        "kind": "shipped",
+        "title": "Pokedex-style dex headers on frames 4 + 6 of remote.html",
+        "summary": "Frames 4 (Chatlog) + 6 (BRAIN Log) now mirror frame 5's live-data dex line. Chatlog dex shows per-agent session counts (e.g. 'claude\u00b75 \u00b7 codex\u00b73 \u00b7 kenai\u00b72'); BRAIN Log dex shows per-actor row counts in the visible 80-line tail. Both fall back to static labels on offline. Wired into the existing refreshChatlogState + refreshLog handlers \u2014 same poll cadence, no new fetches. Bump kenos-dx-upgrade 35\u219245%.",
+        "business_summary": "Frames 4 (Chatlog) + 6 (BRAIN Log) now mirror frame 5's live-data dex line"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "brain-linux-infra",
+        "kind": "shipped",
+        "title": "Azure brain-vm online + BRAIN bootstrapped + throttling planned",
+        "summary": "Provisioned brain-vm in brain-prod-eus2 (Standard_D2als_v7, Ubuntu 24.04, public IP 20.44.110.100, NSG locked to home IP). Set up: apt upgrade, base toolkit (git/python/build/htop/tmux/jq/ripgrep), Tailscale 1.96.4 daemon (operator runs `tailscale up` interactively), ufw deny-incoming-allow-22, fail2ban+unattended-upgrades enabled, /opt/brain workspace. Bootstrapped 1.06GB / 5623 files via rsync (excludes .venv, .git, node_modules, agent_mode/, v4_corpus, kenos-package, archives/kenos-windows*, MGBA, evidence, snapshots). Auto-shutdown set to 0500 UTC daily \u2014 picked from shared.log activity histogram (last 14d quiet trough). vm-keys.txt cheat sheet at BRAIN root. scripts/sync-brain-to-vm.sh + scripts/brain-vm-lockdown.sh promoted from /tmp.",
+        "business_summary": "Provisioned brain-vm in brain-prod-eus2 (Standard_D2als_v7, Ubuntu 24.04, public IP 20.44.110.100, NSG locked to home IP)"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "cherp-sharepoint",
+        "kind": "shipped",
+        "title": "Wave-1b \u2014 daily-folder routing for binary uploads",
+        "summary": "netlify/functions/sharepoint-upload.js (POST {project_code, category, file_name, content_b64, log_date?}) routes uploads into Projects/<code>/<DailyLogs|Photos|JSAs>/YYYY-MM-DD/ with idempotent mkdir-p + Graph 409-as-success. Documents+SpecSheets land flat. SP_Upload + SP_UploadAsync added to js/sharepoint-sync.js. Wired at safety.exportJSApdf (PDF mirrored after doc.save) + work.addMROPhoto (photo mirrored as captured). daily_log shaper picks up sharepoint_pdf_url/pdf_ref into PdfRef column. migrations/2026-04-27_sharepoint_sync_state.sql drafted \u2014 service-role-only sidecar for retry tracking, awaits operator apply.",
+        "business_summary": "our hosting platform/functions/sharepoint-upload.js (POST {project_code, category, file_name, content_b64, log_date?}) routes uploads into Projects/<code>/<DailyLogs|Photos|JSAs>/YYYY-MM-DD/ with idempotent mkdir-p + Graph 409-as-success"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "kenos-dx-upgrade",
+        "kind": "shipped",
+        "title": "Frame 5 inline rework \u2014 dropped widgets-checklist iframe",
+        "summary": "Codex/remote.html frame 5 replaced the iframe-to-widgets-checklist.html (8-tab maze) with a native inline view in the same JS scope as other frames. Three sections, top\u2192bottom: Today (today's milestones, lime card) \u2192 Active (top-5 by %, expandable, with show-all-active link) \u2192 Current Idea (violet cards from current_ideas[]). Tap any project card to expand summary + current + next-steps + 3 recent milestones. Dex shows '<%avg> \u00b7 <total>' total; state badge shows 'synced HH:MM' from last_updated_iso. Manual \u21bb refresh button, polls every 60s when foregrounded, refresh on visibility-resume. No more iframe state quirks (Timeline blank-on-Android bug rendered moot by removal).",
+        "business_summary": "Codex/remote.html frame 5 replaced the iframe-to-widgets-checklist.html (8-tab maze) with a native inline view in the same JS scope as other frames"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Non-pipe trade routing \u2192 /solo/",
+        "summary": "Pushed a43da88 to CHERP main: trade-runtime.js redirects every non-pipe slug to /solo/?trade=<slug> before further page logic. Pipe-trades stays in demo.html with full Supabase networking (Ken's known-good test surface). Loop guard skips redirect when already on /solo/. Affects all entry points that load /js/trade-runtime.js (demo.html / index.html / trade.html).",
+        "business_summary": "shipped to CHERP main: trade-runtime.js redirects every non-pipe slug to /solo/?trade=<slug> before further page logic"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Federation v0 \u2014 connect-to-company device-code flow",
+        "summary": "Pushed d0fa68d to CHERP main: solo About-tab Connect button, 8-char user_code from no-ambiguous-chars 28-letter alphabet, 10-min expiry, 3s polling. Three Netlify functions (connect-start anon, connect-poll anon with lazy-expire, connect-approve JWT-validated against Supabase /auth/v1/user with role gating). /connect.html foreman page reads existing cherp_web_session JWT, role-allowlist foreman+. migrations/2026-04-27_device_pairings.sql parked awaiting operator apply (RLS-on, no policies \u2014 service-role-only).",
+        "business_summary": "shipped to CHERP main: solo About-tab Connect button, 8-char user_code from no-ambiguous-chars 28-letter alphabet, 10-min expiry, 3s polling"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Per-trade content depth \u2014 HVAC, FS, Carp, Concrete to baseline",
+        "summary": "Pushed 33c9042 to CHERP main: HVAC 1\u21925 calcs +1\u21925 refs (Manual J quick-load, round-duct sizer, rect\u2192round, fixed-orifice superheat, R-410A saturation, sheet-metal gauge, capacity convs). Fire-Sprinkler 1\u21925 +1\u21925 (K\u2192P pressure, NFPA 13 density/area, H-W friction Eq 27.2.2, velocity-limit pipe size, NFPA hazard density, hose-stream T.11.2.3.1.2, Sch-40 ID, NFPA C-factors). Carpentry 2\u21925 +1\u21925 (rafter X/12, stud takeoff, IRC R602.7 header, lumber S4S, fastener schedule, pitch ref). Concrete 1\u21924 +1\u21925 (ACI 347 form pressure, rebar weight by size, sacks/yd by PSI, ACI 211 slump, strength gain). SW cache bumped to v2-2026-04-27.",
+        "business_summary": "shipped to CHERP main: HVAC 1\u21925 calcs +1\u21925 refs (Manual J quick-load, round-duct sizer, rect\u2192round, fixed-orifice superheat, R-410A saturation, sheet-metal gauge, capacity convs)"
+      },
+      {
+        "date": "2026-04-27",
+        "project": "brain-pipe-r",
+        "kind": "in_progress",
+        "title": "Frame 4 + 6 search-index overhaul",
+        "summary": "Backend: pipe-r Codex/server.js +chatlogSearchJsonl/Sharedlog/Search helpers + GET /api/chatlog/search (cross-session) + extended GET /api/shared-log to accept ?q= for full-history substring search. Frontend: ~/widgets-chatlog.html new search bar (debounced 220ms, results show date+session+cyan match highlights, Esc clears). ~/widgets-brainlog.html upgraded filter input \u2014 empty=tail mode, \u22652 chars=server-side history search, polling pauses, history pill. Awaits operator pipe-r restart (parent of trio tmux \u2014 restart kills active Claude session).",
+        "business_summary": "Backend: pipe-r Codex/server.js +chatlogSearchJsonl/Sharedlog/Search helpers + GET /service endpoint/chatlog/search (cross-session) + extended GET /service endpoint/shared-log to accept ?q= for full-history substring search"
+      },
+      {
+        "date": "2026-04-26",
+        "project": "cherp-sharepoint",
+        "kind": "shipped",
+        "title": "Pull-direction function + per-employee folder auto-create",
+        "summary": "Pushed bffb37f to CHERP main: netlify/functions/sharepoint-pull.js (3 ops: list-children, list-items, item-content) so SharePoint published reports + spec sheets flow back into CHERP screens. push.js extended with per-employee folder ensure (EmployeeFiles/<id>/{Timecards,Certifications,Employment,DailyLogs,JSAs,Training} on first sync). SharePoint = failsafe+backdoor for office; CHERP = field frontend + connection point.",
+        "business_summary": "shipped to CHERP main: our hosting platform/functions/sharepoint-pull.js (3 ops: list-children, list-items, item-content) so SharePoint published reports + spec sheets flow back into CHERP screens"
+      },
+      {
+        "date": "2026-04-26",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Solo PWA hook-ends \u2014 Docs/Messages/AI tabs + Electricians NEC suite",
+        "summary": "Pushed ecdb576 (Docs+Messages+AI tabs, shared cross-variant localStorage, connect-to-company UX seed) + d838259 (Electricians 5-calc NEC suite + 6 reference tables). Solo build is real shippable PWA with hook-ends for future federation.",
+        "business_summary": "shipped (Docs+Messages+AI tabs, shared cross-variant the device's local storage, connect-to-company UX seed) + d838259 (Electricians 5-calc NEC suite + 6 reference tables)"
+      },
+      {
+        "date": "2026-04-26",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Solo offline shell shipped \u2014 installable per-trade PWAs",
+        "summary": "Pushed 53c31b3: /solo/index.html + app.js + sw.js. Each manifest-<slug>.json points at /solo/?trade=<slug>. 7 variants, shared localStorage with trade_origin tags.",
+        "business_summary": "shipped: /solo/index.html + app.js + sw.js"
+      },
+      {
+        "date": "2026-04-26",
+        "project": "cherp-trade-variants",
+        "kind": "decided",
+        "title": "Variants designed as interchangeable views of one company-network account",
+        "summary": "Trade choice is a view filter + branding, not an account boundary. Same identity on Cherp \u00b7 Pipe Trades and Cherp \u00b7 Electricians sees same tasks. Solo localStorage is shared across variants today; cloud sync federates on cherp.live login. Memory: project_cherp_company_network_federation.md.",
+        "business_summary": "Trade choice is a view filter + branding, not an account boundary"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenai-v5",
+        "kind": "decided",
+        "title": "Corpus-isolation directive \u2014 separate corpora per designated model",
+        "summary": "2026-04-25 directive: each KenAI variant (v5 dev, kenai-trainer Pok\u00e9mon, deepseek-offline-dev) maintains its own parallel corpus. No mixing, no dilution \u2014 specialization is the moat. Implementation: target_model tag on every seed, per-model seed subdirs (agents/kenai/seeds/<model>/{candidates,approved,rejected}/), per-model holdouts. Memory: feedback_kenai_separate_corpora.md.",
+        "business_summary": "2026-04-25 directive: each KenAI variant (v5 dev, kenai-trainer Pok\u00e9mon, deepseek-offline-dev) maintains its own parallel corpus"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "cherp-sharepoint",
+        "kind": "shipped",
+        "title": "Wave-1 SharePoint push function shipped to CHERP main",
+        "summary": "netlify/functions/sharepoint-push.js + setup README pushed (commit 15830a5). One-way Supabase \u2192 Debe Corp SharePoint for daily logs + JSAs. Graph app-only auth, Sites.Selected scope, shared-secret caller gate. Returns 503 until Azure AD app is registered and Netlify env vars are set.",
+        "business_summary": "our hosting platform/functions/sharepoint-push.js + setup README pushed (shipped change)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "cherp-trade-variants",
+        "kind": "shipped",
+        "title": "Trade variants live on cherp.live + variant selector page + crash-back fix",
+        "summary": "Three CHERP main pushes: 1c4a518 (per-trade demos + 7 PWA manifests so each trade installs as distinct app), 6b7c9ad (fix /pipe-trades crash-back from Netlify status=200 rewrites + new /select-variant.html chooser), 15830a5 (SharePoint wave-1). Each trade installs as Cherp \u2014 Pipe Trades / Electricians / HVAC etc.; same Supabase accounts work across every variant.",
+        "business_summary": "Three CHERP main pushes: 1c4a518 (per-trade demos + 7 PWA manifests so each trade installs as distinct app), 6b7c9ad (fix /pipe-trades crash-back from our hosting platform status=200 rewrites + new /select-variant.html chooser), 15830a5 (SharePoint wave-1)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenai-v5",
+        "kind": "decided",
+        "title": "Bug-hunt \u2192 KenAI seed pipeline wired",
+        "summary": "scripts/bughunt-to-seeds.py converts bughunter scan findings \u2192 seed candidates under agents/kenai/seeds/candidates/<ts>_bug-hunt-azure.jsonl as Q&A pairs (\"what is wrong with X?\" \u2192 detail + remediation). First live Azure scan against sub 479a38f9 produced 1 seed candidate (rbac-user-subscription-owner).",
+        "business_summary": "scripts/bughunt-to-seeds.py converts bughunter scan findings \u2192 seed candidates under agents/kenai/seeds/candidates/<ts>_bug-hunt-azure.jsonl as Q&A pairs (\"what is wrong with X?\" \u2192 detail + remediation)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenai-v5",
+        "kind": "decided",
+        "title": "Seed-review verdict \u2014 5/15 clean, 10/15 flagged",
+        "summary": "Reviewed 20260423T114349Z_kenai_seeds.jsonl: 5 clean (3 manual + 2 dream-derived) ready for promote pending Ken authorization. 10 peerlog-derived candidates flagged \u2014 2 hard flags for Claude session UUIDs leaked in bad_pattern; soft flags for duplicates and template-ideal breadth across action verbs. No seed-promote run.",
+        "business_summary": "Reviewed 20260423T114349Z_kenai_seeds.jsonl: 5 clean (3 manual + 2 dream-derived) ready for promote pending Ken authorization"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "Phase 2 v0 \u2014 Azure scanner shipped + first live scan",
+        "summary": "kenos/bughunter/azure-scanner.mjs ships with 6 read-only checks (Storage public-access/TLS/HTTP, NSG admin-port-to-Internet, Key Vault policies/network/soft-delete, RBAC subscription-Owner audit, App Service TLS/HTTPS-only/Managed-Identity, SAS-TTL stub). az CLI shell-out, auth-gated, no npm deps. /api/bughunter/azure endpoint live. scripts/bughunt-to-seeds.py wired so findings \u2192 KenAI seed candidates (Q&A: \"what is wrong with X?\" \u2192 detail + remediation). brain.sh bughunt-azure + bughunt-to-seeds subcommands. Azure CLI 2.85.0 installed via aka.ms/InstallAzureCLIDeb. First live scan against Azure subscription 1 (sub=479a38f9) ran clean \u2014 empty tenant, 5/6 checks zero, 1 LOW rbac-subscription-owner, 1 INFO sas-stub. 1 KenAI seed candidate written. Hunt tab href bug fixed in main-shell.html (leading-slash \u2192 relative).",
+        "business_summary": "kenos/bughunter/azure-scanner.mjs ships with 6 read-only checks (Storage public-access/TLS/HTTP, NSG admin-port-to-Internet, Key Vault policies/network/soft-delete, RBAC subscription-Owner audit, App Service TLS/HTTPS-only/Managed-Identity, SAS-TTL stub)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "Bug Hunter pipeline widget + system-header button",
+        "summary": "kenos/widgets-bughunter.html shipped \u2014 bounty pipeline dashboard with stats (97 findings \u00b7 2 crit \u00b7 65 high \u00b7 4 submitted \u00b7 $10K floor / $120K ceiling), submitted-packet cards, active-targets rail, three-phase roadmap. \ud83d\udc1b Hunt button added to top-controls on both main-shell.html and Codex/remote.html. Server routes for /widgets-bughunter.html, /widgets-bughunter/last, /bounty/*, /bughunter/sample-report.md.",
+        "business_summary": "kenos/widgets-bughunter.html shipped \u2014 bounty pipeline dashboard with stats (97 findings \u00b7 2 crit \u00b7 65 high \u00b7 4 submitted \u00b7 $10K floor / $120K ceiling), submitted-packet cards, active-targets rail, three-phase roadmap"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "KenOS-update Windows bundle integrated into BRAIN",
+        "summary": "Bundle from /media/ken/Steam/Drive Transfer/KenOS-update-2026-04-25 merged into the canonical Linux BRAIN: scanner.js + bug-hunter.html + sample report/scan landed at kenos/bughunter/; 4 bounty packets (Ubisoft / Google / Nexon / Epic) at bounty/; devlog tooling (devlog-capture/render, obs-devlog/api, shorts-capture/render) at kenos/devlog/; captured devlog data archived at evidence/devlog-captures/2026-04-25-windows/; Windows server.js + Windows main-shell.html copied side-by-side under kenos/ for diff/merge.",
+        "business_summary": "Bundle from /media/ken/Steam/Drive Transfer/KenOS-update-2026-04-25 merged into the canonical Linux BRAIN: scanner.js + bug-hunter.html + sample report/scan landed at kenos/bughunter/; 4 bounty packets (Ubisoft / Google / Nexon / Epic) at bounty/; devlog tooling (devlog-capture/render, obs-devlog/se"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "Windows BugHunter scanner \u2014 91 findings on Ken's box",
+        "summary": "Read-only scanner.js (532 lines) ran on DESKTOP-ED797OH in 15.4s. Surfaced 65 HIGH (unquoted services, writable PATH dirs, hijackable scheduled tasks), 25 MEDIUM (ports bound to 0.0.0.0), 1 LOW (WSH enabled), 6 INFO. Highlighted finding: Ubisoft UpcElevationService unquoted ImagePath (CVSS 7.8). Defender + firewall both green. Report archived at kenos/bughunter/sample-report.md.",
+        "business_summary": "Read-only scanner.js (532 lines) ran on DESKTOP-ED797OH in 15.4s"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "shipped",
+        "title": "Four bounty packets drafted \u2014 Nexon (CRIT 8.4) / Epic (CRIT 9.3) / Ubisoft (HIGH 7.8) / Google (HIGH 7.8)",
+        "summary": "Vendor-ready submission markdown: Nexon NGS unquoted-path-with-writable-parent (any local user \u2192 SYSTEM, no admin needed); Epic EpicGamesUpdater service-binary + 55 DLLs writable by local user (DLL hijack to SYSTEM); Ubisoft UpcElevationService unquoted ImagePath (LPE chain); Google Play Games Services unquoted auto-start service (LPE on every boot). Each packet includes CVSS vector, repro steps, PoC notes, remediation, environment context. Estimated payout floor $10K / ceiling $120K across the four packets.",
+        "business_summary": "Vendor-ready submission markdown: Nexon NGS unquoted-path-with-writable-parent (any local user \u2192 SYSTEM, no admin needed); Epic EpicGamesUpdater service-binary + 55 DLLs writable by local user (DLL hijack to SYSTEM); Ubisoft UpcElevationService unquoted ImagePath (LPE chain); Google Play Games Servi"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-bughunter",
+        "kind": "decided",
+        "title": "Roadmap: Phase 2 = Microsoft Azure module + submissions",
+        "summary": "Phase 1 (Windows scanner + 4 packets) is done. Phase 2: submit drafts via HackerOne (Nexon, Epic) / Intigriti (Ubisoft) / Google VRP (Google), then build kenos/bughunter/azure-scanner.mjs to mirror the Windows scanner pattern against an Azure tenant funded by Ken's $1K Microsoft startup credit (Storage public-access, NSG 0.0.0.0/0, Key Vault open policies, RBAC over-privilege, SAS-token TTL, App Service TLS, Managed Identity scope). Target MSRC Azure Bounty ($60K cap) for any service-side issue found during sandbox testing. Phase 3: AWS + GCP + Linux on-host modules; productize as scanner-as-a-service tied to the KenOS package model.",
+        "business_summary": "Phase 1 (Windows scanner + 4 packets) is done"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-android-native",
+        "kind": "decided",
+        "title": "Roadmap: Android-native portable AI dev environment",
+        "summary": "Scoping starts on promoting KenOS from desktop-first + WebView wrapper into a true Android-native runtime so the Z Fold 7 becomes a self-contained personal portable AI dev environment. Termux as the bridge; on-device KenAI; native Settings + log surface; offline-first.",
+        "business_summary": "Scoping starts on promoting KenOS from desktop-first + WebView wrapper into a true Android-native runtime so the Z Fold 7 becomes a self-contained personal portable AI dev environment"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-android",
+        "kind": "shipped",
+        "title": "KenOS-Linux APK built (com.ken.kenos.linux v1.0.0)",
+        "summary": "Side-by-side companion to the Windows-targeted KenOS app: same WebView shell, applicationId com.ken.kenos.linux, app_name 'KenOS-Linux', default URL http://100.105.47.68:7777/remote (this Linux instance via Tailscale). Coexists with both the Windows KenOS APK (com.ken.kenos.maindisplay) and the original Trio app (com.ken.trio) on the phone.",
+        "business_summary": "Side-by-side companion to the Windows-targeted KenOS app: same WebView shell, applicationId com.ken.kenos.linux, app_name 'KenOS-Linux', default URL http://100.105.47.68:7777/remote (this Linux instance via Tailscale)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-android",
+        "kind": "shipped",
+        "title": "Trio v2.1.0 \u2014 Z Fold 7 inner-display variant + edge-to-edge insets",
+        "summary": "android/trio-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0. Debug APK 5.6 MB ready to install once phone is USB-debug authorized.",
+        "business_summary": "android/trio-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-dx-upgrade",
+        "kind": "shipped",
+        "title": "Pokedex-style header on frame 5",
+        "summary": "Linux kenos/main-shell.html frame 5 (Projects) now uses the Windows phone-client header pattern: avatar + col-title + col-dex subtitle + col-state badge, parity with Codex/remote.html. Frames 4 + 6 still on the legacy slot-kicker / slot-sub look.",
+        "business_summary": "Linux kenos/main-shell.html frame 5 (Projects) now uses the Windows phone-client header pattern: avatar + col-title + col-dex subtitle + col-state badge, parity with Codex/remote.html"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "Frame 4 chatlog: Crystal tab + native mgba-qt + xdotool controls",
+        "summary": "Added Pok\u00e9mon Crystal tab to widgets-chatlog.html. Tab swaps in /widgets-emu.html which spawns native mgba-qt via /api/emu/launch and forwards on-screen + browser-keyboard input through xdotool to the mGBA window (touch on remote, keyboard on desktop). ROM served from /rom/pokemon-crystal.gbc. Game opens as a separate desktop window for now \u2014 embed-into-frame work queued under kenos-dx-upgrade.",
+        "business_summary": "Added Pok\u00e9mon Crystal tab to widgets-chatlog.html"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-dx-upgrade",
+        "kind": "shipped",
+        "title": "Windows-variant data + handoffs merged into BRAIN",
+        "summary": "TRIAL deployment-log-dump from the running Windows client pulled into the canonical Linux BRAIN: 2 Windows handoffs (kenos_windows_speedrun, windows_package_fallbacks), 6 missing diaries (2026-04-20\u219225), 3 missing logs/daily/ dirs (04-23/24/25), 25 Windows orchestrator events, 2 browser-history rows, the Z Fold 7 layout-pass note, and 30 Windows-side shared.log lines. Full TRIAL bundle archived at archives/kenos-windows-trial-20260425-011324/; both production ZIPs archived at archives/kenos-windows-release/.",
+        "business_summary": "TRIAL deployment-log-dump from the running Windows client pulled into the canonical Linux BRAIN: 2 Windows handoffs (kenos_windows_speedrun, windows_package_fallbacks), 6 missing diaries (2026-04-20\u219225), 3 missing logs/daily/ dirs (04-23/24/25), 25 Windows orchestrator events, 2 browser-history rows"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-package",
+        "kind": "shipped",
+        "title": "KenOS Windows client live \u2014 production success",
+        "summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune trio bridges live (Ollama / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main Display APK installed on Z Fold6, Z Fold 7 layout pass landed (5.8MB APK). Confirms the Windows-native ZIP path works end-to-end.",
+        "business_summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune trio bridges live (the local AI runtime / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main Di"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "Black-flash fix on poll-driven widgets",
+        "summary": "Brainlog (3s poll), checklist (30s poll), and Controller (5s poll) widgets all stopped reassigning innerHTML on every tick \u2014 now dedupe against last-rendered HTML and only swap when the content actually changed. Eliminates the 'occasional black flash' Ken saw on the main display.",
+        "business_summary": "Brainlog (3s poll), checklist (30s poll), and Controller (5s poll) widgets all stopped reassigning innerHTML on every tick \u2014 now dedupe against last-rendered HTML and only swap when the content actually changed"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "brain-orchestrator",
+        "kind": "shipped",
+        "title": "DeepSeek launcher wired",
+        "summary": "~/bin/trio-pane-deepseek.sh ships parallel to trio-pane-kenai.sh \u2014 gates on `ollama list` so the operator gets a clear error if the tag isn't pulled. config/models.catalog.json updated with the launcher path; flip enabled to true after `ollama pull deepseek-r1:8b` to activate.",
+        "business_summary": "~/bin/trio-pane-deepseek.sh ships parallel to trio-pane-kenai.sh \u2014 gates on so the operator gets a clear error if the tag isn't pulled"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenai-truthfulness",
+        "kind": "shipped",
+        "title": "Peerlog smoke 11/11 on kenai:v5.5",
+        "summary": "All 11 truthfulness probes pass on production tag \u2014 terminal-marker, truncation, commit-claim, trivial-no-format, rebuild-path, file-creation-action, launch-action, save-memory-action, verify-action, commit-push-action, deploy-action. The two outstanding 'next' items (commit-claim-without-evidence, deploy-claim-without-infra-tag) were already covered by commit-push-action + deploy-action; closed.",
+        "business_summary": "All 11 truthfulness probes pass on production tag \u2014 terminal-marker, truncation, commit-claim, trivial-no-format, rebuild-path, file-creation-action, launch-action, save-memory-action, verify-action, commit-push-action, deploy-action"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-package",
+        "kind": "shipped",
+        "title": "KenOS v1.0 transfer ZIP shipped",
+        "summary": "Working Windows-native zip at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard handles identity + GitHub signup walkthrough + dep installs (Node/Python/Git/Ollama/optional Tailscale) + KenAI model pull + payload copy + desktop shortcut + optional adb phone push. Daily-driver KenOS.bat starts server + opens Controller. brain.bat = Windows operator CLI. 79 files, 4.8 MB.",
+        "business_summary": "Working Windows-native zip at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard handles identity + GitHub signup walkthrough + dep installs (Node/Python/Git/the local AI runtime/optional Tailscale) + KenAI model pull + payload copy + desktop shortcut + optional adb pho"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-controller",
+        "kind": "shipped",
+        "title": "Per-service health colors + Rayquaza icon",
+        "summary": "Controller now derives 3-state health (ok/degraded/down) per service \u2014 degraded = running but orchestrator phase=error / last_error / detect note. Rayquaza (#384) wired as the Controller program icon \u2014 served at /assets/pokedex/0384-icon.png, picked up by chrome --app + the autostart .desktop file.",
+        "business_summary": "Controller now derives 3-state health (ok/degraded/down) per service \u2014 degraded = running but orchestrator phase=error / last_error / detect note"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-controller",
+        "kind": "decided",
+        "title": "Legacy retirement deferred \u2014 kept as fallback",
+        "summary": "kenos-deck-monitor2.sh + pipe-r.html stay in tree as the rollback target. Cutover script handles both directions; no need to delete the legacy until a few weeks of clean Controller runtime prove the swap.",
+        "business_summary": "kenos-deck-monitor2.sh + pipe-r.html stay in tree as the rollback target"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "main-shell",
+        "kind": "decided",
+        "title": "Cross-model switch verification = operational",
+        "summary": "End-to-end cross-model switch verification reframed as an operational drill, not a buildable item. Quick-switch path is verified by the orchestrator recovery tests (10/10) + the demo no-op switch from earlier; live cross-family switch happens when Ken cycles to a quiet KenAI moment.",
+        "business_summary": "End-to-end cross-model switch verification reframed as an operational drill, not a buildable item"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-remote",
+        "kind": "decided",
+        "title": "Ops view stays at 3 frames",
+        "summary": "Decision: keep KenOS Remote ops view at Chatlog / Projects / BRAIN Log. A 4th frame would crowd the swipe; if a new pane is needed it ships as its own swipe view.",
+        "business_summary": "Decision: keep KenOS Remote ops view at Chatlog / Projects / BRAIN Log"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-android",
+        "kind": "decided",
+        "title": "Phone app: ship existing APK + manual rebuild for package-id",
+        "summary": "v1 ships the existing trio-v2.apk relabeled as KenOS (strings.xml + manifest). Package-id rename (com.ken.trio \u2192 com.ken.kenos) bundled into the next Controller rebuild commit; sideload-side, the Settings screen lets operators paste their tailnet URL.",
+        "business_summary": "v1 ships the existing trio-v2.apk relabeled as KenOS (strings.xml + manifest)"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-package",
+        "kind": "decided",
+        "title": "Pivot: Windows-native ZIP (no WSL)",
+        "summary": "Approach reset \u2014 pure Windows-native, distributed as a ZIP, double-click setup wizard. Target: a working transfer ZIP today. Each operator gets own GitHub identity (wizard walks her through signup). Phone-push step uses adb sideload of KenOS Mobile APK. Doubles as BRAIN backup for Debe Corp continuity. Future: mold KenOS into the framework for CHERP customer packaging \u2014 sell each customer a personal IT department.",
+        "business_summary": "Approach reset \u2014 pure Windows-native, distributed as a ZIP, double-click setup wizard"
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-package",
+        "kind": "shipped",
+        "title": "KenOS package scaffold + builder (now being rebuilt for Windows-native)",
+        "summary": "Initial scaffold + builder shipped; pivoted to Windows-native \u2014 Linux/WSL stubs removed, PowerShell wizard + .bat launcher + ZIP build coming.",
+        "business_summary": "Initial scaffold + builder shipped; pivoted to Windows-native \u2014 Linux/WSL stubs removed, PowerShell wizard + .bat launcher + ZIP build coming."
+      },
+      {
+        "date": "2026-04-25",
+        "project": "kenos-package",
+        "kind": "decided",
+        "title": "Per-project instance template framing",
+        "summary": "Each KenOS instance is scoped to one operator + one project, not a generic clone. Onboarding captures identity + project name. Ken's BRAIN stays preserved as instance #1; new operators get fresh-stamped instances.",
+        "business_summary": "Each KenOS instance is scoped to one operator + one project, not a generic clone"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "shipped",
+        "title": "KenOS Controller live on HDMI-A-1",
+        "summary": "Cutover applied \u2014 autostart swapped (legacy deck disabled, Controller enabled) and the live HDMI-A-1 chrome --app now serves the Controller. Pushed to git. Rollback is one command (`scripts/kenos-controller-cutover.sh undo --bounce`).",
+        "business_summary": "Cutover applied \u2014 autostart swapped (legacy deck disabled, Controller enabled) and the live HDMI-A-1 chrome --app now serves the Controller"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "shipped",
+        "title": "Controller v2 follow-ups closed",
+        "summary": "Halo wired via HTTP loopback to the existing /api/halo/* endpoints. Per-service log resolution covers files, journalctl, filtered shared.log, and orchestrator events. Pipe-R Restart button works end-to-end through ~/bin/pipe-r-restart.sh (double-fork via setsid).",
+        "business_summary": "Halo wired via HTTP loopback to the existing /service endpoint/halo/* endpoints"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "shipped",
+        "title": "KenOS Controller v1 shipped",
+        "summary": "5 endpoints (services / action / bring-up / take-down / logs), 12-service roster, sci-fi dark UI with status dots + per-service buttons + log/manual modals. Browser-addressable at /controller (also /kenos).",
+        "business_summary": "5 endpoints (services / action / bring-up / take-down / logs), 12-service roster, sci-fi dark UI with status dots + per-service buttons + log/manual modals"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "decided",
+        "title": "KenOS Controller rebuild plan written",
+        "summary": "Operator surface for bringing the BRAIN runtime up, watching it stay up, and bringing it back. 12 services rostered, 7 endpoints scoped, 4 open decisions surfaced. Blueprint for the v1 ship.",
+        "business_summary": "Operator surface for bringing the BRAIN runtime up, watching it stay up, and bringing it back"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "decided",
+        "title": "KenOS naming pass",
+        "summary": "Deck \u2192 KenOS Controller. Trio Chat \u2192 KenOS Remote (laptop mirror of main display). Trio Android app \u2192 KenOS. Filename/package renames bundled into the upcoming Controller rebuild.",
+        "business_summary": "Deck \u2192 KenOS Controller"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "Main display \u2194 KenOS Remote frame sync",
+        "summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log). Trio order normalized to Claude / Codex / KenAI. Sync-discipline comments added to both files so future edits touch both.",
+        "business_summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log)"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-remote",
+        "kind": "shipped",
+        "title": "Project checklist widget shipped",
+        "summary": "Frame 5 of KenOS Remote replaced with this live checklist (clickable filter pills + Projects/Timeline view toggle).",
+        "business_summary": "Frame 5 of KenOS Remote replaced with this live checklist (clickable filter pills + Projects/Timeline view toggle)."
+      },
+      {
+        "date": "2026-04-24",
+        "project": "brain-orchestrator",
+        "kind": "shipped",
+        "title": "Recovery coverage",
+        "summary": "Diagnose + recover routine for the orchestrator state machine. Handles partial-failure scenarios at every phase. 10/10 unit tests passing.",
+        "business_summary": "Diagnose + recover routine for the orchestrator state machine"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "brain-orchestrator",
+        "kind": "shipped",
+        "title": "Quick-switch endpoint + UI cutover",
+        "summary": "Ad-hoc model switches now wrap atomically in a synthetic batch with a real handoff record. Settings popover wired to the new path.",
+        "business_summary": "Ad-hoc model switches now wrap atomically in a synthetic batch with a real handoff record"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "brain-orchestrator",
+        "kind": "shipped",
+        "title": "Models catalog + DeepSeek registration",
+        "summary": "Operator-curated catalog of switchable local models. Switch route catalog-gated. DeepSeek registered as a disabled candidate pending a launcher.",
+        "business_summary": "Operator-curated catalog of switchable local models"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Orchestrator HTTP surface",
+        "summary": "Pickup, ask-history, batch durability, server-events, and stop/start switching all exposed as runtime API endpoints.",
+        "business_summary": "Pickup, ask-history, batch durability, server-events, and stop/start switching all exposed as runtime service endpoint endpoints."
+      },
+      {
+        "date": "2026-04-24",
+        "project": "brain-orchestrator",
+        "kind": "shipped",
+        "title": "Cheap cold-start surfaces",
+        "summary": "Local CLI surfaces for resume orientation: pickup summary, ask history, orchestrator state. Reduces token use on every session start.",
+        "business_summary": "Local CLI surfaces for resume orientation: pickup summary, ask history, orchestrator state"
+      },
+      {
+        "date": "2026-04-23",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "Chatlog viewer",
+        "summary": "Date-scrolling viewer over Claude + Codex + shared transcripts with live SSE feed.",
+        "business_summary": "Date-scrolling viewer over Claude + Codex + shared transcripts with live SSE feed."
+      },
+      {
+        "date": "2026-04-23",
+        "project": "debe-corp",
+        "kind": "decided",
+        "title": "CMC renamed to Debe Corp",
+        "summary": "Private repo seeded; Try-CHERP links repointed to the trades page.",
+        "business_summary": "Private repo seeded; Try-CHERP links repointed to the trades page."
+      },
+      {
+        "date": "2026-04-22",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "kenai:v5 promoted to production",
+        "summary": "Modelfile-driven KenAI v5; v5.5 active in prod. v5.6 in catalog.",
+        "business_summary": "Modelfile-driven KenAI v5; v5.5 active in prod"
+      },
+      {
+        "date": "2026-04-22",
+        "project": "kenai-truthfulness",
+        "kind": "shipped",
+        "title": "Peerlog truthfulness gate (8/8 probes)",
+        "summary": "Probes for hallucinated commit / deploy / file-creation / launch / save-memory claims, seeded from the highest-frequency unsupported phrases in the corpus.",
+        "business_summary": "Probes for hallucinated commit / deploy / file-creation / launch / save-memory claims, seeded from the highest-frequency unsupported phrases in the corpus."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Trio terminal autostart + endpoint logging",
+        "summary": "Trio agent terminals (Claude / KenAI / Codex) come up with the server. Every terminal action logged for audit.",
+        "business_summary": "Trio agent terminals (Claude / KenAI / Codex) come up with the server"
+      },
+      {
+        "date": "2026-04-21",
+        "project": "nest",
+        "kind": "shipped",
+        "title": "Nest catalog v2 + 16 modules",
+        "summary": "Multi-tenant catalog merged. Smoke build passes 15/15 invariants.",
+        "business_summary": "Multi-tenant catalog merged"
+      },
+      {
+        "date": "2026-04-21",
+        "project": "revv",
+        "kind": "shipped",
+        "title": "REVV files rescued from old machine",
+        "summary": "140 files migrated to the active workspace and pushed.",
+        "business_summary": "140 files migrated to the active workspace and pushed."
+      },
+      {
+        "date": "2026-04-18",
+        "project": "brain-linux-infra",
+        "kind": "shipped",
+        "title": "Pop!_OS cutover landed",
+        "summary": "Migration from Windows complete. Old Windows paths retired. New canonical workspace under Linux.",
+        "business_summary": "Migration from Windows complete"
+      },
+      {
+        "date": "2026-04-18",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "V4 corpus + Qwen2.5-Coder-7B fine-tune runner",
+        "summary": "197-row fine-tune dataset committed; V4 LoRA training runner pinned. Sets the stage for the v4-baseline-plus + later v5 lineage.",
+        "business_summary": "197-row fine-tune dataset committed; V4 LoRA training runner pinned"
+      },
+      {
+        "date": "2026-04-18",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Pipe-R workspace migrated into BRAIN",
+        "summary": "Codex workspace restructured to live under the unified BRAIN root on Linux.",
+        "business_summary": "Codex workspace restructured to live under the unified BRAIN root on Linux."
+      },
+      {
+        "date": "2026-04-19",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI v4-baseline-plus promoted (87.3%)",
+        "summary": "Modelfile-only baseline-plus tag scored 87.3% on the 30-prompt holdout \u2014 beating the prior baseline by +50%. Fine-tune path explored and parked; Modelfile-only is the production lineage.",
+        "business_summary": "Modelfile-only baseline-plus tag scored 87.3% on the 30-prompt holdout \u2014 beating the prior baseline by +50%"
+      },
+      {
+        "date": "2026-04-19",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI agent shell shipped",
+        "summary": "Memory + threads + primer + tool tags + dreams + shared.log discipline. The agent loop the v5 line still uses.",
+        "business_summary": "Memory + threads + primer + tool tags + dreams + shared.log discipline"
+      },
+      {
+        "date": "2026-04-19",
+        "project": "main-shell",
+        "kind": "decided",
+        "title": "DP4 main display plan",
+        "summary": "First architectural sketch of the kiosk-style main display that became the current 6-slot deck.",
+        "business_summary": "First architectural sketch of the kiosk-style main display that became the current 6-slot deck."
+      },
+      {
+        "date": "2026-04-20",
+        "project": "nest",
+        "kind": "decided",
+        "title": "Nest module catalog drift identified",
+        "summary": "Audit caught Nest's module catalog out of sync with current CHERP screens. Triggered the catalog v2 rewrite.",
+        "business_summary": "Audit caught Nest's module catalog out of sync with current CHERP screens"
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Operator Model doctrine + BRAIN root git",
+        "summary": "Charter written; BRAIN root initialized as its own repo (4 commits, 176 files tracked). Codex + Claude formalized as two hands of one operator.",
+        "business_summary": "Charter written; BRAIN root initialized as its own repo (4 commits, 176 files tracked)"
+      },
+      {
+        "date": "2026-04-22",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Brain RAG hybrid + CHERP scope",
+        "summary": "Brain index + CHERP workspace registered as first-class repos. Hybrid lexical + semantic search; scope presets (brain / codex / cherp); CHERP-aware reranking.",
+        "business_summary": "Brain index + CHERP workspace registered as first-class repos"
+      },
+      {
+        "date": "2026-04-12",
+        "project": "cherp-maintain",
+        "kind": "shipped",
+        "title": "Field-test ready: CHERP live + Pipe-R loop running",
+        "summary": "First time CHERP was production-stable while Pipe-R was running the dev loop end-to-end.",
+        "business_summary": "First time CHERP was production-stable while Pipe-R was running the dev loop end-to-end."
+      },
+      {
+        "date": "2026-04-12",
+        "project": "nest",
+        "kind": "shipped",
+        "title": "Nest moved to project root + Pipe-R co-launch",
+        "summary": "Nest workspace promoted to top-level; Pipe-R / Nest unified launchers wired up.",
+        "business_summary": "Nest workspace promoted to top-level; Pipe-R / Nest unified launchers wired up."
+      },
+      {
+        "date": "2026-04-12",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI v1 built",
+        "summary": "First end-to-end Ken AI build alongside the CHERP bug sweep. Predates v4/v5 lineage but kicked off the in-house agent track.",
+        "business_summary": "First end-to-end Ken AI build alongside the CHERP bug sweep"
+      },
+      {
+        "date": "2026-04-12",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Pipe-R web-first command center",
+        "summary": "Pipe-R cuts over from .bat-driven launchers to the pipe-r.html command center \u2014 direct ancestor of today's KenOS Controller.",
+        "business_summary": "Pipe-R cuts over from .bat-driven launchers to the pipe-r.html command center \u2014 direct ancestor of today's KenOS Controller."
+      },
+      {
+        "date": "2026-04-10",
+        "project": "cherp-maintain",
+        "kind": "shipped",
+        "title": "Google Sheets sync for CHERP crews",
+        "summary": "Backup + reference system: 8 tabs (Roster, Timecards, Tasks, MROs, Incidents, Certifications, JSAs, Crew Info) with formatting / validation / protection rules. First crew synced successfully.",
+        "business_summary": "Backup + reference system: 8 tabs (Roster, Timecards, Tasks, MROs, Incidents, Certifications, JSAs, Crew Info) with formatting / validation / protection rules"
+      },
+      {
+        "date": "2026-04-10",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Agent Mode: batch runner + file-context prompts",
+        "summary": "First training-data-capturing batch runner with file context wiring. Origin of the agent dispatch + auto-execute loops.",
+        "business_summary": "First training-data-capturing batch runner with file context wiring"
+      },
+      {
+        "date": "2026-04-08",
+        "project": "cherp-maintain",
+        "kind": "decided",
+        "title": "CHERP keeps its name (REVV rename reverted)",
+        "summary": "Briefly renamed to REVV, then reverted \u2014 CHERP stays as the construction-platform brand. REVV later picked up as a separate first-Nest-customer track.",
+        "business_summary": "Briefly renamed to REVV, then reverted \u2014 CHERP stays as the construction-platform brand"
+      },
+      {
+        "date": "2026-04-05",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Sci-fi terminal-agent UI + dataset import",
+        "summary": "Pipe-R reworked from menu-only into the sci-fi command surface that defines the look today. 4-model auto-launchers on COMPLETE TODO.",
+        "business_summary": "Pipe-R reworked from menu-only into the sci-fi command surface that defines the look today"
+      },
+      {
+        "date": "2026-04-04",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Pipe-R first commit",
+        "summary": "The original Node.js + button-driven TUI. Origin of the orchestration center that's now becoming KenOS Controller.",
+        "business_summary": "The original Node.js + button-driven TUI"
+      },
+      {
+        "date": "2026-04-23",
+        "project": "kenai-truthfulness",
+        "kind": "shipped",
+        "title": "Peerlog parser shipped",
+        "summary": "Structured peer-log evidence extractor produced 8,143 rows from Claude / KenAI / Codex / shared logs. Surfaced 516 unsupported claims for triage.",
+        "business_summary": "Structured peer-log evidence extractor produced 8,143 rows from Claude / KenAI / Codex / shared logs"
+      },
+      {
+        "date": "2026-04-23",
+        "project": "kenai-truthfulness",
+        "kind": "shipped",
+        "title": "Action-class smoke probes added",
+        "summary": "Three new truthfulness probes seeded from the highest-frequency unsupported phrases in the corpus (file-creation, launch, save-memory).",
+        "business_summary": "Three new truthfulness probes seeded from the highest-frequency unsupported phrases in the corpus (file-creation, launch, save-memory)."
+      },
+      {
+        "date": "2026-04-23",
+        "project": "heskeny-brain",
+        "kind": "shipped",
+        "title": "Investor packet generator + portal payload",
+        "summary": "Sanitized investor packet auto-generated; Heskeny-Brain public portal seeded with the first investor.html snapshot.",
+        "business_summary": "Sanitized investor packet auto-generated; Heskeny-Brain public portal seeded with the first investor.html snapshot."
+      },
+      {
+        "date": "2026-04-23",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI dream refresh + seed approval flow",
+        "summary": "Dream loop refreshed; operator seed-approval review queue introduced so curated training rows get human sign-off.",
+        "business_summary": "Dream loop refreshed; operator seed-approval review queue introduced so curated training rows get human sign-off."
+      },
+      {
+        "date": "2026-04-23",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "Main display layout \u2014 KenAI to col 3",
+        "summary": "Trio terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover.",
+        "business_summary": "Trio terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover."
+      },
+      {
+        "date": "2026-04-22",
+        "project": "cherp-trade-variants",
+        "kind": "decided",
+        "title": "CHERP runtime branding upgrade scoped",
+        "summary": "First serious sketch of the trade-variant approach (Pipe Trades / Electricians / HVAC) on a single backend with a runtime trade flag.",
+        "business_summary": "First serious sketch of the trade-variant approach (Pipe Trades / Electricians / HVAC) on a single backend with a runtime trade flag."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "kenos-android",
+        "kind": "shipped",
+        "title": "Trio Android v2.0.1 sideloaded + scroll fix",
+        "summary": "Android WebView wrapper rebuilt; scroll buttons working after Tailscale fix on phone. Predecessor of today's KenOS app rename.",
+        "business_summary": "Android WebView wrapper rebuilt; scroll buttons working after Tailscale fix on phone"
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Trio chat: real LLM responses",
+        "summary": "Trio chat endpoint replaced placeholder responses with live model output across all three agents.",
+        "business_summary": "Trio chat endpoint replaced placeholder responses with live model output across all three agents."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "main-shell",
+        "kind": "shipped",
+        "title": "kenos kiosk files + widgets-brainlog v3",
+        "summary": "First kiosk-shaped main display files committed alongside the v3 BRAIN log widget makeover.",
+        "business_summary": "First kiosk-shaped main display files committed alongside the v3 BRAIN log widget makeover."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "BRAIN CLI surface \u2014 health/sync/today/commits/handoff-index/archive/check/retrain-status/slice-log/kenai-audit/trio/grep-log",
+        "summary": "The main brain.sh subcommand fanout that defines the operator's everyday loop.",
+        "business_summary": "The main brain.sh subcommand fanout that defines the operator's everyday loop."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-linux-infra",
+        "kind": "shipped",
+        "title": "Nightly maintenance timer",
+        "summary": "systemd brain-nightly.timer at 03:00: push feature branches, prune worktrees, rebuild BRAIN.db if stale, write log slices + daily dossier.",
+        "business_summary": "systemd brain-nightly.timer at 03:00: push feature branches, prune worktrees, rebuild BRAIN.db if stale, write log slices + daily dossier."
+      },
+      {
+        "date": "2026-04-21",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "PostToolUse hook installed",
+        "summary": "Every Bash / Edit / Write tool invocation now leaves a shared.log entry. Foundation for the peerlog parser + truthfulness gate.",
+        "business_summary": "Every Bash / Edit / Write tool invocation now leaves a shared.log entry"
+      },
+      {
+        "date": "2026-04-20",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Trio terminal endpoint logging",
+        "summary": "Every /api/trio-term/{ensure,key,stop} action logged for audit. Made the orchestrator durability gates trustworthy.",
+        "business_summary": "Every /service endpoint/trio-term/{ensure,key,stop} action logged for audit"
+      },
+      {
+        "date": "2026-04-14",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "Offline agent + KenAI v3 skeleton",
+        "summary": "FastAPI-backed offline_agent: Modelfile builder, evaluator, brain auto-refresh, model designer, memory/drill tools, voice routing. The v3 lineage that became today's v5.",
+        "business_summary": "FastAPI-backed offline_agent: Modelfile builder, evaluator, brain auto-refresh, model designer, memory/drill tools, voice routing"
+      },
+      {
+        "date": "2026-04-14",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI overnight learn mode",
+        "summary": "Native keylog + vision + driver loop running unattended. First sustained learning loop without operator presence.",
+        "business_summary": "Native keylog + vision + driver loop running unattended"
+      },
+      {
+        "date": "2026-04-14",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "KenAI streaming + Halo tab + halo_tools",
+        "summary": "Streaming responses landed; live stats + death-watch + learning-stats dashboard. Validation surface for the unattended loop.",
+        "business_summary": "Streaming responses landed; live stats + death-watch + learning-stats dashboard"
+      },
+      {
+        "date": "2026-04-13",
+        "project": "kenai-v5",
+        "kind": "shipped",
+        "title": "Halo MCC: KenAI takes the sticks",
+        "summary": "First end-to-end agent driving a real game (Halo MCC). Vision loop, motion detection, blob clustering, engagement loop, anti-noop bias. Predecessor lineage of the current KenAI tool-use behavior.",
+        "business_summary": "First end-to-end agent driving a real game (Halo MCC)"
+      },
+      {
+        "date": "2026-04-13",
+        "project": "cherp-maintain",
+        "kind": "shipped",
+        "title": "CHERP offline-first shipped (Phase 9)",
+        "summary": "Offline-first PWA mode. Field-test plan documented. Major maturity step toward the current maintain-mode posture.",
+        "business_summary": "Offline-first PWA mode"
+      },
+      {
+        "date": "2026-04-13",
+        "project": "cherp-maintain",
+        "kind": "decided",
+        "title": "Friend-code \u2192 employee-id rename",
+        "summary": "Crew membership identifier rationalized. Hierarchy + theorycraft plans drafted alongside.",
+        "business_summary": "Crew membership identifier rationalized"
+      },
+      {
+        "date": "2026-04-12",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Auto Mode: closed-loop autonomous squad operator",
+        "summary": "First sustained autonomous squad runner \u2014 auto-review + macro-AFK + Live Test results log. Direct ancestor of today's auto-mode tick + halo loops.",
+        "business_summary": "First sustained autonomous squad runner \u2014 auto-review + macro-AFK + Live Test results log"
+      },
+      {
+        "date": "2026-04-12",
+        "project": "brain-pipe-r",
+        "kind": "shipped",
+        "title": "Mesh networking + HP Remote v3",
+        "summary": "Workstation + laptop joined a private mesh; deck tabs embedded in the laptop client. Foundation for today's KenOS Remote on a second PC.",
+        "business_summary": "Workstation + laptop joined a private mesh; deck tabs embedded in the laptop client"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-controller",
+        "kind": "decided",
+        "title": "Ken: rebuild the Deck as KenOS Controller",
+        "summary": "Ken's call to reframe the HDMI-A-1 surface from generic ops deck \u2192 server-lifecycle controller. 'all the brain systems and launches are going to be through the KenOS Suite, that is to be my operating end for everything.'",
+        "business_summary": "Ken's call to reframe the HDMI-A-1 surface from generic ops deck \u2192 server-lifecycle controller"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-remote",
+        "kind": "decided",
+        "title": "Ken: phone client is the gold standard",
+        "summary": "After reviewing the trio-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference. Triggered the main-display \u2194 phone frame sync work the same day.",
+        "business_summary": "After reviewing the trio-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "kenos-remote",
+        "kind": "decided",
+        "title": "Ken: project checklist as 'the human-rag'",
+        "summary": "Ken's framing \u2014 the operator-curated checklist (with milestones + per-project timelines) becomes the human-readable retrieval surface for context. Drove the click-into-detail + clickable-milestones work.",
+        "business_summary": "Ken's framing \u2014 the operator-curated checklist (with milestones + per-project timelines) becomes the human-readable retrieval surface for context"
+      },
+      {
+        "date": "2026-04-24",
+        "project": "heskeny-brain",
+        "kind": "shipped",
+        "title": "Checklist published to public portal",
+        "summary": "Operator-facing checklist mirrored to the Heskeny-Brain GitHub Pages portal as a shareable live URL. One-command publish script handles future refreshes.",
+        "business_summary": "Operator-facing checklist mirrored to the Heskeny-Brain GitHub Pages portal as a shareable live URL"
+      },
+      {
+        "date": "2026-04-23",
+        "project": "kenai-v5",
+        "kind": "decided",
+        "title": "Ken: arm gate for KenAI tool execution",
+        "summary": "After watching KenAI attempt live writes from inside trio chat, Ken introduced the safe-by-default --dry-run arm gate. Tags get parsed + displayed as [dry-run] notices unless KENAI_ARMED=1 is set.",
+        "business_summary": "After watching KenAI attempt live writes from inside trio chat, Ken introduced the safe-by-default --dry-run arm gate"
+      },
+      {
+        "date": "2026-04-22",
+        "project": "cherp-maintain",
+        "kind": "decided",
+        "title": "Ken: CHERP maintain mode",
+        "summary": "Stability-first stance on cherp.live \u2014 small fixes only, no refactors / no new features. The hold posture the project still operates under.",
+        "business_summary": "Stability-first stance on the live CHERP site \u2014 small fixes only, no refactors / no new features"
+      },
+      {
+        "date": "2026-04-22",
+        "project": "kenos-suite",
+        "kind": "decided",
+        "title": "Ken: BRAIN holds everything",
+        "summary": "Operator rule \u2014 every repo / log / reference must live inside The Brain so session primers see the complete context. Drove the CHERP / Nest / REVV / Heskeny-Brain consolidation under one root.",
+        "business_summary": "Operator rule \u2014 every repo / log / reference must live inside The Brain so session primers see the complete context"
+      },
+      {
+        "date": "2026-04-19",
+        "project": "kenai-v5",
+        "kind": "decided",
+        "title": "Ken: V4 production = baseline-plus",
+        "summary": "After reviewing the rubric-fixed eval (87.3% vs 40.4%), Ken approved Modelfile-only baseline-plus as the production lineage and parked the fine-tune track until the corpus crosses 500 rows.",
+        "business_summary": "After reviewing the rubric-fixed eval (87.3% vs 40.4%), Ken approved Modelfile-only baseline-plus as the production lineage and parked the fine-tune track until the corpus crosses 500 rows."
+      },
+      {
+        "date": "2026-04-19",
+        "project": "main-shell",
+        "kind": "decided",
+        "title": "Ken: kenos kiosk plan",
+        "summary": "Ken sketched the multi-display kiosk concept (deck + main display + widget band on the same PC) that became today's three-program setup.",
+        "business_summary": "Ken sketched the multi-display kiosk concept (deck + main display + widget band on the same PC) that became today's three-program setup."
+      },
+      {
+        "date": "2026-04-18",
+        "project": "brain-linux-infra",
+        "kind": "decided",
+        "title": "Ken: cut over to Pop!_OS",
+        "summary": "Operator decision to migrate the entire workspace off Windows and standardize on Linux. Triggered the BRAIN root reshuffle, paths.py, and the canonical-paths discipline that everything else now depends on.",
+        "business_summary": "Operator decision to migrate the entire workspace off Windows and standardize on Linux"
+      },
+      {
+        "date": "2026-04-18",
+        "project": "kenos-suite",
+        "kind": "decided",
+        "title": "Ken: CHERP \u2192 Nest \u2192 REVV strategy",
+        "summary": "Sequencing call: restore cherp.live first \u2192 level Nest up to emit current-CHERP \u2192 ship REVV via Nest as the first real customer instance. Still the active ecosystem ordering.",
+        "business_summary": "Sequencing call: restore the live CHERP site first \u2192 level Nest up to emit current-CHERP \u2192 ship REVV via Nest as the first real customer instance"
+      },
+      {
+        "date": "2026-04-12",
+        "project": "brain-pipe-r",
+        "kind": "decided",
+        "title": "Ken: button-driven UX only",
+        "summary": "Operator rule \u2014 Ken is a non-coder; the TUI uses numbered buttons and letter keys, no free-text commands. Every feature needs a button. Still binding on Pipe-R / KenOS Controller work.",
+        "business_summary": "Operator rule \u2014 Ken is a non-coder; the TUI uses numbered buttons and letter keys, no free-text commands"
+      },
+      {
+        "date": "2026-04-08",
+        "project": "cherp-maintain",
+        "kind": "decided",
+        "title": "Ken: keep the CHERP name",
+        "summary": "Briefly experimented with renaming CHERP \u2192 REVV; reverted within hours. Ken kept CHERP as the construction-platform brand and held REVV in reserve as a future Nest customer instance.",
+        "business_summary": "Briefly experimented with renaming CHERP \u2192 REVV; reverted within hours"
+      },
+      {
+        "date": "2026-04-04",
+        "project": "brain-pipe-r",
+        "kind": "decided",
+        "title": "Ken: start Pipe-R",
+        "summary": "Operator origin point \u2014 Ken set up the first Pipe-R workspace as a button-driven orchestration TUI. Everything in this checklist descends from this commit.",
+        "business_summary": "Operator origin point \u2014 Ken set up the first Pipe-R workspace as a button-driven orchestration TUI"
+      }
+    ],
+    "groups": [
+      {
+        "id": "cherp",
+        "title": "CHERP",
+        "color": "#6cc24a",
+        "projects": [
+          {
+            "id": "cherp-maintain",
+            "name": "CHERP maintain mode",
+            "status": "active",
+            "percent": 100,
+            "summary": "cherp.live stability-first hold; small fixes only",
+            "current": "5/5 maintain \u00b7 13/13 simulator \u00b7 8/8 KenAI truth gate \u00b7 8,143 peerlog rows",
+            "next": [
+              "Keep live-site hold until cross-family deploy checks land",
+              "Triage 516 unsupported-claim flags weekly"
+            ],
+            "owner": "ken",
+            "business_summary": "the live CHERP site stability-first hold; small fixes only",
+            "business_current": "5/5 maintain \u00b7 13/13 simulator \u00b7 8/8 KenAI truth gate \u00b7 8,143 peerlog rows"
+          },
+          {
+            "id": "cherp-trade-variants",
+            "name": "Trade-variant apps",
+            "status": "active",
+            "percent": 75,
+            "summary": "Pipe Trades / Electricians / HVAC variants on Play + cherp.live picker, single backend, runtime trade flag",
+            "current": "2026-04-27: routing finalized \u2014 pipe-trades stays in demo.html (full Supabase networking, Ken's known-good test surface), every other trade slug auto-redirects to /solo/?trade=<slug> via trade-runtime.js (commit a43da88). Per-trade content depth shipped 2026-04-27: HVAC/FS/Carp/Concrete brought from 1-calc placeholder to 4\u20135 calcs + 4\u20135 ref tables each, industry-anchored math (NFPA 13 \u00a727.2, ACI 347, IRC R602.7, ASHRAE friction). Federation v0 shipped 2026-04-27 (commit d0fa68d) \u2014 solo About-tab Connect-to-company button calls a device-code OAuth flow (connect-start/poll/approve Netlify functions + /connect.html foreman page); awaits operator-applied Supabase migration migrations/2026-04-27_device_pairings.sql to activate. SW caches bumped to v3-2026-04-27. Same Supabase accounts work across every variant.",
+            "next": [
+              "**Priority \u2014 Ken 2026-04-26**: build out FULL-FEATURED per-trade variants (calc + field-ref content depth equivalent to Pipe Trades). Generic ref content is unacceptable; must be trade-relevant.",
+              "Cherp - Safety: 4 calcs + 6 ref tables shipped 2026-04-26 (commit 2959d78), tagged status: dev. Next: incident logging, audit trail, training records, compliance dashboard for company-instance role-lens.",
+              "Cherp - Electricians: NEC suite shipped \u2014 voltage drop, conductor sizing, conduit fill, motor FLA + OCPD, Ohm law (5 calcs, 6 ref tables). Already production-ready depth.",
+              "Cherp - HVAC: 1 calc (CFM-from-room). NEXT: Manual J-lite, refrigerant charge, static pressure, duct sizing (Friction rate), psychrometric ref tables.",
+              "Cherp - Fire Sprinkler: 1 calc (K-factor flow). NEXT: NFPA hydraulic chain, Hazen-Williams, hanger spacing, head coverage tables.",
+              "Cherp - Carpentry: 2 calcs (stair rise, board feet). NEXT: rafter cuts (common+hip), framing takeoffs, header sizing tables, fastener schedules.",
+              "Cherp - Concrete: 1 calc (cubic yards). NEXT: form pressure, rebar spacing, slump+air log, mix design selector.",
+              "Cherp - General: 1 calc (in\u2194mm). NEXT: multi-trade hub showcasing top-3 from each variant.",
+              "Bubblewrap each variant for Play Store publication once content depth is complete per trade."
+            ],
+            "owner": "ken",
+            "business_summary": "Pipe Trades / Electricians / HVAC variants on Play + the live CHERP site picker, single backend, runtime trade flag",
+            "business_current": "2026-04-27: routing finalized \u2014 pipe-trades stays in demo.html (full the cloud database networking, Ken's known-good test surface), every other trade slug auto-redirects to /solo/?trade=<slug> via trade-runtime.js (shipped change)"
+          }
+        ]
+      },
+      {
+        "id": "kenos-suite",
+        "title": "KenOS Suite",
+        "color": "#7ec8e8",
+        "projects": [
+          {
+            "id": "kenos-controller",
+            "name": "KenOS Controller",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "Operator surface for server lifecycle: launchers, enders, health, infrastructure on/off. 12-service roster with 3-state health (ok / degraded / down). Rayquaza icon (#384).",
+            "current": "Live on HDMI-A-1 via the cutover. Per-service health colors. 5 endpoints, restart works for pipe-r itself via double-fork helper. Legacy launcher kept as rollback fallback.",
+            "next": [],
+            "owner": "claude",
+            "related": [
+              "brain-pipe-r",
+              "main-shell",
+              "brain-orchestrator",
+              "kenos-package"
+            ],
+            "business_summary": "Operator surface for server lifecycle: launchers, enders, health, infrastructure on/off",
+            "business_current": "Live on HDMI-A-1 via the cutover"
+          },
+          {
+            "id": "main-shell",
+            "name": "KenOS Main Display",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "6-slot kiosk: Claude / Codex / KenAI trio + chatlog + projects + brain log",
+            "current": "Stable. Settings popover catalog-aware; quick-switch wired; canonical symlink fixed; cols 4/5/6 synced 1:1 with KenOS Remote.",
+            "next": [],
+            "owner": "claude",
+            "related": [
+              "kenos-remote",
+              "kenos-controller",
+              "brain-orchestrator"
+            ],
+            "business_summary": "6-slot kiosk: Claude / Codex / KenAI trio + chatlog + projects + brain log",
+            "business_current": "Stable"
+          },
+          {
+            "id": "kenos-remote",
+            "name": "KenOS Remote",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "Laptop / second-PC mirror of the main display (same content, different physical PC). Trio + Chatlog + Projects + BRAIN Log.",
+            "current": "Frames 4/5/6 synced with main display. Trio order Claude / Codex / KenAI. Ops view stays at 3 frames.",
+            "next": [],
+            "owner": "claude",
+            "related": [
+              "main-shell",
+              "kenos-android"
+            ],
+            "business_summary": "Laptop / second-PC mirror of the main display (same content, different physical PC)",
+            "business_current": "Frames 4/5/6 synced with main display"
+          },
+          {
+            "id": "kenos-package",
+            "name": "KenOS Package \u2014 Windows ZIP for fresh operator",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template. Doubles as BRAIN backup for Debe Corp continuity.",
+            "current": "Production build at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard captures identity + walks through GitHub signup + installs Node/Python/Git/Ollama/Tailscale + pulls KenAI model + copies payload + drops desktop shortcut + optional adb phone push. KenOS.bat starts server + opens Controller. brain.bat = Windows operator CLI. 79 files, 4.8 MB.",
+            "next": [],
+            "owner": "claude",
+            "related": [
+              "kenos-controller",
+              "main-shell",
+              "kenos-android",
+              "kenai-v5"
+            ],
+            "business_summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template",
+            "business_current": "Production build at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard captures identity + walks through GitHub signup + installs Node/Python/Git/the local AI runtime/Tailscale + pulls KenAI model + copies payload + drops desktop shortcut + optional adb phone push"
+          },
+          {
+            "id": "kenos-android",
+            "name": "KenOS (Android)",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "WebView wrapper for KenOS Remote, Tailscale-reachable. Sideloaded; not on the Play Store.",
+            "current": "Functional. Labels renamed Trio \u2192 KenOS. Settings screen lets each operator paste their own tailnet URL. APK bundled into the package ZIP for sideload during install. Z Fold 7 inner-display layout pass landed (sw600dp variant, edge-to-edge insets, 5.8MB).",
+            "next": [],
+            "owner": "ken",
+            "related": [
+              "kenos-remote",
+              "kenos-package"
+            ],
+            "business_summary": "WebView wrapper for KenOS Remote, Tailscale-reachable",
+            "business_current": "Functional"
+          },
+          {
+            "id": "kenos-dx-upgrade",
+            "name": "KenOS DX upgrade \u2014 port Windows-variant wins back to Linux",
+            "status": "active",
+            "percent": 45,
+            "summary": "Take the developer-experience improvements proven out on the Windows client (working trio bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN. Establishes BRAIN as the single source of truth across both OS variants going forward.",
+            "current": "Data merge pass landed. Z Fold 7 sw600dp inner-display variant + edge-to-edge insets handler + version bump (2.1.0 / vc6) shipped into android/trio-webview/. Pokedex-style header (avatar + title + dex subtitle + state badge) ported into Linux main-shell.html frame 5. Pokemon Crystal tab in frame 4 chatlog + native mgba-qt + xdotool key forwarding wired (touch + keyboard).",
+            "next": [
+              "Diff Windows pipe-r server.js against Linux to port the pty title-paren fix + _resolveCli logic + KENOS_ROOT-relative cwd",
+              "Port the layout breakpoint set (\u22651100px = 6\u00d71, 721\u20131099px = 2-up swipe, \u2264720px = 1-up peek) into kenos/main-shell.html if not already present",
+              "Reconcile Controller service roster between Windows + Linux \u2014 pin the canonical 12-service list",
+              "Embed the running mgba game window into a frame (xpra HTML5 or ffmpeg MJPEG) \u2014 currently runs as a separate desktop window"
+            ],
+            "owner": "claude",
+            "related": [
+              "kenos-package",
+              "kenos-controller",
+              "main-shell",
+              "kenos-android",
+              "brain-pipe-r"
+            ],
+            "business_summary": "Take the developer-experience improvements proven out on the Windows client (working trio bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN",
+            "business_current": "Data merge pass landed"
+          },
+          {
+            "id": "kenos-bughunter",
+            "name": "Bug Hunter \u2014 revenue pipeline + AI training arc",
+            "status": "active",
+            "percent": 50,
+            "summary": "Paid bug-bounty pipeline that doubles as KenAI's training surface for the Play \u2192 Break \u2192 Fix arc. Pok\u00e9mon taught pattern recognition; bug hunting pays cash AND teaches attack-class recognition; the resulting patches feed back into the corpus to train the model to ship its own fixes. Success confirms success \u2014 each paid bounty funds + validates the next phase.",
+            "current": "Phase 1 done (4 packets drafted: Nexon CRIT 8.4 / Epic CRIT 9.3 / Ubisoft HIGH 7.8 / Google HIGH 7.8 \u2014 $10K floor / $120K ceiling). Phase 2 v0 scaffolding shipped 2026-04-25: kenos/bughunter/azure-scanner.mjs (6 checks \u2014 Storage public-access/TLS/HTTP, NSG admin-port-to-Internet, Key Vault policies/network, RBAC over-privilege, App Service TLS/HTTPS-only/Managed-Identity, SAS-TTL stub), az-CLI shell-out, auth-gated, no npm deps. Server route /api/bughunter/azure wired. scripts/bughunt-to-seeds.py converts findings \u2192 KenAI seed candidates (corpus). brain.sh subcommands bughunt-azure + bughunt-to-seeds. Hunt tab href bug fixed in main-shell.html:531. Azure CLI 2.85.0 installed; first live scan against subscription 479a38f9 ran clean (empty tenant \u2014 5/6 checks zero, 1 LOW rbac-subscription-owner, 1 INFO sas-stub). 1 KenAI seed candidate written from the live scan.",
+            "next": [
+              "Submit Nexon + Epic via HackerOne, Ubisoft via Intigriti, Google via Google VRP \u2014 operator-only web forms; track via scripts/bounty-status.sh <id> submitted",
+              "Re-scan now that brain-vm + brain-prod-eus2 are deployed \u2014 current widget shows the older 2026-04-25 cherp-bughunt-test findings; new RG has different surfaces (NSG, public IP, key vault)",
+              "Implement SAS-TTL enumeration (currently a stub finding) \u2014 per-storage-account / per-container loop",
+              "Target MSRC Azure Bounty ($60K cap) for any service-side issue surfaced during sandbox testing",
+              "Phase 3: feed paid-out packets back into KenAI corpus as before/after (vulnerable \u2192 patched) pairs; close the Play \u2192 Break \u2192 Fix loop",
+              "Phase 3 reach: AWS (IAM, S3, RDS) + GCP (IAM, GCS, GKE) + Linux on-host (SUID, polkit, systemd unit ACL) modules",
+              "Productize: continuous scan mode under autopilot \u2014 weekly diff, auto-draft new packets, KenAI proposes the fix PR; eventually point the same loop at CHERP / Nest / Debe Corp to harden in-house stack"
+            ],
+            "owner": "claude",
+            "related": [
+              "kenos-package",
+              "kenai-v5",
+              "kenos-controller"
+            ],
+            "business_summary": "Paid bug-bounty pipeline that doubles as KenAI's training surface for the Play \u2192 Break \u2192 Fix arc",
+            "business_current": "Phase 1 done (4 packets drafted: Nexon CRIT 8.4 / Epic CRIT 9.3 / Ubisoft HIGH 7.8 / Google HIGH 7.8 \u2014 $10K floor / $120K ceiling)"
+          },
+          {
+            "id": "kenos-android-native",
+            "name": "KenOS Android-native \u2014 personal portable AI dev",
+            "status": "planned",
+            "percent": 5,
+            "summary": "Promote KenOS from a desktop-first OS with a phone WebView wrapper into a true Android-native runtime. Carry the operator workspace (BRAIN.db, agents, rules, log surface) onto the phone so the Z Fold 7 \u2014 and successors \u2014 becomes a self-contained personal portable AI dev environment. Termux as the bridge layer; on-device KenAI; native Settings; offline-first.",
+            "current": "Scoping. Today's stack: Z Fold 7 has KenOS-Windows (com.ken.kenos.maindisplay) as a WebView shell pointing at the desktop. Trio app (com.ken.trio) repaired + bumped to v2.1.0 with Z Fold 7 sw600dp inner-display variant + edge-to-edge insets. KenOS-Linux APK (com.ken.kenos.linux v1.0.0) built as a side-by-side companion pointing at the Linux instance via Tailscale.",
+            "next": [
+              "Stand up Termux on the Z Fold 7 with brain.sh / git / node / ollama paths",
+              "Decide where on-device BRAIN.db lives (private app dir vs. shared storage) + size budget",
+              "Bridge xterm.js WebView to a Termux pty so trio terminals run on-device when the desktop is offline",
+              "Native Settings + on-device log surface (replace WebView Settings activity) so the app works without a tailnet",
+              "On-device KenAI: ship a small quantized model that runs locally + fallback to tailnet RAG when online",
+              "Install Android Studio on Pop!_OS so the build chain is local; add release keystore for signed builds"
+            ],
+            "owner": "ken",
+            "related": [
+              "kenos-android",
+              "kenos-package",
+              "kenai-v5"
+            ],
+            "business_summary": "Promote KenOS from a desktop-first OS with a phone WebView wrapper into a true Android-native runtime",
+            "business_current": "Scoping"
+          }
+        ]
+      },
+      {
+        "id": "brain",
+        "title": "BRAIN runtime",
+        "color": "#ff9347",
+        "projects": [
+          {
+            "id": "brain-orchestrator",
+            "name": "Model orchestrator",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "Single-resident-model orchestrator with batch durability, audit trail, recovery, and DeepSeek launcher.",
+            "current": "All build-list items shipped. 10/10 recovery tests pass. DeepSeek launcher (~/bin/trio-pane-deepseek.sh) wired with graceful 'tag not pulled' gate; flip catalog enabled flag after `ollama pull deepseek-r1:8b` to activate.",
+            "next": [],
+            "owner": "claude",
+            "related": [
+              "brain-pipe-r",
+              "kenai-v5",
+              "kenos-controller"
+            ],
+            "business_summary": "Single-resident-model orchestrator with batch durability, audit trail, recovery, and DeepSeek launcher.",
+            "business_current": "All build-list items shipped"
+          },
+          {
+            "id": "brain-pipe-r",
+            "name": "Pipe-R command center",
+            "status": "active",
+            "percent": 95,
+            "summary": "Backend orchestration on :7777 \u2014 trio terminals, auto-mode, brain logger, model API. Becoming part of KenOS Controller.",
+            "current": "Stable; recent additions: chatlog viewer, orchestrator API surface, models catalog, project-checklist endpoint",
+            "next": [
+              "Carve out the controller-specific endpoints under /api/controller/*",
+              "Verify quick-switch on a cross-model live test"
+            ],
+            "owner": "codex",
+            "related": [
+              "kenos-controller",
+              "brain-orchestrator",
+              "main-shell"
+            ],
+            "business_summary": "Backend orchestration on :7777 \u2014 trio terminals, auto-mode, brain logger, model service endpoint",
+            "business_current": "Stable; recent additions: chatlog viewer, orchestrator service endpoint surface, models catalog, project-checklist endpoint"
+          },
+          {
+            "id": "brain-linux-infra",
+            "name": "BRAIN Linux infra",
+            "status": "active",
+            "percent": 85,
+            "summary": "Pop!_OS cutover from Windows; nightly maintenance timer; tailnet-reachable services",
+            "current": "Live; nightly timer enabled; sudoers cleanup pending; reboot verification done",
+            "next": [
+              "Sudoers cleanup (deferred from cutover)"
+            ],
+            "owner": "ken",
+            "business_summary": "Pop!_OS cutover from Windows; nightly maintenance timer; tailnet-reachable services",
+            "business_current": "Live; nightly timer enabled; sudoers cleanup pending; reboot verification done"
+          }
+        ]
+      },
+      {
+        "id": "kenai",
+        "title": "KenAI",
+        "color": "#ff5a2b",
+        "projects": [
+          {
+            "id": "kenai-v5",
+            "name": "KenAI v5.x in production",
+            "status": "active",
+            "percent": 92,
+            "summary": "Production KenAI line \u2014 v5.5 active, v5.6 in catalog. Corpus growth gates v6.",
+            "current": "v5.5 active in prod (peerlog smoke 11/11); v5.6 in catalog. Corpus feeders all live: 8,143 peerlog rows + 516\u2013680 unsupported-claim flags surfaced for triage; 84 lessons accumulated from kenai-plays-pokemon; bug-hunt \u2192 seed bridge now feeds Azure scan findings as Q&A pairs (1 candidate from first live scan). 197-row v4 fine-tune dataset committed; v4-baseline-plus 87.3% on the 30-prompt holdout. Current bottleneck: human/Codex review of seed candidates \u2014 nothing promoted to feed v6 yet (5/15 latest candidates clean, 10/15 flagged for scrub).",
+            "next": [
+              "**Corpus discipline (2026-04-25 directive):** every seed carries a target_model tag; v5 corpus stays isolated from kenai-trainer + deepseek-offline-dev material. No dilution.",
+              "Promote the 5 clean seeds (manual + dream) \u2014 hold pending Ken authorization",
+              "Scrub the 10 flagged peerlog candidates (2 hard flags for Claude session UUIDs in bad_pattern; soft flags for duplicates and template breadth) before re-review",
+              "Cut v6 once corpus crosses 500 rows (currently ~90% to gate)",
+              "Re-run v4.1 fine-tune merge when training-stack compatibility is unblocked",
+              "Split agents/kenai/seeds/ into per-model subdirs (kenai-v5/, kenai-trainer/, deepseek-offline-dev/) with candidates|approved|rejected under each",
+              "bughunt-to-seeds.py + scripts/kenai-seeds.py learn a --target-model flag (default kenai-v5)"
+            ],
+            "owner": "ken",
+            "related": [
+              "brain-orchestrator",
+              "kenai-truthfulness"
+            ],
+            "business_summary": "Production KenAI line \u2014 v5.5 active, v5.6 in catalog",
+            "business_current": "v5.5 active in prod (peerlog smoke 11/11); v5.6 in catalog"
+          },
+          {
+            "id": "kenai-truthfulness",
+            "name": "Peerlog truthfulness gate",
+            "status": "shipped",
+            "percent": 100,
+            "summary": "Probes that catch hallucinated commit / deploy / file-creation / launch / save-memory claims before they ship",
+            "current": "Peerlog parser shipped 2026-04-23 \u2014 8,143 rows from Claude/KenAI/Codex/shared logs surfaced 516\u2013680 unsupported claims for triage. Action-class smoke probes (file-creation, launch, save-memory) added 2026-04-23. Peerlog smoke 11/11 on kenai:v5.5 (all action-class probes pass \u2014 terminal-marker, truncation, commit-claim, trivial-no-format, rebuild-path, plus the five action-class additions).",
+            "next": [],
+            "owner": "claude",
+            "business_summary": "Probes that catch hallucinated commit / deploy / file-creation / launch / save-memory claims before they ship",
+            "business_current": "Peerlog parser shipped 2026-04-23 \u2014 8,143 rows from Claude/KenAI/Codex/shared logs surfaced 516\u2013680 unsupported claims for triage"
+          },
+          {
+            "id": "kenai-trainer",
+            "name": "KenAI Trainer \u2014 Pok\u00e9mon completion arc",
+            "status": "active",
+            "percent": 30,
+            "summary": "Dedicated agent + model lane focused on autonomous Pok\u00e9mon Crystal completion as the Play \u2192 Break \u2192 Fix training corpus seed.",
+            "current": "kenai-trainer:v20260425151823 active. 84 lessons accumulated from the kenai-plays-pokemon loop. mGBA + scripted play loop run-and-stop wired through pipe-r so the agent can spawn the emulator, drive it via xdotool, and produce reflect/lesson rows. Separate from the production v5.x line so its specialization (gameplay heuristics) does not dilute the dev-task corpus. 2026-04-27: agents/kenai/seeds/kenai-trainer/{candidates,approved,rejected}/ scaffold in place \u2014 write path still pending.",
+            "next": [
+              "**Corpus discipline:** Pok\u00e9mon-play lessons go to TRAINER corpus only; never bleed into v5 dev corpus or deepseek code corpus.",
+              "Wire the kenai-plays-pokemon lesson writer to drop new lessons into seeds/kenai-trainer/candidates/ (now scaffolded)",
+              "Reach a meaningful Pok\u00e9mon Crystal completion checkpoint (badge progression / route milestones) under autonomous play",
+              "Define a holdout for trainer-specific evals (gameplay decision quality, not dev-task accuracy)",
+              "Cement the swappable-roles design: trainer is one slot, dev / deepseek-offline are sibling slots in models.catalog.json"
+            ],
+            "owner": "claude",
+            "related": [
+              "kenai-v5",
+              "brain-orchestrator"
+            ],
+            "business_summary": "Dedicated agent + model lane focused on autonomous Pok\u00e9mon Crystal completion as the Play \u2192 Break \u2192 Fix training corpus seed.",
+            "business_current": "kenai-trainer:v20260425151823 active"
+          }
+        ]
+      },
+      {
+        "id": "ecosystem",
+        "title": "Ecosystem",
+        "color": "#c084fc",
+        "projects": [
+          {
+            "id": "nest",
+            "name": "Bird's Nest multi-tenant",
+            "status": "active",
+            "percent": 60,
+            "summary": "Multi-tenant catalog with 16 modules; the engine that emits per-customer CHERP builds",
+            "current": "Smoke build passes 15/15 invariants; not yet emitting current-generation CHERP",
+            "next": [
+              "Level Nest up to emit current-CHERP",
+              "Wire REVV as the first real customer instance through Nest"
+            ],
+            "owner": "codex",
+            "related": [
+              "revv",
+              "cherp-maintain",
+              "cherp-trade-variants"
+            ],
+            "business_summary": "Multi-tenant catalog with 16 modules; the engine that emits per-customer CHERP builds",
+            "business_current": "Smoke build passes 15/15 invariants; not yet emitting current-generation CHERP"
+          },
+          {
+            "id": "revv",
+            "name": "REVV (first Nest customer)",
+            "status": "planning",
+            "percent": 15,
+            "summary": "First real customer instance to ship via Nest",
+            "current": "Source files rescued from the old machine and staged in the active workspace",
+            "next": [
+              "Wait for Nest to emit current-CHERP",
+              "Plumb REVV branding through the Nest catalog"
+            ],
+            "owner": "ken",
+            "business_summary": "First real customer instance to ship via Nest",
+            "business_current": "Source files rescued from the old machine and staged in the active workspace"
+          },
+          {
+            "id": "debe-corp",
+            "name": "Debe Corp site",
+            "status": "planning",
+            "percent": 30,
+            "summary": "2026-04-23 rename of Clean Money Corporation; new private repo seeded",
+            "current": "Try-CHERP links repointed to the trades page; site shell not yet built",
+            "next": [
+              "Build site scaffold from the CMC snapshot",
+              "Cut over debecorp.com DNS once the site is live"
+            ],
+            "owner": "ken",
+            "business_summary": "2026-04-23 rename of Clean Money Corporation; new private repo seeded",
+            "business_current": "Try-CHERP links repointed to the trades page; site shell not yet built"
+          },
+          {
+            "id": "heskeny-brain",
+            "name": "Heskeny-Brain investor portal",
+            "status": "active",
+            "percent": 90,
+            "summary": "Public sanitized progress portal; investor-facing snapshot of Brain + CHERP",
+            "current": "Live on GitHub Pages with three pages \u2014 index (repo overview), investor.html (high-level snapshot), dashboard.html (live evidence cards). 2026-04-27: dashboard.html added with 14 green-check cards across 5 groups (maintenance / simulator / truthfulness / evidence / policy), each linking to its underlying evidence file. brain-investor-packet.py extended to emit dashboard.json alongside investor.json \u2014 single command keeps both pages in sync with current evidence. Latest run: 9 pass \u00b7 0 fail \u00b7 5 info.",
+            "next": [
+              "Wire brain-investor-packet.py into the daily maintenance loop so investor.json + dashboard.json regenerate automatically each morning",
+              "Live browser simulations of CHERP workflows against a running local instance (deeper than current static probes)",
+              "Sanitize evidence/ files for GitHub Pages \u2014 current dashboard links into private BRAIN paths; expose just-the-cards for public consumption or copy a sanitized subset under Heskeny-Brain/site/evidence/"
+            ],
+            "owner": "claude",
+            "business_summary": "Public sanitized progress portal; investor-facing snapshot of Brain + CHERP",
+            "business_current": "Live on GitHub Pages with three pages \u2014 index (repo overview), investor.html (high-level snapshot), dashboard.html (live evidence cards)"
+          },
+          {
+            "id": "cherp-sharepoint",
+            "name": "CHERP \u2192 SharePoint sync (Debe Corp)",
+            "status": "active",
+            "percent": 90,
+            "summary": "M365-shop replacement for the Google Sheets sync \u2014 CHERP daily logs + JSAs flow into the Debe Corporation SharePoint site so office staff have an auditable paper trail without installing the PWA.",
+            "current": "Wave-1 + Wave-1b operational. Lists (DailyLogs/JSAs/Timecards/Employees) + doc libraries (Projects/SpecSheets/EmployeeFiles) provisioned 2026-04-26. Wave-1b shipped 2026-04-27: sharepoint-upload.js Netlify function routes binary uploads into Projects/<code>/<DailyLogs|Photos|JSAs>/YYYY-MM-DD/ with idempotent mkdir; SP_Upload + SP_UploadAsync added to js/sharepoint-sync.js; daily_log shaper picks up sharepoint_pdf_url into PdfRef. Wired at two call sites: safety.exportJSApdf (PDF mirrored to JSAs/<date>/) + work.addMROPhoto (photos mirrored to Photos/<date>/). sharepoint_sync_state sidecar migration drafted (migrations/2026-04-27_sharepoint_sync_state.sql) \u2014 pending operator apply + function wire-in.",
+            "next": [
+              "Apply migrations/2026-04-27_sharepoint_sync_state.sql against Debe-Corp Supabase (service-role-only RLS \u2014 no policies)",
+              "Wire sidecar writes into sharepoint-push.js + sharepoint-upload.js post-Graph-success (best-effort, never fails the upload)",
+              "Daily-log PDF generation (currently text-only) \u2014 once present, wire SP_Upload('DailyLogs', pdfBlob, ...) into the saveDailyLog success path so daily PDFs land in DailyLogs/<date>/",
+              "Wave-2: bidirectional document library sync for specs / submittals / SDS",
+              "Wave-3: Entra / Microsoft SSO so foremen drop the second login",
+              "Netlify env still needs MSGRAPH_TENANT_ID + CLIENT_ID + CLIENT_SECRET + CHERP_SYNC_SECRET \u2014 both push and upload functions return 503 until set"
+            ],
+            "owner": "claude",
+            "related": [
+              "cherp-maintain",
+              "debe-corp",
+              "nest"
+            ],
+            "business_summary": "M365-shop replacement for the Google Sheets sync \u2014 CHERP daily logs + JSAs flow into the Debe Corporation SharePoint site so office staff have an auditable paper trail without installing the PWA.",
+            "business_current": "Wave-1 + Wave-1b operational"
+          }
+        ]
+      }
+    ],
+    "current_ideas": [
+      {
+        "id": "cherp-solo-worker-instances",
+        "title": "CHERP solo-worker trade-variant instances",
+        "captured": "2026-04-25",
+        "status": "active",
+        "summary": "Per-trade CHERP variants as offline-first solo-worker PWAs (Bubblewrap-ready for app stores) AND 200-man paid company instances. Trade variants are interchangeable VIEWS of one account \u2014 same identity sees same tasks across Pipe Trades / Electricians / HVAC / etc. cherp.live/demo.html stays as the multi-trade General client (anchor). Per the 2026-04-26 company-network federation memory.",
+        "monetization": [
+          "Free tier: full functionality + Google AdSense ad slots",
+          "$5 one-time purchase: remove ads",
+          "Promotes organic growth by lowering the barrier \u2014 every trade worker can grab their variant for free, and ad revenue + low-friction unlock funds infra"
+        ],
+        "free_tools": [
+          "Calculators + field references (per trade)",
+          "Working work contact system",
+          "Task system",
+          "Profile + simple credential storage"
+        ],
+        "verification": [
+          "Account verification via connections (LinkedIn / phone / email / Google)",
+          "Verified workers can be discovered by other workers + foremen for connection"
+        ],
+        "company_track": {
+          "model": "200-man company-contained instances",
+          "backend": "Same Supabase shape as cherp.live, isolated per-company via Nest provisioning",
+          "features_unlocked": [
+            "social",
+            "sharing",
+            "crew chat",
+            "admin dashboard",
+            "shared library"
+          ],
+          "pricing": "Paid subscription model"
+        },
+        "production_anchor": "Ken keeps cherp.live as the canonical showcase running instance",
+        "next": [
+          "**Solo offline shell shipped 2026-04-26 (commit 53c31b3)**: /solo/ on cherp.live \u2014 auth-stripped, network-stripped, localStorage-only. Each manifest-<slug>.json points at /solo/?trade=<slug>. Service worker caches shell + assets for offline-first PWA install. Tasks SHARED across variants on-device with trade_origin tags so future cherp.live login federates a single set.",
+          "**Per-trade calc suites (v0)**: Pipe Trades (5 \u2014 offset, slope, decimal-fraction, Hazen-Williams, volume), Electricians (2), HVAC (1), Fire Sprinkler (1), Carpentry (2), Concrete (1), General (1). Field-reference tables per trade.",
+          "**Bubblewrap each variant**: wrap /solo/?trade=<slug> as Android APK/AAB for Play Store publication. PWA Builder online tool or Bubblewrap CLI. One app store listing per variant \u2014 Cherp \u00b7 Pipe Trades, Cherp \u00b7 Electricians, etc.",
+          "Expand calc content per trade \u2014 driven by customer requests (NEC depth for Electricians, Manual J for HVAC, NFPA hydraulic for Fire Sprinkler)",
+          "AdSense slots in /solo/index.html \u2014 gated on paid_at_least_once flag (which today is just localStorage; later wires to Stripe + cherp.live account)",
+          "Stripe one-time $5 ad-removal \u2014 once cherp.live account binding is in place",
+          "**Future**: cherp.live login button on solo About tab \u2192 federate local store \u2194 cloud. Same account on Pipe Trades + Electricians installs sees same tasks. THIS IS THE ACCOUNT-AS-COMPANY-NETWORK SHIP.",
+          "200-man company tier per Codex/nest/blueprints/200-man-instance.md \u2014 Phase B Supabase migrations (companies + subscriptions + RLS), Stripe subscription gating, social-feature unlock"
+        ]
+      },
+      {
+        "id": "kenai-model-roadmap",
+        "title": "KenAI model lineup \u2014 three swappable slots",
+        "captured": "2026-04-25",
+        "status": "active",
+        "summary": "Three designated KenAI tags as sibling slots in the orchestrator catalog (config/models.catalog.json). Operator quick-switch between them. Each maintains its OWN parallel corpus \u2014 no dilution.",
+        "models": [
+          {
+            "slot": "kenai-v5 (offline developer)",
+            "tag": "kenai:v5.5 (prod) \u00b7 v5.6 (catalog)",
+            "role": "BRAIN dev work, truthfulness gate, code reasoning, orchestration",
+            "corpus": "agents/kenai/seeds/kenai-v5/* \u2014 peerlog (8,143 rows, 516\u2013680 unsupported flags), dream loop, manual seeds, bug-hunt findings (security/dev material)",
+            "status": "production \u00b7 92%",
+            "v6_gate": "corpus crosses 500 rows (~90% to gate)"
+          },
+          {
+            "slot": "kenai-trainer (Pok\u00e9mon completion)",
+            "tag": "kenai-trainer:v20260425151823",
+            "role": "Autonomous learned gameplay \u2014 Pok\u00e9mon Crystal completion as the Play\u2192Break\u2192Fix corpus seed",
+            "corpus": "agents/kenai/seeds/kenai-trainer/* \u2014 gameplay lessons ONLY (currently 84 lessons in the kenai-plays-pokemon loop, no candidate-seed write path yet)",
+            "status": "active \u00b7 25%",
+            "isolation_note": "Pok\u00e9mon lessons NEVER bleed into v5 dev corpus or deepseek code corpus"
+          },
+          {
+            "slot": "deepseek-offline-dev",
+            "tag": "deepseek-r1:8b (registered 2026-04-24, gated on `ollama pull` to enable)",
+            "role": "Deeper code reasoning lane \u2014 stays out of v5 truthfulness/safety corpus",
+            "corpus": "agents/kenai/seeds/deepseek-offline-dev/* \u2014 code-focused only",
+            "status": "registered, disabled \u00b7 5%",
+            "activation": "Run `ollama pull deepseek-r1:8b`, flip enabled=true in config/models.catalog.json"
+          }
+        ],
+        "swappability": "All three slots live in config/models.catalog.json. Quick-switch endpoint already shipped (brain-orchestrator). Three is the discipline ceiling \u2014 ten would be sprawl.",
+        "next": [
+          "Split agents/kenai/seeds/ into per-model subdirs (v5/, trainer/, deepseek-offline-dev/)",
+          "Add target_model field to seed schema; bughunt-to-seeds + kenai-seeds.py learn --target-model flag",
+          "Wire kenai-plays-pokemon lesson \u2192 trainer seed candidate path",
+          "Run `ollama pull deepseek-r1:8b` to activate the deepseek slot",
+          "Define per-model holdouts (v5: dev-task accuracy; trainer: gameplay decision quality; deepseek: code reasoning)"
+        ]
+      }
+    ]
+  },
+  "wins": [
+    {
+      "ts": "2026-04-28T01:44:43Z",
+      "channel": "milestone",
+      "summary": "test message after fix",
+      "business_summary": "test message after fix"
+    },
+    {
+      "ts": "2026-04-25T01:57:52Z",
+      "channel": "ship",
+      "summary": "KenOS production ZIP rebuilt \u2014 kenos-package/dist/KenOS-1.0-20260425-015735.zip (5.0 MB, 88 files): adds 7 pokedex icons (Rayquaza + roster) to payload, picks up Controller health-color polish + Rayquaza link tags. KenOS Suite all 5 project",
+      "business_summary": "KenOS production ZIP rebuilt \u2014 kenos-package/dist/KenOS-1.0-20260425-015735.zip (5.0 MB, 88 files): adds 7 pokedex icons (Rayquaza + roster) to payload, picks up Controller health-color polish + Rayquaza link tags"
+    },
+    {
+      "ts": "2026-04-25T01:49:12Z",
+      "channel": "ship",
+      "summary": "kenos-package/dist/KenOS-1.0-20260425-014846.zip (4.8 MB, 79 files) \u2014 first working transfer ZIP. Includes Setup.bat, install/KenOS-Setup.ps1, payload/ (server + UI + scripts + rules + KenAI shell + KenOS.apk + KenOS.bat + brain.bat). Build",
+      "business_summary": "kenos-package/dist/KenOS-1.0-20260425-014846.zip (4.8 MB, 79 files) \u2014 first working transfer ZIP"
+    },
+    {
+      "ts": "2026-04-25T00:20:01Z",
+      "channel": "deploy",
+      "summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success",
+      "business_summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success"
+    },
+    {
+      "ts": "2026-04-25T00:06:37Z",
+      "channel": "deploy",
+      "summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)",
+      "business_summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)"
+    },
+    {
+      "ts": "2026-04-24T16:33:08Z",
+      "channel": "push",
+      "summary": "debecorp.com: Try CHERP links repointed to /trades (14 links across 6 pages)",
+      "business_summary": "debecorp.com: Try CHERP links repointed to /trades (14 links across 6 pages)"
+    },
+    {
+      "ts": "2026-04-24T16:19:36Z",
+      "channel": "push",
+      "summary": "cherp.live: operator rename Pipe Down Plumbing LLC \u2192 Debe Corporation (commit 46acbe0)",
+      "business_summary": "the live CHERP site: operator rename Pipe Down Plumbing LLC \u2192 Debe Corporation (shipped change)"
+    }
+  ],
+  "truth_gate": {
+    "available": true,
+    "generated_at": "2026-04-27T19:17:07Z",
+    "window_hours": 4,
+    "total": 10,
+    "pass": 6,
+    "fail": 0,
+    "partial": 0,
+    "indeterminate": 4
+  },
+  "system_flow": {
+    "title": "How CHERP + KenOS connect",
+    "nodes": [
+      {
+        "id": "field",
+        "label": "Field crews",
+        "kind": "user",
+        "row": 0,
+        "col": 0,
+        "biz": "construction crews using the app on phones",
+        "tech": "PWA installed on Android/iOS"
+      },
+      {
+        "id": "cherp",
+        "label": "CHERP app",
+        "kind": "product",
+        "row": 0,
+        "col": 1,
+        "biz": "the field-intelligence platform we sell",
+        "tech": "static PWA at cherp.live (Netlify)"
+      },
+      {
+        "id": "office",
+        "label": "Office staff",
+        "kind": "user",
+        "row": 0,
+        "col": 2,
+        "biz": "office side viewing reports + dispatching",
+        "tech": "browser \u2192 Supabase + SharePoint"
+      },
+      {
+        "id": "supabase",
+        "label": "Cloud DB",
+        "kind": "service",
+        "row": 1,
+        "col": 1,
+        "biz": "where every form, log, and timecard lives",
+        "tech": "Supabase Postgres + RLS + Storage"
+      },
+      {
+        "id": "sharepoint",
+        "label": "Debe Corp SharePoint",
+        "kind": "service",
+        "row": 1,
+        "col": 2,
+        "biz": "where office staff already work \u2014 we sync to it",
+        "tech": "Microsoft Graph app-only auth, daily-folder routing"
+      },
+      {
+        "id": "brain",
+        "label": "BRAIN",
+        "kind": "internal",
+        "row": 2,
+        "col": 1,
+        "biz": "Ken's master memory + agent framework",
+        "tech": "JSONL logs + SQLite FTS + handoffs/"
+      },
+      {
+        "id": "kenos",
+        "label": "KenOS v1.2",
+        "kind": "internal",
+        "row": 2,
+        "col": 0,
+        "biz": "the operator dashboard",
+        "tech": "fullstack-agent-controller w/ chains + tools"
+      },
+      {
+        "id": "kenai",
+        "label": "Local AI (KenAI)",
+        "kind": "internal",
+        "row": 2,
+        "col": 2,
+        "biz": "AI that runs on Ken's GPU, no cloud cost",
+        "tech": "Ollama tags \u00b7 qwen2.5-coder-14b base \u00b7 litellm proxy"
+      }
+    ],
+    "edges": [
+      {
+        "from": "field",
+        "to": "cherp",
+        "label": ""
+      },
+      {
+        "from": "office",
+        "to": "cherp",
+        "label": ""
+      },
+      {
+        "from": "cherp",
+        "to": "supabase",
+        "label": "data"
+      },
+      {
+        "from": "cherp",
+        "to": "sharepoint",
+        "label": "sync"
+      },
+      {
+        "from": "kenos",
+        "to": "brain",
+        "label": ""
+      },
+      {
+        "from": "kenai",
+        "to": "brain",
+        "label": ""
+      },
+      {
+        "from": "kenos",
+        "to": "cherp",
+        "label": "agents build/maintain"
+      }
+    ]
+  },
+  "stats": {
+    "active_projects": 11,
+    "total_milestones": 118
+  },
+  "operator_panel": "http://localhost:8090/",
+  "contact_operator_email": "heskeny@gmail.com"
+}
