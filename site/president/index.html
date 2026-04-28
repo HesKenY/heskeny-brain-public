@@ -30,78 +30,78 @@
 
   <!-- ── SECTION: HERO / what we are ─────────────────────────── -->
   <section class="section hero">
-    <div class="eyebrow">What we're building</div>
-    <h1 class="biz">A field-intelligence platform for construction crews, with an AI maintenance layer that keeps it running and learning.</h1>
-    <h1 class="tech">CHERP — multi-tenant construction crew PWA on Supabase, maintained by an autonomous agent stack on a local 4070, evidence-gated and offline-capable.</h1>
-    <p class="lede biz">Crews use CHERP on their phones for daily logs, JSAs, timecards, calculators, and trade-specific reference. Office staff see everything in real time without installing anything. The AI behind it keeps the code shipping safely.</p>
-    <p class="lede tech">7 trade variants on cherp.live + offline-capable solo PWAs. Supabase RLS-bound. KenAI on Ollama drives migrations + bug-fixing via the KenOS v1.2 controller. Cross-agent claim verifier gates every shipped change.</p>
+    <div class="eyebrow">Overview</div>
+    <h1 class="biz">A field-intelligence platform for construction operations, paired with an autonomous engineering layer that maintains the product itself.</h1>
+    <h1 class="tech">CHERP — multi-tenant construction-operations PWA on Supabase, maintained by an autonomous agent stack on dedicated GPU infrastructure, evidence-gated and offline-capable.</h1>
+    <p class="lede biz">CHERP delivers daily logs, job-safety analyses, timekeeping, trade-specific calculators, and reference materials to construction crews on mobile devices, with synchronized office-side visibility. Engineering and maintenance is performed by a local AI system, providing release velocity and operational continuity without proportional headcount.</p>
+    <p class="lede tech">Seven trade variants on cherp.live plus offline-capable solo PWAs. Supabase REST + RLS, Microsoft Graph SharePoint sync. KenAI on Ollama drives migrations and remediation through the KenOS v1.2 controller. Every shipped change passes a cross-agent claim verifier.</p>
   </section>
 
   <!-- ── SECTION: WHO ─────────────────────────────────────────── -->
   <section class="section who">
-    <div class="eyebrow">Who's behind it</div>
+    <div class="eyebrow">Leadership</div>
     <div class="who-grid">
       <div class="who-card">
         <div class="who-role">President</div>
         <div class="who-name">Sean</div>
-        <div class="who-line">Co-founder · the face · customer + market lead.</div>
+        <div class="who-line">Co-founder. Customer relationships, market positioning, and external representation.</div>
       </div>
       <div class="who-card">
         <div class="who-role">Operator</div>
         <div class="who-name">Ken Deibel</div>
-        <div class="who-line biz">Inventor + technical operator. Designs the system, runs the AI agents, writes the code that the AI doesn't yet.</div>
-        <div class="who-line tech">CHERP architect; runs the BRAIN agent framework, the KenOS controller stack, the KenAI model lineup, and the GPU infrastructure that drives them.</div>
+        <div class="who-line biz">Co-founder and principal architect. Designs and operates the platform, the autonomous engineering stack, and the AI infrastructure.</div>
+        <div class="who-line tech">CHERP architect. Owns the BRAIN agent framework, the KenOS controller stack, the KenAI model lineup, and the GPU infrastructure that drives them.</div>
       </div>
     </div>
   </section>
 
   <!-- ── SECTION: VISION ─────────────────────────────────────── -->
   <section class="section vision">
-    <div class="eyebrow">Where we're heading</div>
+    <div class="eyebrow">Strategic roadmap</div>
     <ol class="vision-arc">
       <li>
         <div class="va-num">1</div>
         <div class="va-body">
-          <h3 class="biz">Get CHERP into more crews</h3>
-          <h3 class="tech">CHERP solo→company funnel + per-trade variants</h3>
-          <p class="biz">Each trade gets its own free phone app on the App Store. Crews try it solo, like it, and pay to connect their whole company.</p>
-          <p class="tech">7 trade-named PWAs (Pipe Trades / Electricians / HVAC / Fire Sprinkler / Carpentry / Concrete / Safety / General) on cherp.live + a federation-v0 device-code flow so a worker's solo app attaches to a company instance. Single Supabase, runtime CHERP_TRADE flag.</p>
+          <h3 class="biz">Distribution: trade-specific entry points</h3>
+          <h3 class="tech">CHERP solo→company funnel with per-trade variants</h3>
+          <p class="biz">Each trade discipline receives a branded mobile application available at no cost. Individual crews adopt the application standalone; conversion to paid company-wide deployment occurs once a connection request is approved by a foreman.</p>
+          <p class="tech">Seven trade-named PWAs (Pipe Trades, Electricians, HVAC, Fire Sprinkler, Carpentry, Concrete, Safety, General) on cherp.live, plus a federation-v0 device-code flow that attaches a worker's solo app to a company instance. Single Supabase backend, runtime CHERP_TRADE flag.</p>
         </div>
       </li>
       <li>
         <div class="va-num">2</div>
         <div class="va-body">
-          <h3 class="biz">Sell company instances</h3>
-          <h3 class="tech">Per-company Supabase isolation + SharePoint sync</h3>
-          <p class="biz">When a company signs up, they get their own private CHERP space. Their existing Microsoft Office files and SharePoint sites all sync automatically.</p>
-          <p class="tech">Tier A architecture: single Supabase project, RLS isolation per company_id; Wave-1 + Wave-1b SharePoint daily-folder routing live for Debe Corp as the first paid instance.</p>
+          <h3 class="biz">Monetization: company-tier instances</h3>
+          <h3 class="tech">Per-company isolation with SharePoint integration</h3>
+          <p class="biz">Each customer receives a dedicated CHERP environment with company-level data isolation. Daily logs, photos, and signed JSAs flow into the customer's existing Microsoft 365 SharePoint site, eliminating the need for office staff to adopt new software.</p>
+          <p class="tech">Tier-A architecture: single Supabase project with RLS isolation per company_id. Wave-1 and Wave-1b SharePoint daily-folder routing in production for Debe Corp, the first paid instance.</p>
         </div>
       </li>
       <li>
         <div class="va-num">3</div>
         <div class="va-body">
-          <h3 class="biz">AI that builds + fixes itself</h3>
-          <h3 class="tech">KenOS controller + wolverine self-write loop</h3>
-          <p class="biz">Most of CHERP's code now gets written and fixed by AI running on a single GPU in Ken's office. Customers get faster releases without us hiring a full dev team.</p>
-          <p class="tech">KenOS v1.2 dispatches goals to the kenai-fullstack/wolverine agents. Wolverine has gated self-write to its own controller source. Cross-agent claim verifier checks every claimed change.</p>
+          <h3 class="biz">Engineering capacity: autonomous maintenance</h3>
+          <h3 class="tech">KenOS controller with gated self-modification</h3>
+          <p class="biz">Routine engineering work — feature implementation, bug remediation, schema migrations — is performed by a local AI system, with each change verified against an evidence ledger before merge. Customers benefit from reduced release latency without expansion of engineering headcount.</p>
+          <p class="tech">KenOS v1.2 dispatches goals to the kenai-fullstack and kenai-wolverine agents. Wolverine carries gated self-write authority over its own controller source. A cross-agent claim verifier validates every claimed change against the filesystem and git history.</p>
         </div>
       </li>
       <li>
         <div class="va-num">4</div>
         <div class="va-body">
-          <h3 class="biz">Pokemon training — proof the AI learns live</h3>
-          <h3 class="tech">kenai-trainer: autonomous Pokémon Crystal completion as the Play→Break→Fix loop</h3>
-          <p class="biz">We're teaching one of our AI models to play and beat Pokémon Crystal — completely on its own. It's not for fun. It's the same loop we use to teach the AI to fix CHERP bugs: try something, see what happened, learn, try again. If the AI can finish Pokémon, it can finish a feature.</p>
-          <p class="tech">kenai-trainer:latest drives mGBA via xdotool, produces lesson seeds (84 banked), separate corpus from kenai-v5 dev corpus per the no-dilution rule. Same loop pattern feeds the bug-hunter pipeline (find vuln → patch → seed) and CHERP migrations.</p>
+          <h3 class="biz">Capability validation: live-response training</h3>
+          <h3 class="tech">kenai-trainer — Pokémon Crystal completion as a Play→Break→Fix benchmark</h3>
+          <p class="biz">We validate the autonomous engineering capability by tasking a dedicated AI variant with completing a complex video game environment without human intervention. The decision loop required — observe state, attempt action, learn from outcome, refine — is the same loop used to remediate CHERP defects in production. Successful completion is a public, externally-verifiable demonstration that the system is capable of multi-step reasoning under uncertainty.</p>
+          <p class="tech">kenai-trainer:latest drives mGBA via xdotool, produces lesson seeds (84 banked to date), maintains a separate corpus from the kenai-v5 development corpus per the no-dilution rule. The same loop pattern feeds the bug-bounty pipeline (find vulnerability → patch → seed) and CHERP migrations.</p>
         </div>
       </li>
       <li>
         <div class="va-num">5</div>
         <div class="va-body">
-          <h3 class="biz">Revenue: bug bounties + paid CHERP instances</h3>
-          <h3 class="tech">Phase-1 bounty packets (Nexon/Epic/Ubisoft/Google) + paid Debe Corp + future tier-A companies</h3>
-          <p class="biz">Two revenue streams while CHERP grows: (1) we find security bugs in big companies' software and get paid bounties; (2) construction companies pay monthly for CHERP. The bounties also train our AI to find bugs in CHERP itself.</p>
-          <p class="tech">$10K floor / $120K ceiling on the four drafted Phase-1 packets. Debe Corp is the first paid CHERP instance; Heskeny-Brain investor portal carries the public evidence.</p>
+          <h3 class="biz">Revenue lines</h3>
+          <h3 class="tech">Phase-1 bounty packets and paid CHERP instances</h3>
+          <p class="biz">Two revenue lines operate in parallel during the platform's growth phase. First, paid security research: documented vulnerability submissions to enterprise bounty programs. Second, paid CHERP company instances. The security work also produces training data that hardens CHERP itself.</p>
+          <p class="tech">$10K floor / $120K ceiling across four drafted Phase-1 packets (Nexon, Epic, Ubisoft, Google). Debe Corp is the first paid CHERP instance; Heskeny-Brain hosts the public evidence portal.</p>
         </div>
       </li>
     </ol>
@@ -109,50 +109,50 @@
 
   <!-- ── SECTION: SYSTEM FLOW ────────────────────────────────── -->
   <section class="section systemflow">
-    <div class="eyebrow">How it connects</div>
-    <h2>The full stack at a glance</h2>
+    <div class="eyebrow">Architecture</div>
+    <h2>System overview</h2>
     <div class="flow-canvas" id="flow-canvas"></div>
-    <p class="flow-note biz">Field crews and office staff use the CHERP app. Everything they enter goes into the cloud database and (for Debe Corp) into SharePoint at the same time. The AI agents on Ken's local GPU build and fix the code, and the BRAIN keeps every action logged so we can prove what happened.</p>
-    <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions → Microsoft Graph (SharePoint). Local KenAI on Ollama via litellm Anthropic-compat proxy → KenOS v1.2 controller → workspace-jailed tools. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
+    <p class="flow-note biz">Field crews and office staff interact through the CHERP application. All entries are written to the cloud database and, for enabled customers, mirrored to their existing SharePoint environment. Engineering and remediation are performed by AI agents running on local GPU infrastructure, with every action recorded in a unified evidence ledger.</p>
+    <p class="flow-note tech">Static PWA → Supabase (REST + RLS) + Netlify functions → Microsoft Graph (SharePoint). Local KenAI on Ollama via litellm Anthropic-compatible proxy → KenOS v1.2 controller → workspace-jailed tools. BRAIN holds canonical state (master.log JSONL + handoffs + evidence).</p>
   </section>
 
   <!-- ── SECTION: PROJECTS (live-synced from operator) ───────── -->
   <section class="section projects">
-    <div class="eyebrow">What we're shipping right now</div>
-    <h2>Active project list</h2>
+    <div class="eyebrow">In progress</div>
+    <h2>Active initiatives</h2>
     <div class="project-grid" id="project-grid">loading…</div>
     <details class="planning-fold">
-      <summary>+ planning / on-deck</summary>
+      <summary>+ Planning / queued</summary>
       <div class="project-grid" id="planning-grid"></div>
     </details>
   </section>
 
   <!-- ── SECTION: RECENT WINS ────────────────────────────────── -->
   <section class="section wins">
-    <div class="eyebrow">Recent wins</div>
-    <h2>What landed lately</h2>
+    <div class="eyebrow">Recent milestones</div>
+    <h2>Recently shipped</h2>
     <ul class="wins-list" id="wins-list">loading…</ul>
   </section>
 
   <!-- ── SECTION: TRUTH GATE ─────────────────────────────────── -->
   <section class="section truth">
-    <div class="eyebrow">Trust signal</div>
+    <div class="eyebrow">Quality assurance</div>
     <h2>Cross-agent claim verifier</h2>
-    <p class="biz">Every claim our AI makes ("I shipped X", "I fixed Y") gets automatically checked against reality. If the file doesn't exist or the commit isn't there, it fails. This is how we prove the AI did what it said.</p>
-    <p class="tech">scripts/brain-agent-claim-checks.py — file-path + commit-SHA token verification across BRAIN/CHERP/HOME roots. Per-actor breakdown. Hooked into the Heskeny-Brain dashboard.</p>
+    <p class="biz">Every modification claimed by an AI agent is automatically validated against the filesystem and version-control history. Claims that reference files which do not exist, or commits which were not made, are flagged and surfaced. This mechanism produces a continuous, evidence-based record of what the system actually delivered.</p>
+    <p class="tech">scripts/brain-agent-claim-checks.py — file-path and commit-SHA token verification across BRAIN, CHERP, and home roots. Per-actor breakdown. Surfaced via the Heskeny-Brain evidence dashboard.</p>
     <div class="truth-stats" id="truth-stats">loading…</div>
   </section>
 
   <!-- ── SECTION: NOTE TO OPERATOR ──────────────────────────── -->
   <section class="section contact">
-    <div class="eyebrow">Got a redline / question / note?</div>
-    <h2>Send it to Ken</h2>
-    <p class="biz">Pre-fills your email client. Use this for site copy edits, customer feedback to relay, market intel, anything you want him to see.</p>
+    <div class="eyebrow">Communication</div>
+    <h2>Send a note to the operator</h2>
+    <p class="biz">Submissions are routed via email and filed in the operator's pickup queue. Suggested uses: copy revisions for cherp.live or marketing surfaces, customer feedback for relay, market intelligence, internal notes.</p>
     <form class="note-form" id="note-form">
       <label>Subject (optional)</label>
       <input type="text" id="note-subject" placeholder="e.g. cherp.live homepage copy">
       <label>Note</label>
-      <textarea id="note-body" rows="6" placeholder="What you want Ken to see…"></textarea>
+      <textarea id="note-body" rows="6" placeholder="Message to the operator…"></textarea>
       <button type="submit" class="key-btn primary">Send</button>
       <span class="meta" id="note-meta"></span>
     </form>
