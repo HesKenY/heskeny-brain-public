@@ -841,6 +841,14 @@ body[data-mode="technical"] .biz  { display: none; }
   background: linear-gradient(180deg, rgba(0,229,255,.04), transparent 50%);
   pointer-events: none;
 }
+.vault-tile.gated   { border-left-color: var(--amber); }
+.vault-tile.gated::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,170,43,.05), transparent 50%);
+  pointer-events: none;
+}
+.vault-tile.gated   .vt-tag   { color: var(--amber); }
+.vault-tile.gated   strong    { color: var(--lime); font-weight: 700; }
 .vault-tile > * { position: relative; z-index: 1; }
 .vault-tile .vt-tag {
   font: 10px ui-monospace, Menlo, Consolas, monospace;

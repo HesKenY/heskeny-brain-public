@@ -176,8 +176,8 @@
   <section class="section bet">
     <div class="eyebrow">Current bet · active hypothesis</div>
     <h2>Per-customer AI dev team on Azure</h2>
-    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked directly into that company's CHERP environment. The customer's files live on a partitioned drive on the same VM — accessible to their office staff, walled off from our system code. The AI runs the day-to-day: it processes field-side data as it lands, watches the dashboards, runs the routine maintenance, and emails periodic reports straight to the customer's inbox. Funded during the test phase by Azure's startup credit allocation; if it works, every paying customer ships with what is effectively a private AI dev team without the operator team having to grow.</p>
-    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Two-partition disk layout: <code>/system</code> holds CHERP + KenOS internals (read-only to customer); <code>/company</code> is the customer's accessible file vault (SMB-shared, role-gated). Tenant-scoped KenOS variant jailed to the workspace. Daily-operations loop processes inbound field data, runs scheduled maintenance, and emits report digests via SMTP. SharePoint integration retired in favor of the on-VM partitioned vault — fewer moving parts, cleaner isolation, no third-party storage dependency.</p>
+    <p class="lede biz">Each paid CHERP company instance gets its own Azure virtual machine running our current KenAI model, hooked into that company's CHERP environment. The customer's files live on a partitioned drive on the same VM — accessible to their office staff, walled off from our system code. The AI is intentionally gated: it can <strong>read</strong> the customer's files (employee records, daily logs, project documents) and <strong>copy</strong> them into its working area for analysis, but it cannot edit them. It can also <strong>create new files</strong> — the periodic reports it generates drop straight into the customer's vault so the customer picks them up the same way they pick up everything else. Funded during the test phase by Azure's startup credit allocation.</p>
+    <p class="lede tech">Per-tenant Azure VM running the current KenAI model on Ollama. Two-partition disk layout: <code>/system</code> holds CHERP + KenOS internals (read-only to customer); <code>/company</code> is the customer's accessible file vault (SMB-shared, role-gated). Tenant-scoped KenOS variant jailed to the workspace. AI-side mount of <code>/company</code> uses a narrow capability set: <code>read</code>, <code>copy-out</code>, and <code>create-new</code> only — no <code>write-existing</code>, no <code>delete</code>. Customer source-of-truth files are immutable to the AI; only AI-authored report files land back in <code>/company</code>. SharePoint integration retired in favor of the on-VM partitioned vault.</p>
 
     <div class="bet-hyp">
       <div class="bh-label">Hypothesis</div>
@@ -201,7 +201,7 @@
       <div class="op-step">
         <div class="op-icon">⚙</div>
         <div class="op-title">Runs the day-to-day</div>
-        <div class="op-note">Processes daily logs, photos, and JSAs as they land. Watches dashboards. Files company-side outputs into the company partition. Handles routine maintenance.</div>
+        <div class="op-note">Reads + copies company files for analysis (no edits). Watches dashboards. Drops new report files back into the company partition for the customer to pick up. Handles routine maintenance.</div>
       </div>
       <div class="op-arrow">→</div>
       <div class="op-step">
@@ -321,12 +321,17 @@
       <div class="vault-tile company">
         <div class="vt-tag">/company · customer-accessible</div>
         <div class="vt-title">Customer file vault</div>
-        <div class="vt-note">Daily logs, photos, signed JSAs, project documents, drawings, submittals, sign-off archives, and the AI-generated reports. Mounted as an SMB share to the customer's office network; per-role read/write gating. This is the surface customer staff actually use day-to-day.</div>
+        <div class="vt-note">Daily logs, photos, signed JSAs, project documents, drawings, submittals, sign-off archives, employee records, and the AI-generated reports the AI deposits here. Mounted as an SMB share to the customer's office network; per-role read/write gating for office staff.</div>
+      </div>
+      <div class="vault-tile gated">
+        <div class="vt-tag">AI access · gated</div>
+        <div class="vt-title">Read + copy + drop reports — no edit</div>
+        <div class="vt-note">The tenant AI is mounted into <code>/company</code> with intentionally narrow permissions. It can <strong>read</strong> any customer file (employee records, daily logs, project docs) and <strong>copy</strong> them into its working area for analysis. It can <strong>create new files</strong> — the periodic reports it generates land here so the customer picks them up through the same vault their staff already use. It cannot edit or overwrite existing customer files. The customer's source-of-truth data is immutable from the AI's perspective.</div>
       </div>
       <div class="vault-tile barrier">
         <div class="vt-tag">Isolation barrier</div>
-        <div class="vt-title">Why two partitions</div>
-        <div class="vt-note">Customer data stays customer-owned and customer-recoverable; our system code stays operator-owned and customer-tamper-proof. A misconfigured office workstation can't reach the AI weights; a model retrain on our side can't accidentally touch customer documents. Disk-level guarantee, not just a permissions guarantee.</div>
+        <div class="vt-title">Why two partitions + gated access</div>
+        <div class="vt-note">Customer data stays customer-owned and customer-recoverable; our system code stays operator-owned and customer-tamper-proof. The AI's read-only-on-existing + create-new-allowed permission posture means it cannot silently mutate employee records or project files — only ever add report files alongside them. A misconfigured office workstation can't reach the AI weights; a model retrain can't touch customer documents. Disk-level guarantee, not just a permissions guarantee.</div>
       </div>
     </div>
   </section>
