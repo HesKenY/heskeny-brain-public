@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-28T03:29:06Z",
+  "generated_at": "2026-04-28T03:30:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1474,6 +1474,12 @@
     ]
   },
   "wins": [
+    {
+      "ts": "2026-04-28T03:29:14Z",
+      "channel": "pivot",
+      "summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)",
+      "business_summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)"
+    },
     {
       "ts": "2026-04-28T03:19:57Z",
       "channel": "ship",
