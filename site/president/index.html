@@ -27,24 +27,49 @@
 
 <main>
 
-  <!-- ── SECTION: HERO / what this panel is ─────────────────── -->
-  <section class="section hero">
-    <div class="eyebrow">Sean · access panel</div>
-    <h1 class="biz">Your live window into the CHERP system — what's deployed, what's syncing, what's in flight, and what's been shipped.</h1>
-    <h1 class="tech">President access panel — read-mostly mirror of operator state. Deployment status, customer SharePoint surfaces, project completion percentages, and the verifier-backed activity ledger.</h1>
-    <p class="lede biz">This page refreshes in the background. Use it to check on customer deployments, follow build progress on initiatives that affect customer conversations, jump straight to the SharePoint folders the office side is using, and see what's been shipped recently. Use the note form at the bottom to send anything that needs the operator's attention.</p>
-    <p class="lede tech">Static page + data JSON regenerated on a cron from the operator workstation. Project percentages come from project-checklist.json. Deployment status surfaces Netlify deploy state and GitHub Pages publish status. SharePoint links are filed per customer environment.</p>
-  </section>
+  <!-- ── SECTION: HERO / showcase ───────────────────────────── -->
+  <section class="section hero hero-showcase">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Sean · access panel</div>
+        <h1 class="biz hero-title">What we've built<br><span class="accent">— and what's live right now.</span></h1>
+        <h1 class="tech hero-title">CHERP platform · KenOS controller<br><span class="accent">— operator state, mirrored.</span></h1>
+        <p class="lede biz">Refreshed in the background. One live customer, agents shipping daily, every claim verified.</p>
+        <p class="lede tech">Data JSON regenerated on a cron. Deployments, build progress, verifier results, and the activity ledger — all from canonical state.</p>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <div class="hm-ring r1"></div>
+        <div class="hm-ring r2"></div>
+        <div class="hm-ring r3"></div>
+        <div class="hm-glyph">◆</div>
+      </div>
+    </div>
 
-  <!-- ── SECTION: KPI STRIP ──────────────────────────────────── -->
-  <section class="section kpis">
-    <div class="eyebrow">At a glance</div>
-    <div class="kpi-strip">
-      <div class="kpi"><div class="v" id="kpi-active">—</div><div class="l">Active projects</div></div>
-      <div class="kpi lime"><div class="v" id="kpi-progress">—</div><div class="l">Avg build progress</div></div>
-      <div class="kpi"><div class="v" id="kpi-truth">—</div><div class="l">Verifier pass rate</div></div>
-      <div class="kpi amber"><div class="v" id="kpi-deploy">—</div><div class="l">Latest deploy</div></div>
-      <div class="kpi violet"><div class="v" id="kpi-customers">1</div><div class="l">Paid instances</div></div>
+    <div class="hero-stats">
+      <div class="hero-stat" data-tone="cyan">
+        <div class="hs-value" id="kpi-active">—</div>
+        <div class="hs-label">Active projects</div>
+      </div>
+      <div class="hero-stat" data-tone="lime">
+        <div class="hs-value" id="kpi-progress">—</div>
+        <div class="hs-label">Avg build progress</div>
+      </div>
+      <div class="hero-stat" data-tone="cyan">
+        <div class="hs-value" id="kpi-truth">—</div>
+        <div class="hs-label">Verifier pass rate</div>
+      </div>
+      <div class="hero-stat" data-tone="amber">
+        <div class="hs-value" id="kpi-deploy">—</div>
+        <div class="hs-label">Latest deploy</div>
+      </div>
+      <div class="hero-stat" data-tone="violet">
+        <div class="hs-value" id="kpi-customers">1</div>
+        <div class="hs-label">Paid instances</div>
+      </div>
+      <div class="hero-stat" data-tone="magenta">
+        <div class="hs-value" id="kpi-shipped">—</div>
+        <div class="hs-label">Milestones shipped</div>
+      </div>
     </div>
   </section>
 
