@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-29T21:30:01Z",
+  "generated_at": "2026-04-29T21:45:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1475,6 +1475,12 @@
   },
   "wins": [
     {
+      "ts": "2026-04-29T21:43:07Z",
+      "channel": "ship",
+      "summary": "pawprint demo gamification shipped \u2014 d522166 pushed \u2192 HesKenY/heskeny-pawprint main \u2192 netlify auto-deploys \u00b7 7 positive-reinforcement features (growsInto bridge text on chores/goals, optional parent kudos prompt+block, named streak tiers, f",
+      "business_summary": "pawprint demo gamification shipped \u2014 d522166 pushed \u2192 HesKenY/heskeny-pawprint main \u2192 our hosting platform auto-deploys \u00b7 7 positive-reinforcement features (growsInto bridge text on chores/goals, optional parent kudos prompt+block, named streak tiers, firstApproval/firstDollar/firstStreakWeek one-ti"
+    },
+    {
       "ts": "2026-04-28T04:00:23Z",
       "channel": "improve",
       "summary": "wolverine self-write hardened \u2014 anti-regression guard on file_ops blocks placeholder stubs / mass deletion / wrong-language comments / adjacent dup blocks (informed by today's f22a98f self-improvement run)",
@@ -1551,12 +1557,6 @@
       "channel": "deploy",
       "summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success",
       "business_summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success"
-    },
-    {
-      "ts": "2026-04-25T00:06:37Z",
-      "channel": "deploy",
-      "summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)",
-      "business_summary": "checklist published live: https://heskeny.github.io/heskeny-brain/projects.html via scripts/publish-checklist.sh (one-command refresh; auto-deploys via GitHub Pages)"
     }
   ],
   "truth_gate": {
