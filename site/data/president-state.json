@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-04-29T23:45:01Z",
+  "generated_at": "2026-04-30T00:00:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1475,6 +1475,12 @@
   },
   "wins": [
     {
+      "ts": "2026-04-29T23:56:00Z",
+      "channel": "ship",
+      "summary": "pawprint demo arcade layer shipped \u2014 0ebd5ca pushed \u2192 HesKenY/heskeny-pawprint main \u2192 netlify auto-deploys \u00b7 XP system (value*100 per approved chore) \u00b7 15-level curve with kid-to-pro titles ('New here' \u2192 'Helper' \u2192 'Foreman' \u2192 'Champion' \u2192 ",
+      "business_summary": "pawprint demo arcade layer shipped \u2014 0ebd5ca pushed \u2192 HesKenY/heskeny-pawprint main \u2192 our hosting platform auto-deploys \u00b7 XP system (value*100 per approved chore) \u00b7 15-level curve with kid-to-pro titles ('New here' \u2192 'Helper' \u2192 'Foreman' \u2192 'Champion' \u2192 'Legend' \u2192 'Pawprint Royalty') \u00b7 animated glowi"
+    },
+    {
       "ts": "2026-04-29T21:43:07Z",
       "channel": "ship",
       "summary": "pawprint demo gamification shipped \u2014 d522166 pushed \u2192 HesKenY/heskeny-pawprint main \u2192 netlify auto-deploys \u00b7 7 positive-reinforcement features (growsInto bridge text on chores/goals, optional parent kudos prompt+block, named streak tiers, f",
@@ -1551,12 +1557,6 @@
       "channel": "ship",
       "summary": "kenos-package/dist/KenOS-1.0-20260425-014846.zip (4.8 MB, 79 files) \u2014 first working transfer ZIP. Includes Setup.bat, install/KenOS-Setup.ps1, payload/ (server + UI + scripts + rules + KenAI shell + KenOS.apk + KenOS.bat + brain.bat). Build",
       "business_summary": "kenos-package/dist/KenOS-1.0-20260425-014846.zip (4.8 MB, 79 files) \u2014 first working transfer ZIP"
-    },
-    {
-      "ts": "2026-04-25T00:20:01Z",
-      "channel": "deploy",
-      "summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success",
-      "business_summary": "public mirror created: HesKenY/heskeny-brain-public (public) \u2192 https://heskeny.github.io/heskeny-brain-public/projects.html \u2014 Pages enabled, deploy=success"
     }
   ],
   "truth_gate": {
