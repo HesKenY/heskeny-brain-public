@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-02T07:15:01Z",
+  "generated_at": "2026-05-02T07:30:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1545,12 +1545,6 @@
       "channel": "milestone",
       "summary": "test message after fix",
       "business_summary": "test message after fix"
-    },
-    {
-      "ts": "2026-04-25T01:57:52Z",
-      "channel": "ship",
-      "summary": "KenOS production ZIP rebuilt \u2014 kenos-package/dist/KenOS-1.0-20260425-015735.zip (5.0 MB, 88 files): adds 7 pokedex icons (Rayquaza + roster) to payload, picks up Controller health-color polish + Rayquaza link tags. KenOS Suite all 5 project",
-      "business_summary": "KenOS production ZIP rebuilt \u2014 kenos-package/dist/KenOS-1.0-20260425-015735.zip (5.0 MB, 88 files): adds 7 pokedex icons (Rayquaza + roster) to payload, picks up Controller health-color polish + Rayquaza link tags"
     }
   ],
   "truth_gate": {
