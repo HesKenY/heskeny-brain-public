@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-05T01:15:01Z",
+  "generated_at": "2026-05-05T01:30:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -101,7 +101,7 @@
         "project": "brain-pipe-r",
         "kind": "in_progress",
         "title": "Frame 4 + 6 search-index overhaul",
-        "summary": "Backend: pipe-r Codex/server.js +chatlogSearchJsonl/Sharedlog/Search helpers + GET /api/chatlog/search (cross-session) + extended GET /api/shared-log to accept ?q= for full-history substring search. Frontend: ~/widgets-chatlog.html new search bar (debounced 220ms, results show date+session+cyan match highlights, Esc clears). ~/widgets-brainlog.html upgraded filter input \u2014 empty=tail mode, \u22652 chars=server-side history search, polling pauses, history pill. Awaits operator pipe-r restart (parent of trio tmux \u2014 restart kills active Claude session).",
+        "summary": "Backend: pipe-r Codex/server.js +chatlogSearchJsonl/Sharedlog/Search helpers + GET /api/chatlog/search (cross-session) + extended GET /api/shared-log to accept ?q= for full-history substring search. Frontend: ~/widgets-chatlog.html new search bar (debounced 220ms, results show date+session+cyan match highlights, Esc clears). ~/widgets-brainlog.html upgraded filter input \u2014 empty=tail mode, \u22652 chars=server-side history search, polling pauses, history pill. Awaits operator pipe-r restart (parent of party tmux \u2014 restart kills active Claude session).",
         "business_summary": "Backend: pipe-r Codex/server.js +chatlogSearchJsonl/Sharedlog/Search helpers + GET /service endpoint/chatlog/search (cross-session) + extended GET /service endpoint/shared-log to accept ?q= for full-history substring search"
       },
       {
@@ -237,16 +237,16 @@
         "project": "kenos-android",
         "kind": "shipped",
         "title": "KenOS-Linux APK built (com.ken.kenos.linux v1.0.0)",
-        "summary": "Side-by-side companion to the Windows-targeted KenOS app: same WebView shell, applicationId com.ken.kenos.linux, app_name 'KenOS-Linux', default URL http://100.105.47.68:7777/remote (this Linux instance via Tailscale). Coexists with both the Windows KenOS APK (com.ken.kenos.maindisplay) and the original Trio app (com.ken.trio) on the phone.",
+        "summary": "Side-by-side companion to the Windows-targeted KenOS app: same WebView shell, applicationId com.ken.kenos.linux, app_name 'KenOS-Linux', default URL http://100.105.47.68:7777/remote (this Linux instance via Tailscale). Coexists with both the Windows KenOS APK (com.ken.kenos.maindisplay) and the original Party app (com.ken.party) on the phone.",
         "business_summary": "Side-by-side companion to the Windows-targeted KenOS app: same WebView shell, applicationId com.ken.kenos.linux, app_name 'KenOS-Linux', default URL http://100.105.47.68:7777/remote (this Linux instance via Tailscale)"
       },
       {
         "date": "2026-04-25",
         "project": "kenos-android",
         "kind": "shipped",
-        "title": "Trio v2.1.0 \u2014 Z Fold 7 inner-display variant + edge-to-edge insets",
-        "summary": "android/trio-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0. Debug APK 5.6 MB ready to install once phone is USB-debug authorized.",
-        "business_summary": "android/trio-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0"
+        "title": "Party v2.1.0 \u2014 Z Fold 7 inner-display variant + edge-to-edge insets",
+        "summary": "android/party-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0. Debug APK 5.6 MB ready to install once phone is USB-debug authorized.",
+        "business_summary": "android/party-webview/ rebuilt: layout-sw600dp/activity_main.xml with side-by-side rail + 56dp targets for the Z Fold 7 inner display, edge-to-edge insets handler in MainActivity (forward-compat for Android 15+), versionCode 5\u21926, versionName 2.0.3\u21922.1.0"
       },
       {
         "date": "2026-04-25",
@@ -277,8 +277,8 @@
         "project": "kenos-package",
         "kind": "shipped",
         "title": "KenOS Windows client live \u2014 production success",
-        "summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune trio bridges live (Ollama / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main Display APK installed on Z Fold6, Z Fold 7 layout pass landed (5.8MB APK). Confirms the Windows-native ZIP path works end-to-end.",
-        "business_summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune trio bridges live (the local AI runtime / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main Di"
+        "summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune party bridges live (Ollama / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main Display APK installed on Z Fold6, Z Fold 7 layout pass landed (5.8MB APK). Confirms the Windows-native ZIP path works end-to-end.",
+        "business_summary": "Real operator run on Windows: KenOS server up on :7777 with pty/cmd.exe fixes (title-paren bug, _resolveCli WinGet path, KENOS_ROOT cwd), Controller showing 5/12 services up, Entei/Raikou/Suicune party bridges live (the local AI runtime / claude CLI / codex CLI via WinGet OpenAI.Codex), KenOS Main D"
       },
       {
         "date": "2026-04-25",
@@ -293,8 +293,8 @@
         "project": "brain-orchestrator",
         "kind": "shipped",
         "title": "DeepSeek launcher wired",
-        "summary": "~/bin/trio-pane-deepseek.sh ships parallel to trio-pane-kenai.sh \u2014 gates on `ollama list` so the operator gets a clear error if the tag isn't pulled. config/models.catalog.json updated with the launcher path; flip enabled to true after `ollama pull deepseek-r1:8b` to activate.",
-        "business_summary": "~/bin/trio-pane-deepseek.sh ships parallel to trio-pane-kenai.sh \u2014 gates on so the operator gets a clear error if the tag isn't pulled"
+        "summary": "~/bin/party-pane-deepseek.sh ships parallel to party-pane-kenai.sh \u2014 gates on `ollama list` so the operator gets a clear error if the tag isn't pulled. config/models.catalog.json updated with the launcher path; flip enabled to true after `ollama pull deepseek-r1:8b` to activate.",
+        "business_summary": "~/bin/party-pane-deepseek.sh ships parallel to party-pane-kenai.sh \u2014 gates on so the operator gets a clear error if the tag isn't pulled"
       },
       {
         "date": "2026-04-25",
@@ -349,8 +349,8 @@
         "project": "kenos-android",
         "kind": "decided",
         "title": "Phone app: ship existing APK + manual rebuild for package-id",
-        "summary": "v1 ships the existing trio-v2.apk relabeled as KenOS (strings.xml + manifest). Package-id rename (com.ken.trio \u2192 com.ken.kenos) bundled into the next Controller rebuild commit; sideload-side, the Settings screen lets operators paste their tailnet URL.",
-        "business_summary": "v1 ships the existing trio-v2.apk relabeled as KenOS (strings.xml + manifest)"
+        "summary": "v1 ships the existing party-v2.apk relabeled as KenOS (strings.xml + manifest). Package-id rename (com.ken.party \u2192 com.ken.kenos) bundled into the next Controller rebuild commit; sideload-side, the Settings screen lets operators paste their tailnet URL.",
+        "business_summary": "v1 ships the existing party-v2.apk relabeled as KenOS (strings.xml + manifest)"
       },
       {
         "date": "2026-04-25",
@@ -413,7 +413,7 @@
         "project": "kenos-controller",
         "kind": "decided",
         "title": "KenOS naming pass",
-        "summary": "Deck \u2192 KenOS Controller. Trio Chat \u2192 KenOS Remote (laptop mirror of main display). Trio Android app \u2192 KenOS. Filename/package renames bundled into the upcoming Controller rebuild.",
+        "summary": "Deck \u2192 KenOS Controller. Party Chat \u2192 KenOS Remote (laptop mirror of main display). Party Android app \u2192 KenOS. Filename/package renames bundled into the upcoming Controller rebuild.",
         "business_summary": "Deck \u2192 KenOS Controller"
       },
       {
@@ -421,7 +421,7 @@
         "project": "main-shell",
         "kind": "shipped",
         "title": "Main display \u2194 KenOS Remote frame sync",
-        "summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log). Trio order normalized to Claude / Codex / KenAI. Sync-discipline comments added to both files so future edits touch both.",
+        "summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log). Party order normalized to Claude / Codex / KenAI. Sync-discipline comments added to both files so future edits touch both.",
         "business_summary": "Cols 4/5/6 synced 1:1 (Chatlog / Projects / BRAIN Log)"
       },
       {
@@ -508,9 +508,9 @@
         "date": "2026-04-21",
         "project": "brain-pipe-r",
         "kind": "shipped",
-        "title": "Trio terminal autostart + endpoint logging",
-        "summary": "Trio agent terminals (Claude / KenAI / Codex) come up with the server. Every terminal action logged for audit.",
-        "business_summary": "Trio agent terminals (Claude / KenAI / Codex) come up with the server"
+        "title": "Party terminal autostart + endpoint logging",
+        "summary": "Party agent terminals (Claude / KenAI / Codex) come up with the server. Every terminal action logged for audit.",
+        "business_summary": "Party agent terminals (Claude / KenAI / Codex) come up with the server"
       },
       {
         "date": "2026-04-21",
@@ -709,8 +709,8 @@
         "project": "main-shell",
         "kind": "shipped",
         "title": "Main display layout \u2014 KenAI to col 3",
-        "summary": "Trio terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover.",
-        "business_summary": "Trio terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover."
+        "summary": "Party terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover.",
+        "business_summary": "Party terminal slot reorder for ergonomics; KenAI moved to col 3 to sit next to its settings popover."
       },
       {
         "date": "2026-04-22",
@@ -724,7 +724,7 @@
         "date": "2026-04-21",
         "project": "kenos-android",
         "kind": "shipped",
-        "title": "Trio Android v2.0.1 sideloaded + scroll fix",
+        "title": "Party Android v2.0.1 sideloaded + scroll fix",
         "summary": "Android WebView wrapper rebuilt; scroll buttons working after Tailscale fix on phone. Predecessor of today's KenOS app rename.",
         "business_summary": "Android WebView wrapper rebuilt; scroll buttons working after Tailscale fix on phone"
       },
@@ -732,9 +732,9 @@
         "date": "2026-04-21",
         "project": "brain-pipe-r",
         "kind": "shipped",
-        "title": "Trio chat: real LLM responses",
-        "summary": "Trio chat endpoint replaced placeholder responses with live model output across all three agents.",
-        "business_summary": "Trio chat endpoint replaced placeholder responses with live model output across all three agents."
+        "title": "Party chat: real LLM responses",
+        "summary": "Party chat endpoint replaced placeholder responses with live model output across all three agents.",
+        "business_summary": "Party chat endpoint replaced placeholder responses with live model output across all three agents."
       },
       {
         "date": "2026-04-21",
@@ -748,7 +748,7 @@
         "date": "2026-04-21",
         "project": "brain-pipe-r",
         "kind": "shipped",
-        "title": "BRAIN CLI surface \u2014 health/sync/today/commits/handoff-index/archive/check/retrain-status/slice-log/kenai-audit/trio/grep-log",
+        "title": "BRAIN CLI surface \u2014 health/sync/today/commits/handoff-index/archive/check/retrain-status/slice-log/kenai-audit/party/grep-log",
         "summary": "The main brain.sh subcommand fanout that defines the operator's everyday loop.",
         "business_summary": "The main brain.sh subcommand fanout that defines the operator's everyday loop."
       },
@@ -772,9 +772,9 @@
         "date": "2026-04-20",
         "project": "brain-pipe-r",
         "kind": "shipped",
-        "title": "Trio terminal endpoint logging",
-        "summary": "Every /api/trio-term/{ensure,key,stop} action logged for audit. Made the orchestrator durability gates trustworthy.",
-        "business_summary": "Every /service endpoint/trio-term/{ensure,key,stop} action logged for audit"
+        "title": "Party terminal endpoint logging",
+        "summary": "Every /api/party-term/{ensure,key,stop} action logged for audit. Made the orchestrator durability gates trustworthy.",
+        "business_summary": "Every /service endpoint/party-term/{ensure,key,stop} action logged for audit"
       },
       {
         "date": "2026-04-14",
@@ -853,8 +853,8 @@
         "project": "kenos-remote",
         "kind": "decided",
         "title": "Ken: phone client is the gold standard",
-        "summary": "After reviewing the trio-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference. Triggered the main-display \u2194 phone frame sync work the same day.",
-        "business_summary": "After reviewing the trio-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference"
+        "summary": "After reviewing the party-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference. Triggered the main-display \u2194 phone frame sync work the same day.",
+        "business_summary": "After reviewing the party-chat phone UI side-by-side with the deck, Ken declared the phone composition the canonical reference"
       },
       {
         "date": "2026-04-24",
@@ -877,8 +877,8 @@
         "project": "kenai-v5",
         "kind": "decided",
         "title": "Ken: arm gate for KenAI tool execution",
-        "summary": "After watching KenAI attempt live writes from inside trio chat, Ken introduced the safe-by-default --dry-run arm gate. Tags get parsed + displayed as [dry-run] notices unless KENAI_ARMED=1 is set.",
-        "business_summary": "After watching KenAI attempt live writes from inside trio chat, Ken introduced the safe-by-default --dry-run arm gate"
+        "summary": "After watching KenAI attempt live writes from inside party chat, Ken introduced the safe-by-default --dry-run arm gate. Tags get parsed + displayed as [dry-run] notices unless KENAI_ARMED=1 is set.",
+        "business_summary": "After watching KenAI attempt live writes from inside party chat, Ken introduced the safe-by-default --dry-run arm gate"
       },
       {
         "date": "2026-04-22",
@@ -1026,7 +1026,7 @@
             "name": "KenOS Main Display",
             "status": "shipped",
             "percent": 100,
-            "summary": "6-slot kiosk: Claude / Codex / KenAI trio + chatlog + projects + brain log",
+            "summary": "6-slot kiosk: Claude / Codex / KenAI party + chatlog + projects + brain log",
             "current": "Stable. Settings popover catalog-aware; quick-switch wired; canonical symlink fixed; cols 4/5/6 synced 1:1 with KenOS Remote.",
             "next": [],
             "owner": "claude",
@@ -1035,7 +1035,7 @@
               "kenos-controller",
               "brain-orchestrator"
             ],
-            "business_summary": "6-slot kiosk: Claude / Codex / KenAI trio + chatlog + projects + brain log",
+            "business_summary": "6-slot kiosk: Claude / Codex / KenAI party + chatlog + projects + brain log",
             "business_current": "Stable"
           },
           {
@@ -1043,8 +1043,8 @@
             "name": "KenOS Remote",
             "status": "shipped",
             "percent": 100,
-            "summary": "Laptop / second-PC mirror of the main display (same content, different physical PC). Trio + Chatlog + Projects + BRAIN Log.",
-            "current": "Frames 4/5/6 synced with main display. Trio order Claude / Codex / KenAI. Ops view stays at 3 frames.",
+            "summary": "Laptop / second-PC mirror of the main display (same content, different physical PC). Party + Chatlog + Projects + BRAIN Log.",
+            "current": "Frames 4/5/6 synced with main display. Party order Claude / Codex / KenAI. Ops view stays at 3 frames.",
             "next": [],
             "owner": "claude",
             "related": [
@@ -1059,7 +1059,7 @@
             "name": "KenOS Package \u2014 Windows ZIP for fresh operator",
             "status": "shipped",
             "percent": 100,
-            "summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template. Doubles as BRAIN backup for Debe Corp continuity.",
+            "summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Party + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template. Doubles as BRAIN backup for Debe Corp continuity.",
             "current": "Production build at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard captures identity + walks through GitHub signup + installs Node/Python/Git/Ollama/Tailscale + pulls KenAI model + copies payload + drops desktop shortcut + optional adb phone push. KenOS.bat starts server + opens Controller. brain.bat = Windows operator CLI. 79 files, 4.8 MB.",
             "next": [],
             "owner": "claude",
@@ -1069,7 +1069,7 @@
               "kenos-android",
               "kenai-v5"
             ],
-            "business_summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Trio + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template",
+            "business_summary": "Windows-native production ZIP of the whole KenOS Suite (Controller + Main Display + Widget Band + KenAI + Party + log system + project checklist + phone app + scaffold + rules) as a fresh-instance template",
             "business_current": "Production build at kenos-package/dist/KenOS-latest.zip \u2014 double-click Setup.bat \u2192 PowerShell wizard captures identity + walks through GitHub signup + installs Node/Python/Git/the local AI runtime/Tailscale + pulls KenAI model + copies payload + drops desktop shortcut + optional adb phone push"
           },
           {
@@ -1078,7 +1078,7 @@
             "status": "shipped",
             "percent": 100,
             "summary": "WebView wrapper for KenOS Remote, Tailscale-reachable. Sideloaded; not on the Play Store.",
-            "current": "Functional. Labels renamed Trio \u2192 KenOS. Settings screen lets each operator paste their own tailnet URL. APK bundled into the package ZIP for sideload during install. Z Fold 7 inner-display layout pass landed (sw600dp variant, edge-to-edge insets, 5.8MB).",
+            "current": "Functional. Labels renamed Party \u2192 KenOS. Settings screen lets each operator paste their own tailnet URL. APK bundled into the package ZIP for sideload during install. Z Fold 7 inner-display layout pass landed (sw600dp variant, edge-to-edge insets, 5.8MB).",
             "next": [],
             "owner": "ken",
             "related": [
@@ -1093,8 +1093,8 @@
             "name": "KenOS DX upgrade \u2014 port Windows-variant wins back to Linux",
             "status": "active",
             "percent": 45,
-            "summary": "Take the developer-experience improvements proven out on the Windows client (working trio bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN. Establishes BRAIN as the single source of truth across both OS variants going forward.",
-            "current": "Data merge pass landed. Z Fold 7 sw600dp inner-display variant + edge-to-edge insets handler + version bump (2.1.0 / vc6) shipped into android/trio-webview/. Pokedex-style header (avatar + title + dex subtitle + state badge) ported into Linux main-shell.html frame 5. Pokemon Crystal tab in frame 4 chatlog + native mgba-qt + xdotool key forwarding wired (touch + keyboard).",
+            "summary": "Take the developer-experience improvements proven out on the Windows client (working party bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN. Establishes BRAIN as the single source of truth across both OS variants going forward.",
+            "current": "Data merge pass landed. Z Fold 7 sw600dp inner-display variant + edge-to-edge insets handler + version bump (2.1.0 / vc6) shipped into android/party-webview/. Pokedex-style header (avatar + title + dex subtitle + state badge) ported into Linux main-shell.html frame 5. Pokemon Crystal tab in frame 4 chatlog + native mgba-qt + xdotool key forwarding wired (touch + keyboard).",
             "next": [
               "Diff Windows pipe-r server.js against Linux to port the pty title-paren fix + _resolveCli logic + KENOS_ROOT-relative cwd",
               "Port the layout breakpoint set (\u22651100px = 6\u00d71, 721\u20131099px = 2-up swipe, \u2264720px = 1-up peek) into kenos/main-shell.html if not already present",
@@ -1109,7 +1109,7 @@
               "kenos-android",
               "brain-pipe-r"
             ],
-            "business_summary": "Take the developer-experience improvements proven out on the Windows client (working trio bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN",
+            "business_summary": "Take the developer-experience improvements proven out on the Windows client (working party bridges, pty fixes, layout breakpoints, Controller polish, Z Fold 7 APK) and merge them \u2014 code, data, and tabs \u2014 back into the canonical Linux BRAIN",
             "business_current": "Data merge pass landed"
           },
           {
@@ -1143,11 +1143,11 @@
             "status": "planned",
             "percent": 5,
             "summary": "Promote KenOS from a desktop-first OS with a phone WebView wrapper into a true Android-native runtime. Carry the operator workspace (BRAIN.db, agents, rules, log surface) onto the phone so the Z Fold 7 \u2014 and successors \u2014 becomes a self-contained personal portable AI dev environment. Termux as the bridge layer; on-device KenAI; native Settings; offline-first.",
-            "current": "Scoping. Today's stack: Z Fold 7 has KenOS-Windows (com.ken.kenos.maindisplay) as a WebView shell pointing at the desktop. Trio app (com.ken.trio) repaired + bumped to v2.1.0 with Z Fold 7 sw600dp inner-display variant + edge-to-edge insets. KenOS-Linux APK (com.ken.kenos.linux v1.0.0) built as a side-by-side companion pointing at the Linux instance via Tailscale.",
+            "current": "Scoping. Today's stack: Z Fold 7 has KenOS-Windows (com.ken.kenos.maindisplay) as a WebView shell pointing at the desktop. Party app (com.ken.party) repaired + bumped to v2.1.0 with Z Fold 7 sw600dp inner-display variant + edge-to-edge insets. KenOS-Linux APK (com.ken.kenos.linux v1.0.0) built as a side-by-side companion pointing at the Linux instance via Tailscale.",
             "next": [
               "Stand up Termux on the Z Fold 7 with brain.sh / git / node / ollama paths",
               "Decide where on-device BRAIN.db lives (private app dir vs. shared storage) + size budget",
-              "Bridge xterm.js WebView to a Termux pty so trio terminals run on-device when the desktop is offline",
+              "Bridge xterm.js WebView to a Termux pty so party terminals run on-device when the desktop is offline",
               "Native Settings + on-device log surface (replace WebView Settings activity) so the app works without a tailnet",
               "On-device KenAI: ship a small quantized model that runs locally + fallback to tailnet RAG when online",
               "Install Android Studio on Pop!_OS so the build chain is local; add release keystore for signed builds"
@@ -1174,7 +1174,7 @@
             "status": "shipped",
             "percent": 100,
             "summary": "Single-resident-model orchestrator with batch durability, audit trail, recovery, and DeepSeek launcher.",
-            "current": "All build-list items shipped. 10/10 recovery tests pass. DeepSeek launcher (~/bin/trio-pane-deepseek.sh) wired with graceful 'tag not pulled' gate; flip catalog enabled flag after `ollama pull deepseek-r1:8b` to activate.",
+            "current": "All build-list items shipped. 10/10 recovery tests pass. DeepSeek launcher (~/bin/party-pane-deepseek.sh) wired with graceful 'tag not pulled' gate; flip catalog enabled flag after `ollama pull deepseek-r1:8b` to activate.",
             "next": [],
             "owner": "claude",
             "related": [
@@ -1190,7 +1190,7 @@
             "name": "Pipe-R command center",
             "status": "active",
             "percent": 95,
-            "summary": "Backend orchestration on :7777 \u2014 trio terminals, auto-mode, brain logger, model API. Becoming part of KenOS Controller.",
+            "summary": "Backend orchestration on :7777 \u2014 party terminals, auto-mode, brain logger, model API. Becoming part of KenOS Controller.",
             "current": "Stable; recent additions: chatlog viewer, orchestrator API surface, models catalog, project-checklist endpoint",
             "next": [
               "Carve out the controller-specific endpoints under /api/controller/*",
@@ -1202,7 +1202,7 @@
               "brain-orchestrator",
               "main-shell"
             ],
-            "business_summary": "Backend orchestration on :7777 \u2014 trio terminals, auto-mode, brain logger, model service endpoint",
+            "business_summary": "Backend orchestration on :7777 \u2014 party terminals, auto-mode, brain logger, model service endpoint",
             "business_current": "Stable; recent additions: chatlog viewer, orchestrator service endpoint surface, models catalog, project-checklist endpoint"
           },
           {
