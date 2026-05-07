@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-06T23:45:01Z",
+  "generated_at": "2026-05-07T00:00:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1539,12 +1539,6 @@
       "channel": "ship",
       "summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections",
       "business_summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections"
-    },
-    {
-      "ts": "2026-04-28T01:44:43Z",
-      "channel": "milestone",
-      "summary": "test message after fix",
-      "business_summary": "test message after fix"
     }
   ],
   "truth_gate": {
