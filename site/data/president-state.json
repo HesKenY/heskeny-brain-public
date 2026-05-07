@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T00:15:01Z",
+  "generated_at": "2026-05-07T00:30:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1527,12 +1527,6 @@
       "channel": "ship",
       "summary": "trio-webview v2.2.0 APK built \u00b7 KenOS shell mobile pass for Galaxy Fold 7 (cover \u2264720px + inner 721-1100px + safe-area insets) \u00b7 AndroidManifest configChanges hardened for fold/unfold survival",
       "business_summary": "trio-webview v2.2.0 APK built \u00b7 KenOS shell mobile pass for Galaxy Fold 7 (cover \u2264720px + inner 721-1100px + safe-area insets) \u00b7 AndroidManifest configChanges hardened for fold/unfold survival"
-    },
-    {
-      "ts": "2026-04-28T02:23:45Z",
-      "channel": "ship",
-      "summary": "president panel refocused as Sean's live access surface \u2014 bounty work removed, deployment-status + customer-SharePoint sections added",
-      "business_summary": "president panel refocused as Sean's live access surface \u2014 bounty work removed, deployment-status + customer-SharePoint sections added"
     }
   ],
   "truth_gate": {
