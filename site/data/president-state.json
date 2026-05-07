@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T02:15:01Z",
+  "generated_at": "2026-05-07T02:30:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1509,12 +1509,6 @@
       "channel": "pivot",
       "summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)",
       "business_summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)"
-    },
-    {
-      "ts": "2026-04-28T03:19:57Z",
-      "channel": "ship",
-      "summary": "president-panel periodic sync wired \u2014 scripts/sync-president-panel.sh + cron */15 \u00b7 auto-mirrors panel files + state JSON to .heskeny-brain-public on every refresh",
-      "business_summary": "president-panel periodic sync wired \u2014 scripts/sync-president-panel.sh + cron */15 \u00b7 auto-mirrors panel files + state JSON to .heskeny-brain-public on every refresh"
     }
   ],
   "truth_gate": {
