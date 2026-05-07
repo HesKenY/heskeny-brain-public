@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T04:00:01Z",
+  "generated_at": "2026-05-07T04:15:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1503,12 +1503,6 @@
       "channel": "pivot",
       "summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI",
       "business_summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI"
-    },
-    {
-      "ts": "2026-04-28T03:29:14Z",
-      "channel": "pivot",
-      "summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)",
-      "business_summary": "architecture pivot in president portal \u2014 SharePoint per-instance retired in favor of on-VM partitioned customer file vault (/system locked, /company SMB-shared)"
     }
   ],
   "truth_gate": {
