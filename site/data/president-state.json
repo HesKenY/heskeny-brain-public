@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T00:00:01Z",
+  "generated_at": "2026-05-07T00:15:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1533,12 +1533,6 @@
       "channel": "ship",
       "summary": "president panel refocused as Sean's live access surface \u2014 bounty work removed, deployment-status + customer-SharePoint sections added",
       "business_summary": "president panel refocused as Sean's live access surface \u2014 bounty work removed, deployment-status + customer-SharePoint sections added"
-    },
-    {
-      "ts": "2026-04-28T02:15:24Z",
-      "channel": "ship",
-      "summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections",
-      "business_summary": "president panel \u2014 dropped deck mode, added how-we-operate / market / revenue ladder / connections / tech-stack / timeline sections"
     }
   ],
   "truth_gate": {
