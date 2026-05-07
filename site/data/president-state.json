@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T04:45:01Z",
+  "generated_at": "2026-05-07T05:00:02Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1497,12 +1497,6 @@
       "channel": "pivot",
       "summary": "trio composition documented per-tenant \u2014 KenAI primary + Claude/Codex subscriptions as online backup + frontier tier \u00b7 probability bands recalibrated (tech viability 75\u219280, cost 80\u219275, adoption 50\u219255)",
       "business_summary": "trio composition documented per-tenant \u2014 KenAI primary + Claude/Codex subscriptions as online backup + frontier tier \u00b7 probability bands recalibrated (tech viability 75\u219280, cost 80\u219275, adoption 50\u219255)"
-    },
-    {
-      "ts": "2026-04-28T03:37:11Z",
-      "channel": "pivot",
-      "summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI",
-      "business_summary": "AI capability gating documented in president portal \u2014 tenant AI mounted into /company with read+copy+create-new only (no edit, no delete) so customer source-of-truth files are immutable to the AI"
     }
   ],
   "truth_gate": {
