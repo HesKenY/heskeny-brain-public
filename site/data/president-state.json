@@ -1,6 +1,6 @@
 {
   "schema": "president-panel-v1",
-  "generated_at": "2026-05-07T05:30:01Z",
+  "generated_at": "2026-05-07T05:45:01Z",
   "operator": "Ken Deibel",
   "president": "Sean",
   "checklist": {
@@ -1491,12 +1491,6 @@
       "channel": "improve",
       "summary": "wolverine self-write hardened \u2014 anti-regression guard on file_ops blocks placeholder stubs / mass deletion / wrong-language comments / adjacent dup blocks (informed by today's f22a98f self-improvement run)",
       "business_summary": "wolverine self-write hardened \u2014 anti-regression guard on file_ops blocks placeholder stubs / mass deletion / wrong-language comments / adjacent dup blocks (informed by today's f22a98f self-improvement run)"
-    },
-    {
-      "ts": "2026-04-28T03:39:51Z",
-      "channel": "pivot",
-      "summary": "trio composition documented per-tenant \u2014 KenAI primary + Claude/Codex subscriptions as online backup + frontier tier \u00b7 probability bands recalibrated (tech viability 75\u219280, cost 80\u219275, adoption 50\u219255)",
-      "business_summary": "trio composition documented per-tenant \u2014 KenAI primary + Claude/Codex subscriptions as online backup + frontier tier \u00b7 probability bands recalibrated (tech viability 75\u219280, cost 80\u219275, adoption 50\u219255)"
     }
   ],
   "truth_gate": {
